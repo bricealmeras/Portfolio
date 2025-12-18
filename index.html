@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Brice Almeras | BTS SIO SISR</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">BRICE.<span>SIO</span></div>
+        <nav>
+            <ul>
+                <li><a href="#home">Accueil</a></li>
+                <li><a href="#skills">Compétences</a></li>
+                <li><a href="#projets">Projets</a></li>
+                <li><a href="#veilles">Veilles</a></li>
+                <li><a href="#contact" class="btn-contact">Me Contacter</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <span class="badge">BTS SIO - SISR</span>
+            <h1>Brice Almeras</h1>
+            <p>Futur administrateur systèmes & réseaux.<br>Passionné par la cybersécurité, la virtualisation et l'infrastructure.</p>
+            
+            <div class="hero-buttons">
+                <a href="#projets" class="btn-primary"><i class="fas fa-server"></i> Mes Projets</a>
+                <a href="CV_Brice_Almeras.pdf" target="_blank" class="btn-secondary"><i class="fas fa-download"></i> Mon CV</a>
+            </div>
+        </div>
+        
+        <div class="hero-image">
+            <div class="image-box">
+                <img src="photo.jpg" alt="Brice Almeras">
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="container">
+        <h2 class="section-title">Compétences Techniques</h2>
+        
+        <div class="skills-wrapper">
+            <div class="skill-category">
+                <h3><i class="fab fa-windows"></i> Administration Système</h3>
+                <div class="tags">
+                    <span>Windows Server</span>
+                    <span>Active Directory</span>
+                    <span>GPO / DNS / DHCP</span>
+                    <span>Linux (Debian/Ubuntu)</span>
+                    <span>PowerShell / Batch</span>
+                    <span>Virtualisation (VMware/Hyper-V)</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3><i class="fas fa-network-wired"></i> Réseau & Sécurité</h3>
+                <div class="tags">
+                    <span>Cisco Packet Tracer</span>
+                    <span>VLAN & Trunking</span>
+                    <span>Routage (OSPF/EIGRP)</span>
+                    <span>Firewall</span>
+                    <span>VPN (IPSec/OpenVPN)</span>
+                    <span>Wireshark / Nmap (Network Scan)</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3><i class="fas fa-server"></i> Services & Outils</h3>
+                <div class="tags">
+                    <span>GLPI (Ticketing)</span>
+                    <span>Docker (Bases)</span>
+                    <span>VMware/Virtualbox (Virtualisation)</span>
+                    <span>Python</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projets" class="container">
+        <h2 class="section-title">Mes Réalisations (E4)</h2>
+        <div class="projects-grid">
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-network-wired"></i></div>
+                <h3>Infrasctructure Cisco</h3>
+                <p>Mise en place d'une architecture réseau sécurisée : Segmentation VLAN, configuration trunking et routage inter-VLAN sur matériel Cisco.</p>
+                <a href="#">Voir la documentation &rarr;</a>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i class="fab fa-windows"></i></div>
+                <h3>Domaine Active Directory</h3>
+                <p>Installation d'un contrôleur de domaine Windows Server. Gestion des utilisateurs, déploiement de GPO et scripts d'ouverture de session.</p>
+                <a href="#">Voir la documentation &rarr;</a>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+                <h3>Sécurité Pfsense</h3>
+                <p>Déploiement d'un pare-feu périmétrique. Configuration du filtrage de paquets, mise en place d'un portail captif et d'un VPN nomade.</p>
+                <a href="#">Voir la documentation &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="veilles" class="container">
+        <h2 class="section-title">Ma Veille Technologique (E5)</h2>
+        
+        <div class="veille-container">
+            <div class="veille-card tools">
+                <h3><i class="fas fa-tools"></i> Mes Outils de Veille</h3>
+                <ul class="tool-list">
+                    <li><i class="fas fa-rss"></i> <strong>Feedly :</strong> Agrégation de flux RSS (ANSSI, CERT-FR)</li>
+                    <li><i class="fab fa-twitter"></i> <strong>Twitter/X :</strong> Suivi de chercheurs en cybersécurité</li>
+                    <li><i class="fas fa-bell"></i> <strong>Google Alerts :</strong> Alertes sur mots-clés spécifiques</li>
+                    <li><i class="fab fa-linkedin"></i> <strong>LinkedIn :</strong> Actualités des éditeurs (Microsoft, Cisco)</li>
+                </ul>
+            </div>
+
+            <div class="veille-card subjects">
+                <h3><i class="fas fa-lightbulb"></i> Mes Sujets d'Étude</h3>
+                
+                <div class="subject-item">
+                    <h4>Sujet 1 : L'IA dans la Cybersécurité</h4>
+                    <p>Comment l'intelligence artificielle améliore la détection des menaces (SOC) mais permet aussi de créer des attaques plus sophistiquées.</p>
+                </div>
+
+                <div class="subject-item">
+                    <h4>Sujet 2 : L'évolution vers le "Zero Trust"</h4>
+                    <p>Analyse de la fin de la sécurité périmétrique traditionnelle au profit d'une vérification continue de l'identité et du contexte.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+<section id="contact" class="container contact-section">
+    <h2 class="section-title">Restons en Contact</h2>
+    
+    <div class="contact-wrapper">
+        <p class="contact-text">
+            Actuellement à la recherche d'une opportunité (stage/alternance/emploi) en administration systèmes et réseaux.
+            N'hésitez pas à me contacter pour échanger sur mon parcours.
+        </p>
+
+        <div class="contact-cards">
+            <a href="mailto:bricealmeras@yahoo.fr" class="contact-card">
+                <div class="icon-box">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <h3>Email</h3>
+                <p>bricealmeras@yahoo.fr</p> </a>
+
+            <a href="https://www.linkedin.com/in/brice-almeras/" target="_blank" class="contact-card">
+                <div class="icon-box">
+                    <i class="fab fa-linkedin-in"></i>
+                </div>
+                <h3>LinkedIn</h3>
+                <p>Brice Almeras</p>
+            </a>
+
+            <div class="contact-card no-hover">
+                <div class="icon-box">
+                    <i class="fas fa-phone-alt"></i>
+                </div>
+                <h3>Téléphone</h3>
+                <p>06 66 78 15 73</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <footer>
+        <div class="footer-content">
+            <p>© 2025 Brice Almeras | Étudiant BTS SIO SISR</p>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/brice-almeras/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const cards = document.querySelectorAll('.contact-card');
+        cards.forEach(card => {
+            card.setAttribute('role', 'button');
+            card.setAttribute('tabindex', '0');
+            const info = card.querySelector('p');
+            const href = card.tagName.toLowerCase() === 'a' ? (card.getAttribute('href') || '') : '';
+            const isLinkedIn = href.includes('linkedin.com');
+
+            function copyInfo(e) {
+                // If this is the LinkedIn card, allow the default navigation
+                if (isLinkedIn) return;
+                if (e) e.preventDefault();
+                const text = info ? info.textContent.trim() : '';
+                if (!text) return;
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(text).then(() => {
+                        showTooltip(card, 'Copié !');
+                    }).catch(() => fallbackCopy(text, card));
+                } else {
+                    fallbackCopy(text, card);
+                }
+            }
+
+            function fallbackCopy(text, card) {
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                document.body.appendChild(ta);
+                ta.select();
+                try {
+                    document.execCommand('copy');
+                    showTooltip(card, 'Copié !');
+                } catch (err) {
+                    showTooltip(card, 'Erreur');
+                }
+                ta.remove();
+            }
+
+            card.addEventListener('click', copyInfo);
+            card.addEventListener('keydown', function(e) {
+                // If LinkedIn card, let Enter/Space activate the link normally
+                if ((e.key === 'Enter' || e.key === ' ') && isLinkedIn) return;
+                if (e.key === 'Enter' || e.key === ' ') copyInfo(e);
+            });
+        });
+
+        function showTooltip(card, message) {
+            let tip = card.querySelector('.copy-tooltip');
+            if (!tip) {
+                tip = document.createElement('div');
+                tip.className = 'copy-tooltip';
+                card.appendChild(tip);
+            }
+            tip.textContent = message;
+            tip.classList.add('visible');
+            setTimeout(() => tip.classList.remove('visible'), 1400);
+        }
+    });
+    </script>
+
+</body>
+</html>
