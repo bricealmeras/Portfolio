@@ -1,0 +1,182 @@
+/* CONFIGURATION DE LA PAGE DOC */
+body {
+    background-color: #0f172a; /* Même fond que le portfolio */
+    color: #cbd5e1;
+    display: flex;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* SIDEBAR NAVIGATION */
+.doc-sidebar {
+    width: 280px;
+    background: #1e293b;
+    height: 100vh;
+    position: fixed;
+    padding: 20px;
+    border-right: 1px solid #334155;
+    overflow-y: auto;
+}
+
+.doc-brand {
+    margin-bottom: 30px;
+}
+
+.doc-brand a {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 15px;
+    transition: 0.3s;
+}
+
+.doc-brand a:hover {
+    color: #38bdf8;
+}
+
+.doc-brand h2 {
+    color: #f8fafc;
+    font-size: 1.5rem;
+}
+
+.doc-menu {
+    list-style: none;
+    padding: 0;
+}
+
+.doc-menu li {
+    margin-bottom: 5px;
+}
+
+.doc-menu a {
+    display: block;
+    padding: 10px 15px;
+    color: #94a3b8;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: 0.2s;
+    font-size: 0.95rem;
+}
+
+.doc-menu a:hover, .doc-menu a.active {
+    background: rgba(56, 189, 248, 0.1);
+    color: #38bdf8;
+}
+
+/* CONTENU PRINCIPAL */
+.doc-content {
+    margin-left: 280px; /* Largeur sidebar */
+    padding: 60px 10%;
+    width: 100%;
+}
+
+.doc-section {
+    margin-bottom: 80px;
+    scroll-margin-top: 40px; /* Pour l'ancre */
+    border-bottom: 1px solid #334155;
+    padding-bottom: 40px;
+}
+
+.doc-section:last-child {
+    border-bottom: none;
+}
+
+.doc-section h1 {
+    font-size: 2.5rem;
+    color: #f8fafc;
+    margin-bottom: 10px;
+}
+
+.doc-section h2 {
+    font-size: 1.8rem;
+    color: #38bdf8; /* Cyan */
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.lead {
+    font-size: 1.2rem;
+    color: #94a3b8;
+    margin-bottom: 40px;
+}
+
+.info-box {
+    background: rgba(56, 189, 248, 0.05);
+    border-left: 4px solid #38bdf8;
+    padding: 20px;
+    border-radius: 0 8px 8px 0;
+}
+
+.info-box h3 {
+    color: #38bdf8;
+    margin-bottom: 10px;
+}
+
+/* BLOCS TERMINAL */
+.terminal-block {
+    background: #0b1120;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 20px;
+    font-family: 'Fira Code', monospace;
+    margin: 20px 0;
+    overflow-x: auto;
+}
+
+.cmd {
+    display: block;
+    color: #f8fafc;
+    margin-bottom: 5px;
+}
+
+.cmd::before {
+    content: "$ ";
+    color: #38bdf8;
+    font-weight: bold;
+}
+
+.output {
+    display: block;
+    color: #94a3b8;
+    margin-bottom: 15px;
+    padding-left: 20px;
+}
+
+.comment {
+    color: #64748b;
+    font-style: italic;
+    display: block;
+    margin: 10px 0;
+}
+
+.btn-download {
+    display: inline-block;
+    background: #38bdf8;
+    color: #0f172a;
+    padding: 12px 25px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 20px;
+    transition: 0.3s;
+}
+
+.btn-download:hover {
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .doc-sidebar {
+        display: none; /* On cache le menu latéral sur mobile pour simplifier */
+    }
+    .doc-content {
+        margin-left: 0;
+        padding: 40px 20px;
+    }
+}

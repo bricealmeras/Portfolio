@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapport Bandit - Brice Almeras</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="bandit.css"> </head>
+<body>
+
+    <nav class="doc-sidebar">
+        <div class="doc-brand">
+            <a href="index.html"><i class="fas fa-arrow-left"></i> Retour au portfolio</a>
+            <h2>Rapport Bandit</h2>
+        </div>
+        <ul class="doc-menu">
+            <li><a href="#intro" class="active">Introduction</a></li>
+            <li><a href="#lvl0">Niveau 0 (SSH)</a></li>
+            <li><a href="#lvl1">Niveau 1 (Tiret)</a></li>
+            <li><a href="#lvl2">Niveau 2 (Espaces)</a></li>
+            <li><a href="#lvl3">Niveau 3 (Cachés)</a></li>
+            <li><a href="#lvl4">Niveau 4 (Types)</a></li>
+            <li><a href="#lvl5">Niveau 5 (Find)</a></li>
+            <li><a href="#lvl6">Niveau 6 (Serveur)</a></li>
+            <li><a href="#lvl7">Niveau 7 (Grep)</a></li>
+            <li><a href="#lvl8">Niveau 8 (Uniq)</a></li>
+            <li><a href="#lvl9">Niveau 9 (Strings)</a></li>
+            <li><a href="#lvl10">Niveau 10 (Base64)</a></li>
+            <li><a href="#lvl11">Niveau 11 (Rot13)</a></li>
+            <li><a href="#lvl12">Niveau 12 (Compression)</a></li>
+            <li><a href="#conclusion">Conclusion</a></li>
+        </ul>
+    </nav>
+
+    <main class="doc-content">
+        
+        <section id="intro" class="doc-section">
+            <h1>OverTheWire : Bandit</h1>
+            <p class="lead">Rapport d'apprentissage : Niveaux 0 à 13 (Manipulation de données)</p>
+            
+            <div class="info-box">
+                <h3><i class="fas fa-info-circle"></i> Qu'est-ce que Bandit ?</h3>
+                <p>Bandit est une succession de challenges techniques (CTF ou Capture The Flag) liée à l'apprentissage de l'environnement Linux et aux fondamentaux de la Cybersécurité.</p>
+                <p>Les challenges se basent sur un principe progressif, où chaque niveau impose de résoudre une problématique spécifique : recherche et manipulation de fichiers, analyse des données et protocoles réseaux afin d'extraire le mot de passe permettant d'accéder au niveau suivant.</p>
+            </div>
+            <a href="Rapport bandit.pdf" target="_blank" class="btn-download"><i class="fas fa-file-pdf"></i> Télécharger le PDF original</a>
+        </section>
+
+        <section id="lvl0" class="doc-section">
+            <h2>Niveau 0 → 1 : Initialisation SSH</h2>
+            <p><strong>Analyse :</strong> Pour ce premier niveau d'initialisation, il nous est simplement demandé de se connecter en SSH au serveur <code>bandit.labs.overthewire.org</code> sous l'utilisateur <code>bandit0</code> avec le mot de passe <code>bandit0</code> via le port 2220.</p>
+            
+            <div class="terminal-block">
+                <span class="cmd">$ ssh bandit0@bandit.labs.overthewire.org -p 2220</span>
+            </div>
+            
+            <p>Une fois connecté, je fais la commande <code>ls</code> et je m'aperçois de la présence d'un fichier « readme ». Je l'ouvre donc grâce à la commande <code>cat readme</code> qui m'affiche le mot de passe contenu à l'intérieur.</p>
+            
+            <div class="terminal-block">
+                <span class="cmd">$ ls</span>
+                <span class="output">readme</span>
+                <span class="cmd">$ cat readme</span>
+                <span class="output">The password you are looking for is: ZjLjTmM6FvvyRnrb2rfNWOZOTa6ip5If</span>
+            </div>
+        </section>
+
+        <section id="lvl1" class="doc-section">
+            <h2>Niveau 1 → 2 : Fichiers Spéciaux (-)</h2>
+            <p><strong>Analyse :</strong> Il m'est demandé de lire un fichier appelé <code>-</code> que nous pouvons appeler « dashed filename ». Le problème c'est qu'un fichier nommé de la sorte ne peut pas être simplement lu via une commande <code>cat</code> ou <code>nano</code> ordinaire.</p>
+            <p>Sur Linux, de nombreuses commandes utilisent le symbole <code>-</code> pour indiquer une option ou autres entrées (stdin).</p>
+            <p><strong>Solution :</strong> La solution est alors d'utiliser le chemin relatif du fichier pour le lire en ajoutant <code>./</code> devant le nom du fichier.</p>
+            <div class="terminal-block">
+                <span class="cmd">$ cat ./-</span>
+                <span class="output">263JGJPfgU6LtdEvgfWU1XP5yac29mFx</span>
+            </div>
+        </section>
+
+        <section id="lvl2" class="doc-section">
+            <h2>Niveau 2 → 3 : Espaces dans les noms</h2>
+            <p><strong>Analyse :</strong> Il m'est indiqué que le mot de passe se trouve dans un fichier appelé <code>spaces in this filename</code>. Comme dit, ce fichier contient des espaces dans son nom. Le problème, c'est qu'on ne peut pas lire simplement un fichier contenant des espaces.</p>
+            <p>La commande <code>cat</code> ou <code>nano</code> pense que je tente d'entrer une option, un peu à la manière du premier niveau.</p>
+            <p><strong>Solution :</strong> Pour contrer cela, il faut ajouter <code>\</code> avant chaque espace ou utiliser des guillemets.</p>
+            <div class="terminal-block">
+                <span class="cmd">$ cat spaces\ in\ this\ filename</span>
+                <span class="output">MNk8KNH3Usiio41PRUEoDFPqfxLPlSmx</span>
+            </div>
+        </section>
+
+        <section id="lvl3" class="doc-section">
+            <h2>Niveau 3 → 4 : Fichiers Cachés</h2>
+            <p><strong>Analyse :</strong> La consigne m'indique que le mot de passe est contenu dans un fichier se trouvant dans le dossier <code>inhere</code>. Je me déplace alors dans ce fichier. Mais il n'y a aucun fichier apparent quand j'utilise simplement la commande <code>ls</code>.</p>
+            <p>Dans ce cas-là, je peux tenter la commande <code>ls -a</code> (all) pour montrer tous les objets présents et même ceux qui sont masqués. On y découvre alors un fichier nommé <code>...Hiding-From-You</code>. Les fichiers dont le nom commence par un <code>.</code> sont considérés comme cachés, ce qui explique que nous ne le voyions pas.</p>
+            <div class="terminal-block">
+                <span class="cmd">$ cd inhere/</span>
+                <span class="cmd">$ ls -a</span>
+                <span class="output">.  ..  ...Hiding-From-You</span>
+                <span class="cmd">$ cat ...Hiding-From-You</span>
+                <span class="output">2WmrDFRmJIq3IPxneAaMGhapopFhF3NJ</span>
+            </div>
+        </section>
+
+        <section id="lvl4" class="doc-section">
+            <h2>Niveau 4 → 5 : Types de Fichiers (Human-readable)</h2>
+            <p><strong>Analyse :</strong> La consigne indique que le mot de passe se trouve dans le seul fichier lisible par un humain. On peut donc en déduire qu'il y a plusieurs fichiers illisibles et qu'un parmi cette liste est lisible.</p>
+            <p>Effectivement, il y a plusieurs fichiers qui semblent illisibles ou corrompus qui en altèrent même le Shell.</p>
+            <p><strong>Solution :</strong> Pour ne pas s'embêter à lire les fichiers un par un, nous pouvons utiliser la commande <code>file</code> qui nous indique de quel type de fichier il s'agit réellement, en ajoutant l'argument <code>./*</code> pour analyser tous les fichiers du dossier.</p>
+            <div class="terminal-block">
+                <span class="cmd">$ file ./*</span>
+                <span class="output">./-file07: ASCII text</span>
+                <span class="comment"># Le fichier -file07 est le seul identifié comme "ASCII text".</span>
+                <span class="cmd">$ cat ./-file07</span>
+                <span class="output">40QYVPkxZO0E005pTW81FB8j8lxXGUQW</span>
+            </div>
+        </section>
+
+        <section id="lvl5" class="doc-section">
+            <h2>Niveau 5 → 6 : Recherche avancée (Find)</h2>
+            <p><strong>Analyse :</strong> Dans ce niveau, le fichier est caché dans une arborescence de plusieurs sous-dossiers. Manuellement, il est impossible de le retrouver.</p>
+            <p>La consigne nous donne quelques éléments pour le retrouver : lisible par un humain, son poids est de 1033 octets et il n'est pas exécutable. Dans cette situation, la commande <code>find</code> nous sera utile en y ajoutant ces arguments :</p>
+            <ul>
+                <li><code>-type f</code> : Chercher uniquement des fichiers.</li>
+                <li><code>-size 1033c</code> : Filtrer précisément sur la taille (c pour octets).</li>
+                <li><code>! -executable</code> : Le point d'exclamation signifie « NOT » (exclure les exécutables).</li>
+            </ul>
+            <div class="terminal-block">
+                <span class="cmd">$ find . -type f -size 1033c ! -executable</span>
+                <span class="output">./maybehere07/.file2</span>
+                <span class="cmd">$ cat ./maybehere07/.file2</span>
+                <span class="output">HWasnphtq9AVKe0dmk45nxy20cvUa6EG</span>
+            </div>
+        </section>
+
+        <section id="lvl6" class="doc-section">
+            <h2>Niveau 6 → 7 : Recherche serveur & Redirections</h2>
+            <p><strong>Analyse :</strong> A présent, le fichier n'est plus stocké dans notre répertoire personnel mais il peut être n'importe où sur le serveur. Nous avons quelques indications : le fichier appartient à l'utilisateur <code>bandit7</code> et au groupe <code>bandit6</code> et sa taille est de 33 octets.</p>
+            <p><strong>Solution :</strong> Comme au niveau précédent, la commande <code>find</code> va nous aider. J'ajoute <code>2>/dev/null</code> pour rediriger les erreurs (flux 2) vers « le vide » (null) pour ne voir apparaître que le fichier auquel nous avons accès et qui nous intéresse.</p>
+            <div class="terminal-block">
+                <span class="cmd">$ find / -user bandit7 -group bandit6 -size 33c 2>/dev/null</span>
+                <span class="output">/var/lib/dpkg/info/bandit7.password</span>
+                <span class="cmd">$ cat /var/lib/dpkg/info/bandit7.password</span>
+                <span class="output">morbNTDkSW6jIlUc0ymOdMaLn0lFVAaj</span>
+            </div>
+        </section>
+
+        <section id="lvl7" class="doc-section">
+            <h2>Niveau 7 → 8 : Grep</h2>
+            <p><strong>Analyse :</strong> La consigne nous indique que le mot de passe est stocké à côté du mot <code>millionth</code> dans le fichier <code>data.txt</code>.</p>
+            <p>Pour cela, la commande <code>grep</code> va nous être utile. Elle va chercher une ligne dans le fichier qui contient le mot spécifié.</p>
+            <div class="terminal-block">
+                <span class="cmd">$ grep millionth data.txt</span>
+                <span class="output">millionth     dfwvzFQi4mU0wfNbF0e9RoWskMLg7eEc</span>
+            </div>
+        </section>
+
+        <section id="lvl8" class="doc-section">
+            <h2>Niveau 8 → 9 : Uniq et Sort</h2>
+            <p><strong>Analyse :</strong> Le mot de passe est stocké dans le fichier <code>data.txt</code> et est la seule chaîne de caractères unique dans le fichier. Cela veut dire que le fichier est probablement rempli de doublons.</p>
+            <p><strong>Solution :</strong> Nous allons utiliser deux commandes. D'abord <code>sort</code> pour trier par ordre alphabétique les lignes. Puis <code>uniq -u</code> qui nous permet de n'afficher que la ligne qui n'apparaît qu'une seule fois.</p>
+            <div class="terminal-block">
+                <span class="cmd">$ sort data.txt | uniq -u</span>
+                <span class="output">4CKMh1JI91bUIZZPXDqGanal4xvAg0JM</span>
+            </div>
+        </section>
+
+        <section id="lvl9" class="doc-section">
+            <h2>Niveau 9 → 10 : Strings</h2>
+            <p><strong>Analyse :</strong> On nous dit que le mot de passe est stocké dans l'une des rares chaînes de caractères lisibles par l'homme, précédée d'une répétition de plusieurs « = ».</p>
+            <p>Nous allons donc utiliser <code>strings</code> pour pouvoir lire le fichier (qui n'est pas lisible simplement) et dans la même commande utiliser <code>grep</code> pour chercher une ligne contenant plusieurs « = ».</p>
+            <div class="terminal-block">
+                <span class="cmd">$ strings data.txt | grep ===</span>
+                <span class="output">========== the password is FGUW5ilLVJrxX9kMYMmlN4MgbpfMiqey</span>
+            </div>
+        </section>
+
+        <section id="lvl10" class="doc-section">
+            <h2>Niveau 10 → 11 : Encodage Base64</h2>
+            <p><strong>Analyse :</strong> Le mot de passe est stocké dans le fichier <code>data.txt</code> codé en Base64.</p>
+            <p>Il nous suffit de le lire grâce à la commande <code>base64 -d</code> (decode).</p>
+            <div class="terminal-block">
+                <span class="cmd">$ base64 -d data.txt</span>
+                <span class="output">The password is dtR173fZKb0RRsDFSGsg2RWnpNVj3qRr</span>
+            </div>
+        </section>
+
+        <section id="lvl11" class="doc-section">
+            <h2>Niveau 11 → 12 : Chiffrement ROT13</h2>
+            <p><strong>Analyse :</strong> Le fichier contient du texte qui semble lisible (caractères ASCII) mais qui ne veut rien dire. Il s'agit en effet d'un chiffrement ROT13 (rotation de 13 caractères). Étant donné que l'alphabet est composé de 26 lettres, il suffit de faire une rotation de 13 de plus pour revenir aux caractères d'origine.</p>
+            <p><strong>Commande :</strong> <code>tr 'A-Za-z' 'N-ZA-Mn-za-m'</code>. On indique que l'on veut décaler les lettres de N à Z dans le périmètre de A à M (et idem pour les minuscules).</p>
+            <div class="terminal-block">
+                <span class="cmd">$ cat data.txt | tr 'A-Za-z' 'N-ZA-Mn-za-m'</span>
+                <span class="output">The password is 7x16WNeHIi5YkIhWsfFIqoognUTyj9Q4</span>
+            </div>
+        </section>
+
+        <section id="lvl12" class="doc-section">
+            <h2>Niveau 12 → 13 : Compression (La Poupée Russe)</h2>
+            <p><strong>Analyse :</strong> Dans ce niveau, nous devons faire preuve de patience et de méthodologie. Le fichier d'origine est un « hexdump » qui cache une succession de compressions dans différents formats (Gzip, Bzip2, Tar). Nous pouvons voir cela un peu comme une poupée Russe : un fichier compressé qui contient un autre fichier compressé et ainsi de suite.</p>
+            <p>Il nous est indiqué que dans le répertoire personnel nous n'avons pas les droits pour créer des fichiers. Il faut alors créer un dossier dans le <code>/tmp</code> avec la commande <code>mktemp -d</code>.</p>
+            
+            <p><strong>Procédure :</strong></p>
+            <ol>
+                <li>Premièrement, inverser (décoder) le hexdump grâce à <code>xxd -r</code> (revert) vers le dossier temporaire.</li>
+                <li>Utiliser la commande <code>file</code> pour savoir de quel type de fichier il s'agit (Gzip, Bzip2, Tar).</li>
+                <li>Renommer le fichier avec la bonne extension (ex: .gz) puis l'extraire avec la commande appropriée (<code>gunzip</code>, <code>bunzip2</code>, <code>tar -xf</code>).</li>
+                <li>Répéter l'opération jusqu'à obtenir le fichier en clair.</li>
+            </ol>
+            
+            <div class="terminal-block">
+                <span class="cmd">$ mktemp -d</span>
+                <span class="output">/tmp/tmp.y9p1AJTqks</span>
+                <span class="cmd">$ xxd -r data.txt > /tmp/tmp.y9p1AJTqks/data.bin</span>
+                <span class="comment"># Après de multiples décompressions...</span>
+                <span class="cmd">$ cat data8</span>
+                <span class="output">The password is 8ZjyCRiBWFYkneahHsk5WjRARs0P1Zvr</span>
+            </div>
+        </section>
+
+        <section id="conclusion" class="doc-section">
+            <h2>Conclusion</h2>
+            <p>La validation de ces 12 premiers niveaux, axés sur la manipulation de fichiers et l'administration système, a été une étape déterminante.</p>
+            <p>Ces bases fondamentales m'ont permis d'acquérir une réelle fluidité dans l'environnement Linux, une aisance indispensable pour aborder sereinement les challenges plus complexes à venir.</p>
+            
+            <a href="Rapport bandit.pdf" target="_blank" class="btn-download"><i class="fas fa-file-pdf"></i> Télécharger le PDF original</a>
+        </section>
+
+    </main>
+</body>

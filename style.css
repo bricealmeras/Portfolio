@@ -506,3 +506,222 @@ footer {
         max-width: 300px;
     }
 }
+/* SECTION BANDIT INTERACTIVE */
+.section-intro {
+    text-align: center;
+    color: var(--text-dim);
+    margin-bottom: 40px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.bandit-interface {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    background: #161b22; /* Fond très sombre */
+    padding: 30px;
+    border-radius: 15px;
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    box-shadow: 0 0 40px rgba(0,0,0,0.5);
+}
+
+/* Sidebar avec les boutons */
+.bandit-sidebar {
+    flex: 1;
+    min-width: 250px;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    padding-right: 20px;
+}
+
+.bandit-sidebar h3 {
+    color: var(--primary);
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--primary);
+    display: inline-block;
+}
+
+.level-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.lvl-btn {
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--text-light);
+    padding: 10px 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
+.lvl-btn:hover, .lvl-btn.active {
+    background: var(--primary);
+    color: var(--bg-color);
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+}
+
+.btn-pdf {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: transparent;
+    border: 1px solid var(--text-dim);
+    color: var(--text-dim);
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-pdf:hover {
+    border-color: #ef4444; /* Rouge PDF */
+    color: #ef4444;
+}
+
+/* Zone Terminal */
+.bandit-display {
+    flex: 2;
+    min-width: 300px;
+    background: #0d1117;
+    border-radius: 10px;
+    overflow: hidden;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.terminal-header {
+    background: #21262d;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid #30363d;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+.red { background: #ff5f56; }
+.yellow { background: #ffbd2e; }
+.green { background: #27c93f; }
+
+#terminal-title {
+    margin-left: 10px;
+    color: #8b949e;
+    font-size: 0.9rem;
+}
+
+.terminal-body {
+    padding: 20px;
+    color: #c9d1d9;
+}
+
+.terminal-body h4 {
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+.terminal-body p {
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.cmd-block {
+    background: rgba(255,255,255,0.05);
+    padding: 10px;
+    border-left: 3px solid var(--primary);
+    margin: 15px 0;
+    font-family: monospace;
+    color: #a5d6ff;
+    overflow-x: auto;
+}
+
+.flag {
+    color: #7ee787; /* Vert succès */
+    font-weight: bold;
+    word-break: break-all;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .bandit-interface {
+        flex-direction: column;
+    }
+    .bandit-sidebar {
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        padding-bottom: 20px;
+        padding-right: 0;
+    }
+}
+/* Mise à jour Terminal Body pour plus de détails */
+.terminal-body {
+    padding: 25px;
+    color: #c9d1d9;
+    height: 400px; /* On fixe une hauteur pour éviter que la page saute */
+    overflow-y: auto; /* Scroll si le texte est long */
+    font-family: 'Consolas', 'Monaco', monospace; /* Police plus "code" */
+}
+
+.terminal-body h4 {
+    color: var(--primary);
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+    padding-bottom: 10px;
+}
+
+.analysis-block {
+    margin-bottom: 20px;
+}
+
+.analysis-block p {
+    margin-bottom: 10px;
+    color: #8b949e; /* Gris clair pour le texte narratif */
+}
+
+.analysis-block ul {
+    list-style: none;
+    padding-left: 15px;
+    margin-bottom: 15px;
+}
+
+.analysis-block li {
+    margin-bottom: 8px;
+    position: relative;
+}
+
+.analysis-block li::before {
+    content: '>';
+    color: var(--primary);
+    position: absolute;
+    left: -15px;
+    font-weight: bold;
+}
+
+.cmd-block {
+    background: #0d1117;
+    border: 1px solid #30363d;
+    padding: 15px;
+    border-radius: 6px;
+    margin: 15px 0;
+    color: #e6edf3;
+    font-family: monospace;
+    white-space: pre-wrap; /* Garde les retours à la ligne */
+}
+
+.cmd-comment {
+    color: #6a737d; /* Commentaires en gris comme dans un IDE */
+    font-style: italic;
+    display: block;
+    margin-bottom: 5px;
+}
