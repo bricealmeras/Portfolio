@@ -236,6 +236,135 @@ nav a:hover {
     border-color: var(--primary);
 }
 
+/* SECTION DIPLÔMES & CERTIFICATIONS */
+.diplomes-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 40px;
+}
+
+.diplome-category h3 {
+    color: var(--primary);
+    margin-bottom: 25px;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.diplome-item, .certification-item {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: 0.3s;
+}
+
+.diplome-item:hover, .certification-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-3px);
+    border-color: rgba(56, 189, 248, 0.3);
+}
+
+.diplome-item h4, .certification-item h4 {
+    color: var(--text-light);
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.diplome-details, .certification-details {
+    color: var(--text-dim);
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+.diplome-status, .certification-status {
+    color: var(--primary);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.diplome-progress {
+    margin: 15px 0;
+}
+
+.progress-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    color: var(--text-light);
+}
+
+.status-icon {
+    margin-right: 10px;
+    font-size: 1rem;
+}
+
+/* SECTION EXPÉRIENCE PROFESSIONNELLE */
+.experience-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.experience-item {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 25px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: 0.3s;
+}
+
+.experience-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-3px);
+    border-color: rgba(56, 189, 248, 0.3);
+}
+
+.experience-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.experience-header h3 {
+    color: var(--primary);
+    margin: 0;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.experience-period {
+    background: var(--primary);
+    color: var(--bg-color);
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.experience-role {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+    font-style: italic;
+}
+
+.experience-description {
+    color: var(--text-light);
+    line-height: 1.6;
+    margin: 0;
+}
+
 /* SECTION PROJETS (GRID) */
 .projects-grid {
     display: grid;

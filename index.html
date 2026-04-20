@@ -16,6 +16,8 @@
             <ul>
                 <li><a href="#home">Accueil</a></li>
                 <li><a href="#skills">Compétences</a></li>
+                <li><a href="#diplomes">Diplômes</a></li>
+                <li><a href="#experience">Expérience</a></li>
                 <li><a href="#projets">Projets</a></li>
                 <li><a href="#veilles">Veilles</a></li>
                 <li><a href="#contact" class="btn-contact">Me Contacter</a></li>
@@ -63,10 +65,12 @@
                 <div class="tags">
                     <span>Cisco Packet Tracer</span>
                     <span>VLAN & Trunking</span>
-                    <span>Routage (OSPF/EIGRP)</span>
-                    <span>Firewall</span>
-                    <span>VPN (IPSec/OpenVPN)</span>
-                    <span>Wireshark / Nmap (Network Scan)</span>
+                    <span>Routage (Pfsense / Cisco)</span>
+                    <span>Firewall (Pfsense)</span>
+                    <!-- <span>VPN (IPSec/OpenVPN)</span> -->
+                    <span>Wireshark / Nmap (Scan réseau)</span>
+                    <span>Redondance CARP</span>
+                    <span>Règles Par-feu</span>
                 </div>
             </div>
 
@@ -82,25 +86,83 @@
         </div>
     </section>
 
+    <section id="diplomes" class="container">
+        <h2 class="section-title">Diplômes & Certifications</h2>
+
+        <div class="diplomes-wrapper">
+            <div class="diplome-category">
+                <h3><i class="fas fa-graduation-cap"></i> Diplômes</h3>
+                <div class="diplome-item">
+                    <h4>BTS Services Informatiques aux Organisations</h4>
+                    <p class="diplome-details">Option Solutions d'Infrastructure, Systèmes et Réseaux (SISR)</p>
+                    <div class="diplome-progress">
+                        <p class="progress-item"><span class="status-icon">✅</span> Première année - Terminée</p>
+                        <p class="progress-item"><span class="status-icon">🔄</span> Deuxième année - En cours</p>
+                    </div>
+                    <p class="diplome-status">Obtention prévue pour 2027</p>
+                </div>
+            </div>
+
+            <div class="diplome-category">
+                <h3><i class="fas fa-certificate"></i> Certifications</h3>
+                <div class="certification-item">
+                    <h4>CCNA (Cisco Certified Network Associate)</h4>
+                    <p class="certification-details">Certification en cours - Préparation aux examens</p>
+                    <p class="certification-status">🔄 En cours d'acquisition</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="container">
+        <h2 class="section-title">Expérience Professionnelle</h2>
+
+        <div class="experience-wrapper">
+            <div class="experience-item">
+                <div class="experience-header">
+                    <h3><i class="fas fa-hospital"></i> Service Informatique - CHU de Nîmes</h3>
+                    <span class="experience-period">2022 - 2025</span>
+                </div>
+                <p class="experience-role">Stages de lycée - 3 années consécutives</p>
+                <p class="experience-description">Immersion progressive dans l'environnement informatique hospitalier. Participation à la maintenance des équipements, support utilisateur et découverte des systèmes d'information de santé.</p>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <h3><i class="fas fa-building"></i> Cekoya - Nîmes</h3>
+                    <span class="experience-period">2025 - 2026</span>
+                </div>
+                <p class="experience-role">Alternance/Stage BTS SIO SISR</p>
+                <p class="experience-description">Expérience en entreprise dans le domaine des systèmes et réseaux. Mise en pratique des compétences acquises en formation sur des projets concrets.</p>
+            </div>
+        </div>
+    </section>
+
     <section id="projets" class="container">
         <h2 class="section-title">Mes Réalisations (E4)</h2>
         <div class="projects-grid">
             <div class="card">
                 <div class="card-icon"><i class="fas fa-network-wired"></i></div>
-                <h3>Infrasctructure Cisco</h3>
-                <p>Mise en place d'une architecture réseau sécurisée : Segmentation VLAN, configuration trunking et routage inter-VLAN sur matériel Cisco.</p>
+                <h3>Infrastructure Cisco</h3>
+                <p>Mise en place d'une architecture réseau sur Cisco Packet Tracer : Segmentation VLAN, configuration trunking ,routage inter-VLAN, protocole NAT, EIGRP et OSPF</p>
                 <a href="#">Voir la documentation &rarr;</a>
             </div>
             <div class="card">
                 <div class="card-icon"><i class="fab fa-windows"></i></div>
                 <h3>Domaine Active Directory</h3>
-                <p>Installation d'un contrôleur de domaine Windows Server. Gestion des utilisateurs, déploiement de GPO et scripts d'ouverture de session.</p>
+                <p>Mise en place d'un domaine virtuel sur VMware Workstation. Installation d'un contrôleur de domaine Windows Server, configuration DNS/DHCP, gestion des utilisateurs selon le modèle AGDLP, déploiement de GPO et scripts d'ouverture de session.</p>
                 <a href="#">Voir la documentation &rarr;</a>
             </div>
             <div class="card">
                 <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
                 <h3>Sécurité Pfsense</h3>
                 <p>Déploiement d'un pare-feu périmétrique. Configuration du filtrage de paquets, mise en place d'un portail captif et d'un VPN nomade.</p>
+                <a href="#">Voir la documentation &rarr;</a>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-server"></i></div>
+                <h3>Serveur Zabbix</h3>
+                <p>Déploiement et supervision d'un serveur Zabbix pour le monitoring réseau et applicatif. Création de templates, alertes et tableaux de bord de suivi.</p>
                 <a href="#">Voir la documentation &rarr;</a>
             </div>
             <div class="card">
@@ -119,10 +181,10 @@
             <div class="veille-card tools">
                 <h3><i class="fas fa-tools"></i> Mes Outils de Veille</h3>
                 <ul class="tool-list">
-                    <li><i class="fas fa-rss"></i> <strong>Feedly :</strong> Agrégation de flux RSS (ANSSI, CERT-FR)</li>
-                    <li><i class="fab fa-twitter"></i> <strong>Twitter/X :</strong> Suivi de chercheurs en cybersécurité</li>
-                    <li><i class="fas fa-bell"></i> <strong>Google Alerts :</strong> Alertes sur mots-clés spécifiques</li>
-                    <li><i class="fab fa-linkedin"></i> <strong>LinkedIn :</strong> Actualités des éditeurs (Microsoft, Cisco)</li>
+                    <li><i class="fas fa-rss"></i> <strong>Feedly :</strong> Agrégation de flux RSS (ANSSI, CERT-FR, IT-Connect, Les Numériques)</li>
+                    <!-- <li><i class="fab fa-twitter"></i> <strong>Twitter/X :</strong> Suivi de chercheurs en cybersécurité</li> -->
+                    <!-- <li><i class="fas fa-bell"></i> <strong>Google Alerts :</strong> Alertes sur mots-clés spécifiques</li> -->
+                    <li><i class="fab fa-linkedin"></i> <strong>LinkedIn :</strong> Actualités des éditeurs (Microsoft, Cisco, Feed LinkedIn)</li>
                 </ul>
             </div>
 
@@ -130,13 +192,13 @@
                 <h3><i class="fas fa-lightbulb"></i> Mes Sujets d'Étude</h3>
                 
                 <div class="subject-item">
-                    <h4>Sujet 1 : L'IA dans la Cybersécurité</h4>
-                    <p>Comment l'intelligence artificielle améliore la détection des menaces (SOC) mais permet aussi de créer des attaques plus sophistiquées.</p>
+                    <h4>Sujet 1 : Optimisation du travail</h4>
+                    <p>Recherche active de moyens d'automatiser et d'améliorer l'efficacité des processus techniques.</p>
                 </div>
 
                 <div class="subject-item">
-                    <h4>Sujet 2 : L'évolution vers le "Zero Trust"</h4>
-                    <p>Analyse de la fin de la sécurité périmétrique traditionnelle au profit d'une vérification continue de l'identité et du contexte.</p>
+                    <h4>Sujet 2 : CyberSécurité</h4>
+                    <p>Exploration des dernières tendances et menaces en matière de cybersécurité.</p>
                 </div>
             </div>
         </div>
