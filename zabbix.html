@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projet Zabbix - Brice Almeras</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="zabbix.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">BRICE.<span>SIO</span></div>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="btn-contact"><i class="fas fa-arrow-left"></i> Retour</a></li>
+                <li><a href="#intro">Intro</a></li>
+                <li><a href="#zabbix-def">Présentation</a></li>
+                <li><a href="#installation">Serveur</a></li>
+                <li><a href="#agent-install">Agent</a></li>
+                <li><a href="#conclusion">Conclusion</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="doc-content">
+        
+        <section id="intro" class="doc-section">
+            <h1>Projet Zabbix</h1>
+            <p class="lead">Mise en place d'une tour de contrôle pour l'infrastructure informatique de l'entreprise</p>
+            
+            <div class="info-box">
+                <h3><i class="fas fa-target"></i> L'Idée</h3>
+                <p>Mettre en place une tour de contrôle pour l'infrastructure informatique de l'entreprise. Un système de supervision complet et moderne pour garantir la disponibilité et les performances des ressources IT.</p>
+            </div>
+        </section>
+
+        <section id="contexte" class="doc-section">
+            <h2>Contexte du Projet</h2>
+            <p><strong>Besoin :</strong> Passer d'une maintenance "réactive" (on répare quand ça casse) à une maintenance "proactive" (on intervient avant la panne).</p>
+            <div class="highlight-box">
+                <p><em>« Il vaut mieux prévenir que guérir »</em></p>
+            </div>
+            <p>Cette transition est essentielle pour minimiser les arrêts serveur et améliorer la productivité de l'entreprise en identifiant les problèmes potentiels avant qu'ils ne deviennent critiques.</p>
+        </section>
+
+        <section id="zabbix-def" class="doc-section">
+            <h2>Qu'est-ce que Zabbix ?</h2>
+            <p>Zabbix est un logiciel qui supervise de nombreux paramètres d'un réseau (débit, connexion, requêtes) ainsi que la santé et l'intégrité des serveurs et des ordinateurs clients.</p>
+            <p>C'est une solution de monitoring complète et flexible, capable de :
+            </p>
+            <ul>
+                <li>Surveiller les performances réseau et serveurs</li>
+                <li>Collecter et analyser des données en temps réel</li>
+                <li>Alerter en cas d'anomalies</li>
+                <li>Générer des rapports détaillés</li>
+                <li>Supporter des déploiements à grande échelle</li>
+            </ul>
+        </section>
+
+        <section id="monitoring" class="doc-section">
+            <h2>Le Monitoring des PC Clients</h2>
+            <p>Vous pouvez surveiller tout votre parc informatique de la même manière que vos serveurs. Pour un PC client, Zabbix peut vous dire :</p>
+            
+            <h3>Santé Matérielle</h3>
+            <ul>
+                <li>État du disque dur (prédiction de panne)</li>
+                <li>Température du processeur</li>
+                <li>Utilisation de la RAM</li>
+            </ul>
+            
+            <h3>Inventaire</h3>
+            <ul>
+                <li>Quel logiciel est installé</li>
+                <li>Quelle version de Windows est utilisée</li>
+                <li>Quel est le numéro de série du PC</li>
+            </ul>
+            
+            <h3>Disponibilité</h3>
+            <ul>
+                <li>Est-ce que le PC de la comptabilité est allumé et connecté au réseau ?</li>
+                <li>Latence de connexion</li>
+            </ul>
+        </section>
+
+        <section id="pourquoi" class="doc-section">
+            <h2>Pourquoi Zabbix ?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <h4><i class="fas fa-code"></i> Open Source</h4>
+                    <p>100% Open Source - pas de coût de licence</p>
+                </div>
+                <div class="benefit-card">
+                    <h4><i class="fas fa-universal-access"></i> Polyvalent</h4>
+                    <p>Extrêmement polyvalent pour surveiller serveurs, réseaux et applications</p>
+                </div>
+                <div class="benefit-card">
+                    <h4><i class="fas fa-laptop"></i> Multi-plateforme</h4>
+                    <p>Applicable à nos serveurs ET à nos PC clients (Windows principalement)</p>
+                </div>
+                <div class="benefit-card">
+                    <h4><i class="fas fa-chart-bar"></i> Scalabilité</h4>
+                    <p>Supporte des déploiements à petite et grande échelle</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="installation" class="doc-section">
+            <h2>Partie I : L'Installation</h2>
+            <p>L'installation se déroulera sur un serveur Debian (Ubuntu fonctionne également) virtualisé depuis notre serveur local de l'entreprise. Objectif : zéro coûts supplémentaires.</p>
+        </section>
+
+        <section id="etape-a" class="doc-section">
+            <h2>Étape A : Configuration Serveur</h2>
+            <p>La première partie de l'installation se fera via le Shell de notre serveur :</p>
+            
+            <h3>1. Installation du dépôt Zabbix</h3>
+            <p>On commence par télécharger et installer le paquet qui contient les sources officielles de Zabbix.</p>
+            <div class="terminal-block">
+                <span class="cmd">wget https://repo.zabbix.com/zabbix/7.0/debian/pool/main/z/zabbix-release/zabbix-release_latest_7.0+debian12_all.deb</span>
+                <span class="cmd">sudo dpkg -i zabbix-release_latest_7.0+debian12_all.deb</span>
+                <span class="cmd">sudo apt update</span>
+            </div>
+
+            <h3>2. Installation du serveur, du frontend et de l'agent</h3>
+            <p>Cette commande installe le cœur de Zabbix ainsi que les composants web nécessaires.</p>
+            <div class="terminal-block">
+                <span class="cmd">sudo apt install zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent mariadb-server</span>
+            </div>
+
+            <h3>3. Création de la base de données</h3>
+            <p>Connectez-vous à MariaDB pour créer la base et l'utilisateur. Remplacez <code>votre_mot_de_passe</code> par un mot de passe sécurisé.</p>
+            <div class="terminal-block">
+                <span class="cmd">sudo mariadb -u root</span>
+            </div>
+            <p>Une fois dans l'invite de commande MariaDB, tapez ces lignes une par une :</p>
+            <div class="terminal-block">
+                <span class="cmd">create database zabbix character set utf8mb4 collate utf8mb4_bin;</span>
+                <span class="cmd">create user zabbix@localhost identified by 'votre_mot_de_passe';</span>
+                <span class="cmd">grant all privileges on zabbix.* to zabbix@localhost;</span>
+                <span class="cmd">set global log_bin_trust_function_creators = 1;</span>
+                <span class="cmd">quit;</span>
+            </div>
+
+            <h3>4. Importation du schéma initial</h3>
+            <p>Importez les données de base dans la base de données que vous venez de créer. Le système vous demandera le mot de passe de l'utilisateur zabbix défini juste au-dessus.</p>
+            <div class="terminal-block">
+                <span class="cmd">sudo zcat /usr/share/zabbix-sql-scripts/mysql/server.sql.gz | mysql --default-character-set=utf8mb4 -uzabbix -p zabbix</span>
+            </div>
+            <p><strong>Note :</strong> Une fois l'importation terminée (cela peut prendre quelques secondes), désactivez l'option de création de fonctions :</p>
+            <div class="terminal-block">
+                <span class="cmd">sudo mariadb -u root -e "set global log_bin_trust_function_creators = 0;"</span>
+            </div>
+
+            <h3>5. Configuration du serveur Zabbix</h3>
+            <p>Modifiez le fichier de configuration pour indiquer à Zabbix quel mot de passe utiliser pour se connecter à la base de données.</p>
+            <div class="terminal-block">
+                <span class="cmd">sudo nano /etc/zabbix/zabbix_server.conf</span>
+            </div>
+            <p>Cherchez la ligne <code># DBPassword=</code> et modifiez-la comme ceci (enlevez le #) :</p>
+            <div class="terminal-block">
+                <span class="cmd">DBPassword=votre_mot_de_passe</span>
+            </div>
+
+            <h3>6. Redémarrage et activation des services</h3>
+            <p>Lancez les services et faites en sorte qu'ils démarrent automatiquement avec le serveur.</p>
+            <div class="terminal-block">
+                <span class="cmd">sudo systemctl restart zabbix-server zabbix-agent apache2</span>
+                <span class="cmd">sudo systemctl enable zabbix-server zabbix-agent apache2</span>
+            </div>
+
+            <h3>7. Finalisation via l'interface Web</h3>
+            <p>Ouvrez votre navigateur et rendez-vous à l'adresse suivante : <code>http://adresse_ip_du_serveur/zabbix</code></p>
+            <p>Suivez l'assistant de configuration (tout devrait être au vert). Les identifiants par défaut sont :</p>
+            <ul>
+                <li><strong>Utilisateur :</strong> Admin</li>
+                <li><strong>Mot de passe :</strong> zabbix</li>
+            </ul>
+        </section>
+
+        <section id="etape-b" class="doc-section">
+            <h2>Étape B : Configuration Web</h2>
+            <p>Une fois l'installation via ligne de commande terminée, la seconde partie de l'installation s'effectue à la première ouverture de l'application / panel web de Zabbix.</p>
+            <p>Pour accéder au panel de l'interface Zabbix on rentre : <code>IP_du_serveur/zabbix</code> dans notre navigateur.</p>
+
+            <h3>Écran 1 : Sélection de la langue</h3>
+            <figure class="doc-figure">
+                <img src="assets/zabbix/image1.png" alt="Sélection de la langue - Zabbix">
+                <figcaption>Une première page de configuration apparait, sur lequel il faut sélectionner notre langue (Français dans notre cas).</figcaption>
+            </figure>
+            <p>Cliquer sur "Prochaine étape"</p>
+
+            <h3>Écran 2 : Vérification des dépendances</h3>
+            <figure class="doc-figure">
+                <img src="assets/zabbix/image2.png" alt="Vérification des dépendances">
+                <figcaption>Une seconde page apparait nous indiquant si toutes les dépendances sont bien installées et actives.</figcaption>
+            </figure>
+
+            <h3>Écran 3 : Configuration de la base de données</h3>
+            <figure class="doc-figure">
+                <img src="assets/zabbix/image3.png" alt="Configuration de la base de données">
+                <figcaption>Configuration de la base de données - Paramètres de communication pour la base de données.</figcaption>
+            </figure>
+            <p>Cette interface permet de définir les paramètres de communication nécessaires pour que l'interface PHP de Zabbix puisse lire et écrire des données dans le système de gestion de base de données.</p>
+            <p>Il est alors nécessaire de renseigner :</p>
+            <ul>
+                <li><strong>Type de base de données :</strong> MySQL (Si MariaDB a été utilisé, sélectionner tout de même MySQL car les deux fonctionnent de la même manière)</li>
+                <li><strong>Hôte de base de données :</strong> C'est en principe notre machine sur laquelle est installé Zabbix (localhost), sinon renseigner l'adresse de la base donnée externe</li>
+                <li><strong>Port de la base de données :</strong> laisser à 0 (port par défaut utilisé par Zabbix)</li>
+                <li><strong>Nom de la base de données :</strong> zabbix (Nom assigné précédemment)</li>
+                <li><strong>Stocker les informations d'identification :</strong> Par soucis d'efficacité nous allons choisir Texte brut, mais si l'installation s'effectue dans une grande entreprise il faudra préconiser l'utilisation d'un Coffre HashiCorp (stockage externe et sécurisé du mot de passe)</li>
+                <li><strong>Utilisateur / Mot de passe :</strong> Les identifiants créés précédemment lors de l'étape A</li>
+            </ul>
+
+            <h3>Écran 4 : Paramètres serveur</h3>
+            <figure class="doc-figure">
+                <img src="assets/zabbix/image4.png" alt="Configuration du serveur - Paramètres généraux">
+                <figcaption>Nommer le serveur ZABBIX (de préférence en respectant une convention de nommage),puis le fuseau horaire, pour nous ,Français , “Europe/Brussels” convient.</figcaption>
+            </figure>
+
+            <h3>Écran 5&6 : Vérification et confirmation</h3>
+            <figure class="doc-figure">
+                <img src="assets/zabbix/image5.png" alt="Sélection du fuseau horaire - Partie 1">
+                <figcaption></figcaption>
+            </figure>
+            <figure class="doc-figure">
+                <img src="assets/zabbix/image6.png" alt="Sélection du fuseau horaire - Partie 2">
+                <figcaption>Pages récapitulative, ainsi qu’une confirmation si l’installation est terminée .</figcaption>
+            </figure>
+
+            <h3>Écran 7 : Résumé et confirmation</h3>
+            <figure class="doc-figure">
+                <img src="assets/zabbix/image7.png" alt="Page récapitulative de l'installation">
+                <figcaption>Une page récapitulative, ainsi qu'une confirmation si l'installation est terminée. Nous avons désormais accès à l'interface de Zabbix.</figcaption>
+            </figure>
+        </section>
+
+        <section id="agent-install" class="doc-section">
+            <h2>Installation de l'Agent Zabbix</h2>
+            <p>Une fois arrivé sur l'interface, pour y ajouter un nouvel appareil à superviser, la meilleure manière est d'installer l'agent Zabbix. Voici la procédure simple sur un Windows Server :</p>
+
+            <h3>Téléchargement de l'agent</h3>
+            <figure class="doc-figure">
+                <img src="assets/zabbix/image8.png" alt="Site de téléchargement Zabbix">
+                <figcaption>Il faut se rendre sur le site de zabbix : https://www.zabbix.com/fr/download_agents</figcaption>
+            </figure>
+            <p>Puis sélectionner l'OS de la machine en question, télécharger et lancer l'installeur.</p>
+
+            <h3>Sélection du système d'exploitation</h3>
+            <figure class="doc-figure">
+                <img src="assets/zabbix/image9.png" alt="Sélection de l'OS - Zabbix">
+                <figcaption>Sélectionner Windows server et télécharger l'agent approprié.</figcaption>
+            </figure>
+
+            <h3>Installation et configuration</h3>
+            <figure class="doc-figure">
+                <img src="assets/zabbix/image10.png" alt="Processus d'installation de l'agent">
+                <figcaption>Lancer l'installeur téléchargé.</figcaption>
+            </figure>
+
+            <h3>Paramètres de configuration critiques</h3>
+            <figure class="doc-figure">
+                <img src="assets/zabbix/image11.png" alt="Paramètres critiques de l'agent">
+                <figcaption>Étape la plus importante de la configuration de l'agent.</figcaption>
+            </figure>
+            <p>Il est crucial de configurer :</p>
+            <ul>
+                <li><strong>Host name :</strong> Mettre le nom exact de la machine. Pour en être sûr → CMD > <code>hostname</code></li>
+                <li><strong>Zabbix server IP/DNS :</strong> Indiquer l'adresse IP du serveur Zabbix</li>
+                <li><strong>Agent listen port :</strong> 10050 (Le port par défaut utilisé par Zabbix)</li>
+                <li><strong>Server or Proxy for active checks :</strong> Également l'adresse IP du serveur Zabbix, si aucun proxy Zabbix n'est utilisé</li>
+                <li><strong>Cocher :</strong> "Add agent location to the PATH"</li>
+            </ul>
+
+            <h3>Ajout de l'agent sur l'interface Zabbix</h3>
+            <figure class="doc-figure">
+                <img src="assets/zabbix/image12.png" alt="Interface Zabbix - Création d'hôte">
+                <figcaption>Cliquer sur "Collecte de données" > "Hôte" > "Créer un Hôte"</figcaption>
+            </figure>
+            <p>Dans le formulaire de création d'hôte :</p>
+            <ul>
+                <li><strong>Nom de l'hôte :</strong> Indiquer le nom exact de la machine (ex: WINSERV-EDWIN)</li>
+                <li><strong>Modèles :</strong> Windows By Zabbix Agent</li>
+                <li><strong>Ajouter :</strong> Agent</li>
+                <li><strong>Groupes d'hôtes :</strong> Windows Servers</li>
+                <li><strong>Adresse IP :</strong> Indiquer l'IP de la machine</li>
+            </ul>
+
+            <h3>Confirmation et statut ZBX</h3>
+            <figure class="doc-figure">
+                <img src="assets/zabbix/image13.png" alt="Statut ZBX vert - Hôte actif">
+                <figcaption>Lorsque tout est bon, un rectangle "ZBX" en vert apparait, indiquant que l'agent communique correctement.</figcaption>
+            </figure>
+            <p>Nous avons désormais accès aux différents graphiques relatifs aux statistiques de RAM, stockage, CPU etc...</p>
+
+            <h3>Visualisation des graphiques</h3>
+            <figure class="doc-figure">
+                <img src="assets/zabbix/image14.png" alt="Section Graphiques de Zabbix">
+                <figcaption>Cliquer sur "Graphiques" pour accéder aux visualisations de données.</figcaption>
+            </figure>
+
+            <h3>Graphiques détaillés de l'hôte</h3>
+            <figure class="doc-figure">
+                <img src="assets/zabbix/image15.png" alt="Graphiques détaillés de l'hôte">
+                <figcaption>Cliquer sur "Graphiques de l'hôtes" pour avoir les informations les plus intéressantes (CPU, RAM, disque, etc...).</figcaption>
+            </figure>
+        </section>
+
+        <section id="conclusion" class="doc-section">
+            <h2>Conclusion</h2>
+            <div class="success-box">
+                <h3><i class="fas fa-check-circle"></i> Déploiement Réussi</h3>
+                <p>Vous disposez maintenant d'une solution de monitoring complète et open source pour superviser l'intégralité de votre infrastructure informatique.</p>
+            </div>
+            <p><strong>Avantages clés du déploiement :</strong></p>
+            <ul>
+                <li>Passage à une maintenance proactive</li>
+                <li>Visibilité complète sur l'infrastructure (serveurs + clients)</li>
+                <li>Aucun coût de licence</li>
+                <li>Alertes en temps réel sur les anomalies</li>
+                <li>Historique et graphiques détaillés</li>
+                <li>Scalabilité pour des déploiements futurs</li>
+            </ul>
+        </section>
+
+    </main>
+
+    <script>
+        // Gestion du menu actif avec le nouveau design header
+        const links = document.querySelectorAll('header nav ul li a[href^="#"]');
+        const sections = document.querySelectorAll('.doc-section');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= (sectionTop - 150)) { // 150px d'offset pour compenser le header
+                    current = section.getAttribute('id');
+                }
+            });
+
+            links.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
