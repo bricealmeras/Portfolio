@@ -26,23 +26,51 @@ img {
     border-radius: 8px;
     border: 1px solid #334155;
     display: block;
-    margin: 20px auto;
+    margin: 30px auto;
     max-width: 750px;
+}
+
+/* TITRES DES SECTIONS */
+.doc-section h2 {
+    font-size: 1.8rem;
+    color: #38bdf8;
+    margin-bottom: 25px;
+    margin-top: 40px;
+    font-weight: 600;
+}
+
+.doc-section h3 {
+    font-size: 1.2rem;
+    color: #f1f5f9;
+    margin-bottom: 15px;
+    margin-top: 30px;
+    font-weight: 600;
+}
+
+.doc-section h1 {
+    font-size: 2.5rem;
+    color: #f1f5f9;
+    margin-bottom: 15px;
+    font-weight: 700;
 }
 
 /* SECTIONS */
 .doc-section {
     width: 100%;
-    max-width: 800px;
+    max-width: 900px;
+    margin-bottom: 60px;
+    scroll-margin-top: 40px;
+}
+
+.doc-section:last-child {
+    margin-bottom: 0;
 }
 
 .lead {
-    font-size: 1.15rem;
-    color: #38bdf8;
-    font-weight: 500;
-    margin-bottom: 30px;
-    padding-bottom: 20px;
-    border-bottom: 2px solid rgba(56, 189, 248, 0.3);
+    font-size: 1.2rem;
+    color: #94a3b8;
+    font-weight: 400;
+    margin-bottom: 40px;
 }
 
 /* FIGURES ET LÉGENDES */
@@ -94,35 +122,25 @@ img {
 .doc-section ul {
     list-style: none;
     padding: 0;
-    margin: 30px auto;
-    max-width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
+    margin: 25px 0;
 }
 
 .doc-section ul li {
-    padding: 14px 20px;
-    padding-left: 45px;
+    padding: 12px 15px 12px 45px;
     position: relative;
     color: #cbd5e1;
-    line-height: 1.7;
-    text-align: left;
-    min-width: 100%;
-    max-width: 650px;
-    background: linear-gradient(135deg, rgba(56, 189, 248, 0.05), rgba(139, 92, 246, 0.05));
+    line-height: 1.6;
+    margin-bottom: 10px;
+    background: rgba(56, 189, 248, 0.04);
     border-left: 3px solid #38bdf8;
-    border-radius: 6px;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(5px);
+    border-radius: 4px;
+    transition: all 0.2s ease;
 }
 
 .doc-section ul li:hover {
-    background: linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(139, 92, 246, 0.15));
+    background: rgba(56, 189, 248, 0.08);
     border-left-color: #8b5cf6;
-    transform: translateX(8px);
-    box-shadow: 0 4px 16px rgba(56, 189, 248, 0.1);
+    padding-left: 50px;
 }
 
 .doc-section ul li::before {
@@ -131,8 +149,8 @@ img {
     left: 15px;
     color: #38bdf8;
     font-weight: bold;
-    font-size: 1.1rem;
-    transition: color 0.3s ease;
+    font-size: 1rem;
+    transition: color 0.2s ease;
 }
 
 .doc-section ul li:hover::before {
@@ -167,27 +185,27 @@ img {
 }
 
 .terminal-block {
-    background: linear-gradient(135deg, #0b1120, #0f172a);
+    background: linear-gradient(135deg, #0b1120 0%, #0f172a 100%);
     border: 1px solid #334155;
-    border-radius: 12px;
-    padding: 30px;
+    border-radius: 8px;
+    padding: 25px;
     font-family: 'Fira Code', monospace;
-    margin: 30px auto;
+    margin: 25px 0;
     overflow-x: auto;
     display: block;
     max-width: 100%;
     width: 100%;
     box-sizing: border-box;
     position: relative;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
 .terminal-block::before {
-    content: "$ Terminal";
+    content: "Terminal";
     position: absolute;
-    top: 12px;
-    left: 30px;
-    font-size: 0.75rem;
+    top: 10px;
+    left: 25px;
+    font-size: 0.7rem;
     color: #64748b;
     font-weight: 600;
     text-transform: uppercase;
@@ -197,37 +215,33 @@ img {
 .cmd {
     display: block;
     color: #f8fafc;
-    margin-bottom: 8px;
-    margin-top: 20px;
+    margin-bottom: 6px;
+    margin-top: 15px;
     word-break: break-word;
-    padding: 8px 10px;
-    border-radius: 4px;
-    background: rgba(56, 189, 248, 0.05);
-    border-left: 3px solid #38bdf8;
-    transition: all 0.2s ease;
+    padding: 6px 0;
+    transition: color 0.2s ease;
 }
 
 .cmd:first-of-type {
-    margin-top: 40px;
+    margin-top: 35px;
 }
 
 .cmd:hover {
-    background: rgba(56, 189, 248, 0.1);
-    border-left-color: #8b5cf6;
+    color: #38bdf8;
 }
 
 .cmd::before {
     content: "$ ";
     color: #38bdf8;
     font-weight: bold;
-    letter-spacing: 1px;
+    margin-right: 2px;
 }
 
 .output {
     display: block;
     color: #94a3b8;
-    margin-bottom: 15px;
-    padding-left: 20px;
+    margin-bottom: 8px;
+    padding-left: 0;
     word-break: break-word;
     font-size: 0.95rem;
 }
@@ -247,43 +261,67 @@ img {
 
 /* BOXES D'INFORMATION */
 .info-box {
-    background: linear-gradient(135deg, rgba(56, 189, 248, 0.08), rgba(139, 92, 246, 0.05));
-    border-left: 4px solid #38bdf8;
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(139, 92, 246, 0.1));
+    border-top: 3px solid #38bdf8;
+    border-bottom: 3px solid #38bdf8;
     padding: 30px;
-    border-radius: 12px;
-    margin: 30px auto;
-    max-width: 700px;
-    backdrop-filter: blur(5px);
-    border-top: 1px solid rgba(56, 189, 248, 0.2);
-    box-shadow: 0 8px 24px rgba(56, 189, 248, 0.08);
+    border-radius: 10px;
+    margin: 30px 0;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(56, 189, 248, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1);
     transition: all 0.3s ease;
+    position: relative;
+}
+
+.info-box::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 0px;
+    background: linear-gradient(90deg, transparent, #38bdf8, transparent);
+    border-radius: 10px 10px 0 0;
 }
 
 .info-box:hover {
-    box-shadow: 0 12px 32px rgba(56, 189, 248, 0.15);
-    transform: translateY(-2px);
-    border-top-color: rgba(56, 189, 248, 0.4);
+    box-shadow: 0 12px 48px rgba(56, 189, 248, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    transform: translateY(-4px);
+    border-top-color: #00d4ff;
+    border-bottom-color: #00d4ff;
 }
 
 .info-box h3 {
-    color: #38bdf8;
+    color: #00d4ff;
     margin-bottom: 15px;
+    font-size: 1.2rem;
+    font-weight: 700;
     display: flex;
     align-items: center;
-    gap: 12px;
     justify-content: center;
-    font-size: 1.15rem;
+    gap: 12px;
+    text-align: center;
 }
 
 .info-box h3 i {
-    font-size: 1.3rem;
-    animation: pulse 2s infinite;
+    font-size: 1.4rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
 }
 
 .info-box p {
-    color: #cbd5e1;
+    color: #f1f5f9;
     margin-bottom: 15px;
+    margin-top: 8px;
+    line-height: 1.8;
     text-align: center;
+    font-weight: 600;
+    font-size: 1.05rem;
+    letter-spacing: 0.3px;
 }
 
 .info-box p:last-child {
@@ -294,68 +332,58 @@ img {
 .highlight-box {
     background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(56, 189, 248, 0.05));
     border-left: 4px solid #8b5cf6;
-    padding: 30px;
-    border-radius: 12px;
-    margin: 30px auto;
-    max-width: 700px;
-    backdrop-filter: blur(5px);
-    border-top: 1px solid rgba(139, 92, 246, 0.2);
-    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.08);
+    padding: 25px;
+    border-radius: 8px;
+    margin: 30px 0;
+    box-shadow: 0 4px 16px rgba(139, 92, 246, 0.08);
     transition: all 0.3s ease;
 }
 
 .highlight-box:hover {
-    box-shadow: 0 12px 32px rgba(139, 92, 246, 0.15);
+    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.12);
     transform: translateY(-2px);
-    border-top-color: rgba(139, 92, 246, 0.4);
 }
 
 .highlight-box p {
     color: #cbd5e1;
-    font-size: 1.1rem;
     margin: 0;
-    text-align: center;
+    line-height: 1.6;
+    font-style: italic;
 }
 
 /* BOXES DE SUCCÈS */
 .success-box {
     background: linear-gradient(135deg, rgba(34, 197, 94, 0.08), rgba(56, 189, 248, 0.05));
     border-left: 4px solid #22c55e;
-    padding: 30px;
-    border-radius: 12px;
-    margin: 30px auto;
-    max-width: 700px;
-    backdrop-filter: blur(5px);
-    border-top: 1px solid rgba(34, 197, 94, 0.2);
-    box-shadow: 0 8px 24px rgba(34, 197, 94, 0.08);
+    padding: 25px;
+    border-radius: 8px;
+    margin: 30px 0;
+    box-shadow: 0 4px 16px rgba(34, 197, 94, 0.08);
     transition: all 0.3s ease;
 }
 
 .success-box:hover {
-    box-shadow: 0 12px 32px rgba(34, 197, 94, 0.15);
+    box-shadow: 0 8px 24px rgba(34, 197, 94, 0.12);
     transform: translateY(-2px);
-    border-top-color: rgba(34, 197, 94, 0.4);
 }
 
 .success-box h3 {
     color: #22c55e;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     display: flex;
     align-items: center;
-    gap: 12px;
-    justify-content: center;
-    font-size: 1.15rem;
+    gap: 10px;
+    font-size: 1.1rem;
 }
 
 .success-box h3 i {
-    font-size: 1.3rem;
-    animation: pulse 2s infinite;
+    font-size: 1.2rem;
 }
 
 .success-box p {
     color: #cbd5e1;
-    margin-bottom: 15px;
-    text-align: center;
+    margin-bottom: 10px;
+    line-height: 1.6;
 }
 
 .success-box p:last-child {
@@ -384,10 +412,10 @@ img {
 }
 
 .benefit-card {
-    background: linear-gradient(135deg, #1e293b, #0f172a);
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.8));
     border: 1px solid #334155;
-    border-radius: 12px;
-    padding: 28px;
+    border-radius: 8px;
+    padding: 25px;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
@@ -412,10 +440,10 @@ img {
 }
 
 .benefit-card:hover {
-    background: linear-gradient(135deg, #334155, #1e293b);
+    background: linear-gradient(135deg, rgba(51, 65, 85, 0.9), rgba(30, 41, 59, 0.9));
     border-color: #38bdf8;
-    box-shadow: 0 12px 32px rgba(56, 189, 248, 0.2);
-    transform: translateY(-8px);
+    box-shadow: 0 8px 24px rgba(56, 189, 248, 0.15);
+    transform: translateY(-4px);
 }
 
 .benefit-card h4 {
@@ -423,20 +451,20 @@ img {
     margin-bottom: 12px;
     display: flex;
     align-items: center;
-    gap: 12px;
-    font-size: 1.15rem;
-    justify-content: center;
+    gap: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
     position: relative;
     z-index: 1;
 }
 
 .benefit-card h4 i {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     transition: all 0.3s ease;
 }
 
 .benefit-card:hover h4 i {
-    transform: rotate(360deg) scale(1.2);
+    transform: scale(1.15);
     color: #8b5cf6;
 }
 
@@ -445,7 +473,6 @@ img {
     margin: 0;
     font-size: 0.95rem;
     line-height: 1.6;
-    text-align: center;
     position: relative;
     z-index: 1;
     transition: color 0.3s ease;
@@ -455,65 +482,16 @@ img {
     color: #cbd5e1;
 }
 
-/* TITRES */
-.doc-section h1 {
-    text-align: center;
-    font-size: 2.5rem;
-    color: #f1f5f9;
-    margin-bottom: 20px;
-    background: linear-gradient(135deg, #38bdf8, #8b5cf6);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.doc-section h2 {
-    font-size: 1.9rem;
-    color: #38bdf8;
-    margin: 60px auto 25px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    justify-content: center;
-    position: relative;
-    padding-bottom: 15px;
-    border-bottom: 2px solid rgba(56, 189, 248, 0.2);
-    transition: all 0.3s ease;
-}
-
-.doc-section h2:hover {
-    border-bottom-color: rgba(56, 189, 248, 0.5);
-}
-
-.doc-section h3 {
-    font-size: 1.35rem;
-    color: #cbd5e1;
-    margin: 35px auto 18px;
-    text-align: center;
-    font-weight: 600;
-    position: relative;
-}
-
-.doc-section h3::before {
-    content: "";
-    display: inline-block;
-    width: 4px;
-    height: 1.2em;
-    background: linear-gradient(135deg, #38bdf8, #8b5cf6);
-    margin-right: 10px;
-    border-radius: 2px;
-}
-
+/* PARAGRAPHES ET TEXTE GÉNÉRAL */
 .doc-section p {
     color: #cbd5e1;
-    margin: 20px auto;
-    line-height: 1.8;
-    text-align: center;
+    margin: 18px 0;
+    line-height: 1.7;
 }
 
-/* PARAGRAPHES SPÉCIALISÉS */
 .doc-section strong {
     color: #f1f5f9;
+    font-weight: 600;
 }
 
 .doc-section em {
@@ -524,15 +502,13 @@ img {
 /* RESPONSIVITÉ */
 @media (max-width: 1024px) {
     .doc-content {
-        max-width: 100%;
-        padding-left: 30px;
-        padding-right: 30px;
+        padding: 100px 30px 40px;
     }
 
     .benefits-grid {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 20px;
-        margin: 30px auto;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 18px;
+        margin: 30px 0;
     }
 
     .doc-figure figcaption {
@@ -540,76 +516,69 @@ img {
     }
 
     .info-box, .highlight-box, .success-box {
-        max-width: 100%;
         padding: 20px;
+        margin: 20px 0;
     }
 
     .terminal-block {
-        padding: 20px;
-        margin: 20px auto;
+        padding: 18px;
+        margin: 18px 0;
     }
 
     .doc-section h2 {
         font-size: 1.6rem;
-        margin: 40px auto 18px;
+        margin: 30px 0 18px;
+    }
+
+    .doc-section h3 {
+        font-size: 1.15rem;
+        margin: 22px 0 14px;
     }
 }
 
 @media (max-width: 768px) {
     .doc-content {
-        max-width: 100%;
-        padding-left: 20px;
-        padding-right: 20px;
+        padding: 100px 20px 40px;
     }
 
     .doc-section h1 {
         font-size: 1.8rem;
+        margin-bottom: 10px;
     }
 
     .doc-section h2 {
-        font-size: 1.3rem;
-        margin: 30px auto 12px;
-        gap: 8px;
+        font-size: 1.4rem;
+        margin: 30px 0 20px;
     }
 
     .doc-section h3 {
         font-size: 1.1rem;
-        margin: 20px auto 10px;
-    }
-
-    .doc-section h3::before {
-        width: 3px;
-        margin-right: 8px;
+        margin: 20px 0 15px;
     }
 
     .doc-section p {
         font-size: 0.95rem;
-        margin: 15px auto;
+        margin: 12px 0;
     }
 
     .benefits-grid {
         grid-template-columns: 1fr;
-        margin: 20px auto;
+        margin: 20px 0;
         gap: 15px;
     }
 
     .benefit-card {
-        padding: 20px;
+        padding: 18px;
     }
 
     .benefit-card h4 {
         font-size: 1rem;
-        gap: 8px;
-    }
-
-    .benefit-card h4 i {
-        font-size: 1.2rem;
     }
 
     .terminal-block {
         padding: 15px;
-        font-size: 0.8rem;
-        margin: 15px auto;
+        margin: 15px 0;
+        border-radius: 6px;
     }
 
     .terminal-block::before {
@@ -618,67 +587,54 @@ img {
     }
 
     .cmd {
-        margin-bottom: 6px;
-        margin-top: 12px;
-        padding: 6px 8px;
+        margin-bottom: 5px;
+        margin-top: 10px;
         font-size: 0.85rem;
     }
 
     .cmd:first-of-type {
-        margin-top: 25px;
+        margin-top: 20px;
     }
 
     .output {
         margin-bottom: 8px;
-        padding-left: 15px;
         font-size: 0.85rem;
     }
 
     img {
         border-radius: 6px;
-        margin: 15px auto;
-        max-width: 90vw;
+        margin: 15px 0;
+        max-width: 100%;
     }
 
     .doc-figure {
-        margin: 20px auto;
+        margin: 15px 0;
     }
 
     .doc-figure figcaption {
         font-size: 0.85rem;
-        padding: 0 5px;
-        margin-top: 12px;
+        margin-top: 10px;
     }
 
     .info-box, .highlight-box, .success-box {
-        max-width: 100%;
         padding: 15px;
-        margin: 20px auto;
-        border-radius: 8px;
+        margin: 15px 0;
+        border-radius: 6px;
     }
 
-    .info-box h3, .success-box h3 {
-        font-size: 1.05rem;
-        margin-bottom: 10px;
-        gap: 8px;
-    }
-
-    .info-box h3 i, .success-box h3 i {
-        font-size: 1.1rem;
+    .info-box h3, .highlight-box h3, .success-box h3 {
+        font-size: 1rem;
+        margin-bottom: 8px;
     }
 
     .doc-section ul {
-        margin: 15px auto;
-        gap: 10px;
+        margin: 15px 0;
     }
 
     .doc-section ul li {
-        max-width: 100%;
-        min-width: auto;
-        padding: 10px 15px;
-        padding-left: 35px;
+        padding: 10px 12px 10px 35px;
         font-size: 0.9rem;
-        border-radius: 5px;
+        margin-bottom: 8px;
     }
 
     .doc-section ul li::before {
@@ -689,6 +645,5 @@ img {
     .lead {
         font-size: 1rem;
         margin-bottom: 20px;
-        padding-bottom: 15px;
     }
 }
