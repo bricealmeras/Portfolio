@@ -365,6 +365,34 @@ nav a:hover {
     margin: 0;
 }
 
+.experience-company-description {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin: 14px 0 0;
+    padding-left: 16px;
+    border-left: 3px solid var(--primary);
+    font-style: normal;
+}
+
+.experience-link {
+    margin-top: 12px;
+}
+
+.experience-link a {
+    color: var(--text-light);
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.experience-link a:hover {
+    color: #4ade80;
+    text-shadow: 0 0 12px rgba(74, 222, 128, 0.5);
+    transform: translateY(-1px);
+}
+
 /* SECTION PROJETS (GRID) */
 .projects-grid {
     display: grid;
