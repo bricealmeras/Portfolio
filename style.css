@@ -87,11 +87,41 @@ nav a:hover {
 /* SECTION HERO (ACCUEIL) */
 .hero {
     min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto auto;
+    align-items: start;
+    column-gap: 60px;
+    row-gap: 16px;
+    padding: 120px 10% 80px;
+}
+
+.hero-content {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: end;
+}
+
+.terminal-toggle-btn {
+    grid-column: 1;
+    grid-row: 2;
+    align-self: start;
+    justify-self: start;
+}
+
+.terminal-cli {
+    grid-column: 1;
+    grid-row: 3;
+    align-self: start;
+    justify-self: start;
+}
+
+.hero-image {
+    grid-column: 2;
+    grid-row: 1 / 4;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 10%;
-    padding-top: 60px;
+    justify-content: center;
 }
 
 .hero-content {
@@ -510,6 +540,235 @@ nav a:hover {
     font-size: 0.9rem;
 }
 
+/* =====================
+   TERMINAL CLI
+   ===================== */
+.terminal-cli {
+    background: #0d1117;
+    border-radius: 12px;
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    box-shadow: 0 0 40px rgba(56, 189, 248, 0.08), 0 20px 60px rgba(0,0,0,0.5);
+    width: 100%;
+    max-width: 480px;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    margin-top: 20px;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+    flex-shrink: 0;
+}
+
+.terminal-cli:focus-within {
+    box-shadow: 0 0 50px rgba(56, 189, 248, 0.18), 0 20px 60px rgba(0,0,0,0.5);
+    border-color: rgba(56, 189, 248, 0.5);
+}
+
+/* Header faux boutons */
+.terminal-cli-header {
+    background: #161b22;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.terminal-cli-dots {
+    display: flex;
+    gap: 7px;
+}
+
+.cli-dot {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    display: inline-block;
+}
+.cli-dot-red    { background: #ff5f57; }
+.cli-dot-yellow { background: #febc2e; }
+.cli-dot-green  { background: #28c840; }
+
+.terminal-cli-title {
+    color: #8b949e;
+    font-size: 0.82rem;
+    margin-left: 6px;
+    letter-spacing: 0.5px;
+}
+
+/* Corps du terminal */
+.terminal-cli-body {
+    padding: 12px 14px;
+    height: 200px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    cursor: text;
+}
+
+/* Scrollbar custom */
+.terminal-cli-body::-webkit-scrollbar {
+    width: 5px;
+}
+.terminal-cli-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+.terminal-cli-body::-webkit-scrollbar-thumb {
+    background: rgba(56, 189, 248, 0.3);
+    border-radius: 10px;
+}
+
+/* Lignes de sortie */
+.cli-line {
+    font-size: 0.75rem;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-break: break-word;
+    margin: 0;
+}
+
+.cli-info      { color: #c9d1d9; }
+.cli-success   { color: #3fb950; }
+.cli-error     { color: #f85149; }
+.cli-border    { color: #38bdf8; }
+.cli-highlight { color: #38bdf8; font-weight: 600; }
+.cli-cmd       { color: #79c0ff; font-weight: 600; }
+
+.cli-user-cmd {
+    color: #e6edf3;
+    margin-top: 6px;
+}
+
+/* Ligne de saisie */
+.cli-input-line {
+    display: flex;
+    align-items: center;
+    margin-top: 6px;
+    flex-shrink: 0;
+}
+
+.cli-prompt {
+    color: #38bdf8;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    font-weight: 600;
+    user-select: none;
+}
+
+#cli-input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #e6edf3;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.75rem;
+    caret-color: #38bdf8;
+    flex: 1;
+    padding: 0;
+}
+
+/* Terminal caché / visible */
+.terminal-hidden {
+    display: none !important;
+}
+
+/* Bouton toggle terminal */
+.terminal-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(56, 189, 248, 0.08);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    color: var(--primary);
+    padding: 8px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.82rem;
+    font-weight: 600;
+    transition: 0.3s;
+    width: fit-content;
+}
+
+.terminal-toggle-btn:hover {
+    background: rgba(56, 189, 248, 0.18);
+    box-shadow: 0 0 14px rgba(56, 189, 248, 0.25);
+    transform: translateY(-2px);
+}
+
+.terminal-toggle-btn i {
+    font-size: 0.9rem;
+}
+
+
+
+/* =====================
+   FLUX RSS IT-CONNECT
+   ===================== */
+/* FLUX RSS IT-CONNECT */
+.rss-card {
+    flex: 1;
+    min-width: 300px;
+}
+
+.rss-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 14px 16px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    text-decoration: none;
+    margin-bottom: 10px;
+    transition: 0.3s;
+}
+
+.rss-item:hover {
+    background: rgba(56, 189, 248, 0.08);
+    border-color: rgba(56, 189, 248, 0.3);
+    transform: translateX(4px);
+}
+
+.rss-item-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.rss-date {
+    font-size: 0.78rem;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.rss-title {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.4;
+}
+
+.rss-icon {
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    flex-shrink: 0;
+    transition: 0.3s;
+}
+
+.rss-item:hover .rss-icon {
+    color: var(--primary);
+}
+
+.rss-loading, .rss-error {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    padding: 10px 0;
+}
+
+.rss-error {
+    color: #ef4444;
+}
+
 /* FOOTER */
 footer {
     background: #0b1120;
@@ -540,22 +799,46 @@ footer {
     header {
         padding: 15px 20px;
     }
-    
+
     nav {
-        display: none; /* Pour faire simple sur mobile, on cache le menu ici, ou on le met en colonne */
+        display: none;
     }
 
-    .hero {
-        flex-direction: column-reverse;
+        .hero {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto;
         text-align: center;
+        padding: 100px 6% 60px;
+        gap: 16px;
+    }
+
+    .hero-content {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .hero-image {
+        grid-column: 1;
+        grid-row: 2;
         justify-content: center;
-        padding-top: 100px;
+    }
+
+    .terminal-toggle-btn {
+        grid-column: 1;
+        grid-row: 3;
+        justify-self: center;
+    }
+
+    .terminal-cli {
+        grid-column: 1;
+        grid-row: 4;
+        max-width: 100%;
+        justify-self: center;
     }
 
     .image-box {
-        width: 200px;
-        height: 200px;
-        margin-bottom: 30px;
+        width: 180px;
+        height: 180px;
     }
 
     .hero-buttons {

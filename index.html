@@ -35,8 +35,35 @@
                 <a href="#projets" class="btn-primary"><i class="fas fa-server"></i> Mes Projets</a>
                 <a href="CV_Brice_Almeras.pdf" target="_blank" class="btn-secondary"><i class="fas fa-download"></i> Mon CV</a>
             </div>
+                </div>
+
+                <!-- BOUTON TOGGLE TERMINAL -->
+        <button class="terminal-toggle-btn" id="terminal-toggle-btn" title="Ouvrir/Fermer le terminal">
+            <i class="fas fa-terminal"></i>
+        </button>
+
+        <!-- TERMINAL CLI -->
+        <div class="terminal-cli terminal-hidden" id="terminal-cli">
+            <div class="terminal-cli-header">
+                <div class="terminal-cli-dots">
+                    <span class="cli-dot cli-dot-red"></span>
+                    <span class="cli-dot cli-dot-yellow"></span>
+                    <span class="cli-dot cli-dot-green"></span>
+                </div>
+                <span class="terminal-cli-title">visiteur@portfolio:~</span>
+            </div>
+            <div class="terminal-cli-body" id="cli-body">
+                <div id="cli-output">
+                    <p class="cli-line cli-info">Bienvenue sur le portfolio de <span class="cli-highlight">Brice Almeras</span> 👋</p>
+                    <p class="cli-line cli-info">Tape <span class="cli-cmd">help</span> pour voir les commandes disponibles.</p>
+                </div>
+                <div class="cli-input-line">
+                    <span class="cli-prompt">visiteur@portfolio:~$&nbsp;</span>
+                    <input type="text" id="cli-input" autocomplete="off" spellcheck="false" aria-label="Terminal input" />
+                </div>
+            </div>
         </div>
-        
+
         <div class="hero-image">
             <div class="image-box">
                 <img src="photo.png" alt="Brice Almeras">
@@ -197,6 +224,13 @@
                 </ul>
             </div>
 
+            <div class="veille-card rss-card">
+                <h3><i class="fas fa-rss"></i> Derniers articles IT-Connect</h3>
+                <div id="rss-feed">
+                    <p class="rss-loading"><i class="fas fa-spinner fa-spin"></i> Chargement des articles...</p>
+                </div>
+            </div>
+
             <div class="veille-card subjects">
                 <h3><i class="fas fa-lightbulb"></i> Mes Sujets d'Étude</h3>
                 
@@ -262,66 +296,9 @@
         </div>
     </footer>
 
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const cards = document.querySelectorAll('.contact-card');
-        cards.forEach(card => {
-            card.setAttribute('role', 'button');
-            card.setAttribute('tabindex', '0');
-            const info = card.querySelector('p');
-            const href = card.tagName.toLowerCase() === 'a' ? (card.getAttribute('href') || '') : '';
-            const isLinkedIn = href.includes('linkedin.com');
+        <script src="main.js" defer></script>
 
-            function copyInfo(e) {
-                // If this is the LinkedIn card, allow the default navigation
-                if (isLinkedIn) return;
-                if (e) e.preventDefault();
-                const text = info ? info.textContent.trim() : '';
-                if (!text) return;
-                if (navigator.clipboard && navigator.clipboard.writeText) {
-                    navigator.clipboard.writeText(text).then(() => {
-                        showTooltip(card, 'Copié !');
-                    }).catch(() => fallbackCopy(text, card));
-                } else {
-                    fallbackCopy(text, card);
-                }
-            }
-
-            function fallbackCopy(text, card) {
-                const ta = document.createElement('textarea');
-                ta.value = text;
-                document.body.appendChild(ta);
-                ta.select();
-                try {
-                    document.execCommand('copy');
-                    showTooltip(card, 'Copié !');
-                } catch (err) {
-                    showTooltip(card, 'Erreur');
-                }
-                ta.remove();
-            }
-
-            card.addEventListener('click', copyInfo);
-            card.addEventListener('keydown', function(e) {
-                // If LinkedIn card, let Enter/Space activate the link normally
-                if ((e.key === 'Enter' || e.key === ' ') && isLinkedIn) return;
-                if (e.key === 'Enter' || e.key === ' ') copyInfo(e);
-            });
-        });
-
-        function showTooltip(card, message) {
-            let tip = card.querySelector('.copy-tooltip');
-            if (!tip) {
-                tip = document.createElement('div');
-                tip.className = 'copy-tooltip';
-                card.appendChild(tip);
-            }
-            tip.textContent = message;
-            tip.classList.add('visible');
-            setTimeout(() => tip.classList.remove('visible'), 1400);
-        }
-    });
-    </script>
+        
 
 </body>
 </html>
