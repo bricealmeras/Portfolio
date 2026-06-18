@@ -1,31 +1,66 @@
-/* CONFIGURATION DE LA PAGE DOC */
-body {
-    background-color: #0f172a; /* Même fond que le portfolio */
-    color: #cbd5e1;
-    display: flex;
+﻿/* =============================================
+   BANDIT.CSS - Styles page rapport Bandit
+   ============================================= */
+
+/* Reset complet pour cette page */
+*, *::before, *::after {
+    box-sizing: border-box;
     margin: 0;
-    font-family: 'Poppins', sans-serif;
+    padding: 0;
 }
 
-/* SIDEBAR NAVIGATION */
+body {
+    background-color: #0f172a;
+    color: #cbd5e1;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Cache le header du portfolio */
+header {
+    display: none !important;
+}
+
+/* =====================
+   SIDEBAR
+   ===================== */
 .doc-sidebar {
-    width: 280px;
-    background: #1e293b;
-    height: 100vh;
     position: fixed;
-    padding: 20px;
+    top: 0;
+    left: 0;
+    width: 260px;
+    height: 100vh;
+    background: #1e293b;
     border-right: 1px solid #334155;
+    padding: 30px 20px;
     overflow-y: auto;
+    z-index: 100;
+    flex-shrink: 0;
+}
+
+.doc-sidebar::-webkit-scrollbar {
+    width: 4px;
+}
+.doc-sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+.doc-sidebar::-webkit-scrollbar-thumb {
+    background: rgba(56, 189, 248, 0.3);
+    border-radius: 10px;
 }
 
 .doc-brand {
     margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #334155;
 }
 
 .doc-brand a {
     color: #94a3b8;
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -39,45 +74,62 @@ body {
 
 .doc-brand h2 {
     color: #f8fafc;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
 }
 
-.doc-menu {
-    list-style: none;
-    padding: 0;
+/* Neutralise les styles nav ul de style.css */
+nav.doc-sidebar ul.doc-menu {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2px !important;
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
 }
 
-.doc-menu li {
-    margin-bottom: 5px;
+nav.doc-sidebar ul.doc-menu li {
+    width: 100% !important;
+    margin: 0 !important;
 }
 
-.doc-menu a {
-    display: block;
-    padding: 10px 15px;
-    color: #94a3b8;
-    text-decoration: none;
-    border-radius: 6px;
-    transition: 0.2s;
-    font-size: 0.95rem;
+nav.doc-sidebar ul.doc-menu li a {
+    display: block !important;
+    padding: 8px 12px !important;
+    color: #94a3b8 !important;
+    text-decoration: none !important;
+    border-radius: 6px !important;
+    font-size: 0.88rem !important;
+    font-weight: 400 !important;
+    background: transparent !important;
+    border: none !important;
+    transition: 0.2s !important;
 }
 
-.doc-menu a:hover, .doc-menu a.active {
-    background: rgba(56, 189, 248, 0.1);
-    color: #38bdf8;
+nav.doc-sidebar ul.doc-menu li a:hover,
+nav.doc-sidebar ul.doc-menu li a.active {
+    background: rgba(56, 189, 248, 0.1) !important;
+    color: #38bdf8 !important;
 }
 
-/* CONTENU PRINCIPAL */
+/* =====================
+   CONTENU PRINCIPAL
+   ===================== */
 .doc-content {
-    margin-left: 280px; /* Largeur sidebar */
-    padding: 60px 10%;
+    margin-left: 260px;
+    padding: 60px 8%;
     width: 100%;
 }
 
+/* =====================
+   SECTIONS
+   ===================== */
 .doc-section {
-    margin-bottom: 80px;
-    scroll-margin-top: 40px; /* Pour l'ancre */
-    border-bottom: 1px solid #334155;
-    padding-bottom: 40px;
+    max-width: 860px;
+    margin: 0 auto 80px;
+    padding-bottom: 60px;
+    border-bottom: 1px solid #1e293b;
 }
 
 .doc-section:last-child {
@@ -85,39 +137,92 @@ body {
 }
 
 .doc-section h1 {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     color: #f8fafc;
     margin-bottom: 10px;
+    font-weight: 700;
 }
 
 .doc-section h2 {
-    font-size: 1.8rem;
-    color: #38bdf8; /* Cyan */
+    font-size: 1.6rem;
+    color: #38bdf8;
     margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    font-weight: 600;
 }
 
 .lead {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: #94a3b8;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 
+.doc-section p {
+    color: #cbd5e1;
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
+
+.doc-section strong {
+    color: #f1f5f9;
+    font-weight: 600;
+}
+
+.doc-section code {
+    font-family: 'Fira Code', monospace;
+    color: #38bdf8;
+    background: rgba(56, 189, 248, 0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.88em;
+}
+
+.doc-section ul, .doc-section ol {
+    padding-left: 20px;
+    margin: 15px 0;
+}
+
+.doc-section ul li, .doc-section ol li {
+    color: #cbd5e1;
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+
+/* =====================
+   INFO BOX
+   ===================== */
 .info-box {
     background: rgba(56, 189, 248, 0.05);
-    border-left: 4px solid #38bdf8;
-    padding: 20px;
-    border-radius: 0 8px 8px 0;
+    border: 1px solid rgba(56, 189, 248, 0.15);
+    border-left: 3px solid #38bdf8;
+    padding: 20px 24px;
+    border-radius: 8px;
+    margin: 25px 0;
 }
 
 .info-box h3 {
     color: #38bdf8;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.info-box p {
+    color: #cbd5e1;
+    font-size: 0.95rem;
+    line-height: 1.7;
     margin-bottom: 10px;
 }
 
-/* BLOCS TERMINAL */
+.info-box p:last-child {
+    margin-bottom: 0;
+}
+
+/* =====================
+   TERMINAL BLOCK
+   ===================== */
 .terminal-block {
     background: #0b1120;
     border: 1px solid #334155;
@@ -131,7 +236,8 @@ body {
 .cmd {
     display: block;
     color: #f8fafc;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
+    font-size: 0.9rem;
 }
 
 .cmd::before {
@@ -143,40 +249,60 @@ body {
 .output {
     display: block;
     color: #94a3b8;
-    margin-bottom: 15px;
-    padding-left: 20px;
+    margin-bottom: 12px;
+    padding-left: 16px;
+    font-size: 0.88rem;
 }
 
 .comment {
+    display: block;
     color: #64748b;
     font-style: italic;
-    display: block;
-    margin: 10px 0;
+    margin: 8px 0;
+    font-size: 0.85rem;
 }
 
+/* =====================
+   BOUTON TELECHARGEMENT
+   ===================== */
 .btn-download {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     background: #38bdf8;
     color: #0f172a;
-    padding: 12px 25px;
+    padding: 10px 22px;
     border-radius: 6px;
     text-decoration: none;
     font-weight: 600;
+    font-size: 0.9rem;
     margin-top: 20px;
     transition: 0.3s;
 }
 
 .btn-download:hover {
-    box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+    opacity: 0.9;
 }
 
-/* RESPONSIVE */
-@media (max-width: 900px) {
+/* =====================
+   RESPONSIVE
+   ===================== */
+@media (max-width: 768px) {
     .doc-sidebar {
-        display: none; /* On cache le menu latéral sur mobile pour simplifier */
+        display: none;
     }
+
     .doc-content {
         margin-left: 0;
-        padding: 40px 20px;
+        padding: 40px 6%;
+    }
+
+    .doc-section h1 {
+        font-size: 1.6rem;
+    }
+
+    .doc-section h2 {
+        font-size: 1.3rem;
     }
 }

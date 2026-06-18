@@ -261,67 +261,30 @@ img {
 
 /* BOXES D'INFORMATION */
 .info-box {
-    background: linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(139, 92, 246, 0.1));
-    border-top: 3px solid #38bdf8;
-    border-bottom: 3px solid #38bdf8;
-    padding: 30px;
-    border-radius: 10px;
+    background: rgba(56, 189, 248, 0.05);
+    border-left: 3px solid var(--primary);
+    border: 1px solid rgba(56, 189, 248, 0.15);
+    border-left: 3px solid var(--primary);
+    padding: 24px 28px;
+    border-radius: 8px;
     margin: 30px 0;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 8px 32px rgba(56, 189, 248, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    transition: all 0.3s ease;
-    position: relative;
-}
-
-.info-box::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 0px;
-    background: linear-gradient(90deg, transparent, #38bdf8, transparent);
-    border-radius: 10px 10px 0 0;
-}
-
-.info-box:hover {
-    box-shadow: 0 12px 48px rgba(56, 189, 248, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.15);
-    transform: translateY(-4px);
-    border-top-color: #00d4ff;
-    border-bottom-color: #00d4ff;
 }
 
 .info-box h3 {
-    color: #00d4ff;
-    margin-bottom: 15px;
-    font-size: 1.2rem;
-    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 12px;
+    font-size: 1rem;
+    font-weight: 600;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 12px;
-    text-align: center;
-}
-
-.info-box h3 i {
-    font-size: 1.4rem;
-    animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-5px); }
+    gap: 10px;
 }
 
 .info-box p {
-    color: #f1f5f9;
-    margin-bottom: 15px;
-    margin-top: 8px;
-    line-height: 1.8;
-    text-align: center;
-    font-weight: 600;
-    font-size: 1.05rem;
-    letter-spacing: 0.3px;
+    color: #cbd5e1;
+    margin-bottom: 10px;
+    line-height: 1.7;
+    font-size: 0.95rem;
 }
 
 .info-box p:last-child {

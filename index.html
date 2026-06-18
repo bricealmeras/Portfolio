@@ -7,12 +7,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Portfolio - Brice Almeras | BTS SIO SISR">
+    <meta property="og:description" content="Futur administrateur systèmes & réseaux. Passionné par la cybersécurité, la virtualisation et l'infrastructure.">
+    <meta property="og:image" content="photo.png">
+    <meta property="og:type" content="website">
 </head>
 <body>
 
     <header>
         <div class="logo">BRICE.<span>SIO</span></div>
-        <nav>
+                <nav id="main-nav">
             <ul>
                 <li><a href="#home">Accueil</a></li>
                 <li><a href="#skills">Compétences</a></li>
@@ -20,55 +26,66 @@
                 <li><a href="#experience">Expérience</a></li>
                 <li><a href="#projets">Projets</a></li>
                 <li><a href="#veilles">Veilles</a></li>
+                <li><a href="#formulaire">Formulaire</a></li>
                 <li><a href="#contact" class="btn-contact">Me Contacter</a></li>
             </ul>
         </nav>
+        <button class="hamburger" id="hamburger-btn" aria-label="Ouvrir le menu">
+            <span></span><span></span><span></span>
+        </button>
     </header>
 
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <span class="badge">BTS SIO - SISR</span>
-            <h1>Brice Almeras</h1>
-            <p>Futur administrateur systèmes & réseaux.<br>Passionné par la cybersécurité, la virtualisation et l'infrastructure.</p>
-            
-            <div class="hero-buttons">
-                <a href="#projets" class="btn-primary"><i class="fas fa-server"></i> Mes Projets</a>
-                <a href="CV_Brice_Almeras.pdf" target="_blank" class="btn-secondary"><i class="fas fa-download"></i> Mon CV</a>
-            </div>
-                </div>
+        <section id="home" class="hero">
+        <div class="hero-grid-bg"></div>
 
-                <!-- BOUTON TOGGLE TERMINAL -->
-        <button class="terminal-toggle-btn" id="terminal-toggle-btn" title="Ouvrir/Fermer le terminal">
-            <i class="fas fa-terminal"></i>
-        </button>
-
-        <!-- TERMINAL CLI -->
-        <div class="terminal-cli terminal-hidden" id="terminal-cli">
-            <div class="terminal-cli-header">
-                <div class="terminal-cli-dots">
-                    <span class="cli-dot cli-dot-red"></span>
-                    <span class="cli-dot cli-dot-yellow"></span>
-                    <span class="cli-dot cli-dot-green"></span>
+        <!-- COLONNE GAUCHE -->
+        <div class="hero-left">
+            <div class="hero-content">
+                <span class="badge">BTS SIO - SISR</span>
+                <h1>Brice Almeras</h1>
+                <p>Futur administrateur systèmes & réseaux.<br>Passionné par la cybersécurité, la virtualisation et l'infrastructure.</p>
+                <div class="hero-buttons">
+                    <a href="#projets" class="btn-primary"><i class="fas fa-server"></i> Mes Projets</a>
+                    <a href="CV_Brice_Almeras.pdf" target="_blank" class="btn-secondary"><i class="fas fa-download"></i> Mon CV</a>
                 </div>
-                <span class="terminal-cli-title">visiteur@portfolio:~</span>
             </div>
-            <div class="terminal-cli-body" id="cli-body">
-                <div id="cli-output">
-                    <p class="cli-line cli-info">Bienvenue sur le portfolio de <span class="cli-highlight">Brice Almeras</span> 👋</p>
-                    <p class="cli-line cli-info">Tape <span class="cli-cmd">help</span> pour voir les commandes disponibles.</p>
+
+            <!-- BOUTON TOGGLE TERMINAL -->
+            <button class="terminal-toggle-btn" id="terminal-toggle-btn" title="Ouvrir/Fermer le terminal">
+                <i class="fas fa-terminal"></i>
+            </button>
+
+            <!-- TERMINAL CLI -->
+            <div class="terminal-cli terminal-hidden" id="terminal-cli">
+                <div class="terminal-cli-header">
+                    <div class="terminal-cli-dots">
+                        <span class="cli-dot cli-dot-red"></span>
+                        <span class="cli-dot cli-dot-yellow"></span>
+                        <span class="cli-dot cli-dot-green"></span>
+                    </div>
+                    <span class="terminal-cli-title">visiteur@portfolio:~</span>
                 </div>
-                <div class="cli-input-line">
-                    <span class="cli-prompt">visiteur@portfolio:~$&nbsp;</span>
-                    <input type="text" id="cli-input" autocomplete="off" spellcheck="false" aria-label="Terminal input" />
+                <div class="terminal-cli-body" id="cli-body">
+                    <div id="cli-output">
+                        <p class="cli-line cli-info">Bienvenue sur le portfolio de <span class="cli-highlight">Brice Almeras</span> 👋</p>
+                        <p class="cli-line cli-info">Tape <span class="cli-cmd">help</span> pour voir les commandes disponibles.</p>
+                    </div>
+                    <div class="cli-input-line">
+                        <span class="cli-prompt">visiteur@portfolio:~$&nbsp;</span>
+                        <input type="text" id="cli-input" autocomplete="off" spellcheck="false" aria-label="Terminal input" />
+                    </div>
                 </div>
             </div>
         </div>
 
+        <!-- COLONNE DROITE : PHOTO -->
         <div class="hero-image">
             <div class="image-box">
                 <img src="photo.png" alt="Brice Almeras">
             </div>
         </div>
+
+        
     </section>
 
     <section id="skills" class="container">
@@ -153,6 +170,11 @@
                 </div>
                 <p class="experience-role">Stages de lycée - 3 années consécutives</p>
                 <p class="experience-description">Immersion progressive dans l'environnement informatique hospitalier. Participation à la maintenance des équipements, support utilisateur et découverte des systèmes d'information de santé.</p>
+                <ul class="experience-tasks">
+                    <li><i class="fas fa-chevron-right"></i> Préparation de postes via serveur <strong>Windows Deployment Services (WDS)</strong> avec boot <strong>PXE</strong></li>
+                    <li><i class="fas fa-chevron-right"></i> Déploiement des postes dans les différents services hospitaliers</li>
+                    <li><i class="fas fa-chevron-right"></i> Intégration des machines dans la plage <strong>DHCP</strong> unique au <strong>VLAN</strong> du service concerné</li>
+                </ul>
             </div>
 
             <div class="experience-item">
@@ -171,16 +193,22 @@
     <section id="projets" class="container">
         <h2 class="section-title">Mes Réalisations (E4)</h2>
         <div class="projects-grid">
-            <div class="card">
-                <div class="card-icon"><i class="fas fa-network-wired"></i></div>
-                <h3>Infrastructure Cisco</h3>
-                <p>Mise en place d'une architecture réseau sur Cisco Packet Tracer : Segmentation VLAN, configuration trunking ,routage inter-VLAN, protocole NAT, EIGRP et OSPF</p>
-                <!-- <a href="#">Voir la documentation &rarr;</a> -->
-            </div>
-            <div class="card">
+                        <div class="card">
+                            <div class="card-icon"><i class="fas fa-network-wired"></i></div>
+                            <h3>Infrastructure Cisco</h3>
+                            <p>Mise en place d'une architecture réseau sur Cisco Packet Tracer : Segmentation VLAN, configuration trunking, routage inter-VLAN, protocole NAT, EIGRP et OSPF</p>
+                            <div class="card-tags">
+                                <span>Cisco</span><span>VLAN</span><span>OSPF</span><span>NAT</span>
+                            </div>
+                            <a href="PROJET_SIO_BRICE_ALMERAS.docx">Voir la documentation &rarr;</a>
+                        </div>
+                        <div class="card">
                 <div class="card-icon"><i class="fab fa-windows"></i></div>
                 <h3>Domaine Active Directory</h3>
                 <p>Mise en place d'un domaine virtuel sur VMware Workstation. Installation d'un contrôleur de domaine Windows Server, configuration DNS/DHCP, gestion des utilisateurs selon le modèle AGDLP, déploiement de GPO et scripts d'ouverture de session.</p>
+                <div class="card-tags">
+                    <span>Windows Server</span><span>Active Directory</span><span>VMware</span><span>GPO</span>
+                </div>
                 <a href="DOC_TECHNIQUE_BRICE_ALMERAS.pdf">Voir la documentation &rarr;</a>
             </div>
             <!-- <div class="card">
@@ -189,24 +217,33 @@
                 <p>Déploiement d'un systeme de parfeu avec des regles</p>
                 <a href="#">Voir la documentation &rarr;</a>
             </div> -->
-            <div class="card">
+                        <div class="card">
                 <div class="card-icon"><i class="fas fa-server"></i></div>
                 <h3>Serveur Zabbix</h3>
                 <p>Déploiement et supervision d'un serveur Zabbix pour le monitoring réseau et applicatif. Création de templates, alertes et tableaux de bord de suivi.</p>
+                <div class="card-tags">
+                    <span>Zabbix</span><span>Linux</span><span>SNMP</span><span>Monitoring</span>
+                </div>
                 <a href="zabbix.html">Voir la documentation &rarr;</a>
             </div>
-            <div class="card">
-    <div class="card-icon"><i class="fas fa-terminal"></i></div>
-    <h3>Rapport Bandit (CTF)</h3>
-    <p>Documentation complète des niveaux 0 à 13 du wargame OverTheWire. Manipulation avancée de fichiers Linux.</p>
-    <a href="bandit.html">Voir le rapport complet &rarr;</a>
-</div>
-            <div class="card">
-    <div class="card-icon"><i class="fas fa-table"></i></div>
-    <h3>Tableau de Synthèse</h3>
-    <p>Récapitulatif de l'ensemble de mes activités professionnelles réalisées durant mon BTS SIO SISR.</p>
-    <a href="BRICE ALMERAS 8-1 - BTS SIO - 2025 - Annexe 8-1 - Epreuve E5 - Tableau de synthèse.pdf" target="_blank">Consulter le tableau &rarr;</a>
-</div>
+                        <div class="card">
+                <div class="card-icon"><i class="fas fa-terminal"></i></div>
+                <h3>Rapport Bandit (CTF)</h3>
+                <p>Documentation complète des niveaux 0 à 13 du wargame OverTheWire. Manipulation avancée de fichiers Linux.</p>
+                <div class="card-tags">
+                    <span>Linux</span><span>CTF</span><span>Bash</span><span>SSH</span>
+                </div>
+                <a href="bandit.html">Voir le rapport complet &rarr;</a>
+            </div>
+                        <div class="card">
+                <div class="card-icon"><i class="fas fa-table"></i></div>
+                <h3>Tableau de Synthèse</h3>
+                <p>Récapitulatif de l'ensemble de mes activités professionnelles réalisées durant mon BTS SIO SISR.</p>
+                <div class="card-tags">
+                    <span>BTS SIO</span><span>SISR</span><span>E5</span>
+                </div>
+                <a href="BRICE ALMERAS 8-1 - BTS SIO - 2025 - Annexe 8-1 - Epreuve E5 - Tableau de synthèse.pdf" target="_blank">Consulter le tableau &rarr;</a>
+            </div>
         </div>
     </section>
 
@@ -218,6 +255,7 @@
                 <h3><i class="fas fa-tools"></i> Mes Outils de Veille</h3>
                 <ul class="tool-list">
                     <li><i class="fas fa-rss"></i> <strong>Feedly :</strong> Agrégation de flux RSS (ANSSI, CERT-FR, IT-Connect, Les Numériques)</li>
+                    <li><i class="fas fa-bell"></i> <strong>Google Alerts :</strong> Alertes sur mots-clés spécifiques (ransomware, Active Directory, CVE...)</li>
                     <!-- <li><i class="fab fa-twitter"></i> <strong>Twitter/X :</strong> Suivi de chercheurs en cybersécurité</li> -->
                     <!-- <li><i class="fas fa-bell"></i> <strong>Google Alerts :</strong> Alertes sur mots-clés spécifiques</li> -->
                     <li><i class="fab fa-linkedin"></i> <strong>LinkedIn :</strong> Actualités des éditeurs (Microsoft, Cisco, Feed LinkedIn)</li>
@@ -234,22 +272,54 @@
             <div class="veille-card subjects">
                 <h3><i class="fas fa-lightbulb"></i> Mes Sujets d'Étude</h3>
                 
-                <div class="subject-item">
-                    <h4>Sujet 1 : Optimisation du travail</h4>
-                    <p>Recherche active de moyens d'automatiser et d'améliorer l'efficacité des processus techniques.</p>
+                                <div class="subject-item">
+                    <h4>Sujet 1 : Automatisation & Optimisation</h4>
+                    <p>Recherche active de moyens d'automatiser les processus techniques : scripts PowerShell, tâches planifiées, déploiement automatisé via GPO. Suivi des outils comme Ansible et des bonnes pratiques DevOps adaptées à l'administration système.</p>
                 </div>
 
                 <div class="subject-item">
-                    <h4>Sujet 2 : CyberSécurité</h4>
-                    <p>Exploration des dernières tendances et menaces en matière de cybersécurité.</p>
+                    <h4>Sujet 2 : Cybersécurité</h4>
+                    <p>Veille sur les dernières menaces et vulnérabilités (CVE critiques, alertes CERT-FR, ANSSI). Suivi des attaques par ransomware, des failles Active Directory (Pass-the-Hash, Kerberoasting) et des bonnes pratiques de durcissement système.</p>
                 </div>
+
                 <div class="subject-item">
                     <h4>Sujet 3 : Administration Windows Server / Active Directory</h4>
-                    <p>Suivi des évolutions et bonnes pratiques liées à l'administration Windows Server, la gestion des annuaires Active Directory, des GPO et des services associés</p>
+                    <p>Suivi des évolutions Windows Server (2019/2022), des mises à jour critiques et des bonnes pratiques AD : gestion des GPO, modèle de délégation AGDLP, sécurisation des comptes à privilèges et supervision via outils natifs.</p>
                 </div>
             </div>
         </div>
     </section>
+<section id="formulaire" class="container">
+    <h2 class="section-title">Envoyer un Message</h2>
+    <div class="form-wrapper">
+        <form id="contact-form" action="https://formspree.io/f/xzdqqgrw" method="POST">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="name">Nom</label>
+                    <input type="text" id="name" name="name" placeholder="Votre nom" required />
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="votre@email.com" required />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="subject">Sujet</label>
+                <input type="text" id="subject" name="subject" placeholder="Objet de votre message" required />
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="6" placeholder="Votre message..." required></textarea>
+            </div>
+            <button type="submit" class="btn-form">
+                <i class="fas fa-paper-plane"></i> Envoyer le message
+            </button>
+            <p class="form-success" id="form-success"><i class="fas fa-check-circle"></i> Message envoyé avec succès !</p>
+            <p class="form-error" id="form-error"><i class="fas fa-exclamation-circle"></i> Une erreur est survenue, réessayez.</p>
+        </form>
+    </div>
+</section>
+
 <section id="contact" class="container contact-section">
     <h2 class="section-title">Restons en Contact</h2>
     
@@ -275,23 +345,34 @@
                 <p>Brice Almeras</p>
             </a>
 
-            <div class="contact-card no-hover">
+                        <div class="contact-card no-hover" id="phone-card">
                 <div class="icon-box">
                     <i class="fas fa-phone-alt"></i>
                 </div>
                 <h3>Téléphone</h3>
-                <p>06 66 78 15 73</p>
+                <p class="phone-hidden">Cliquez pour révéler</p>
+                <p class="phone-number" style="display:none;">06 66 78 15 73</p>
             </div>
         </div>
     </div>
 </section>
 
-    <footer>
+        <footer>
         <div class="footer-content">
+            <div class="footer-nav">
+                <a href="#home">Accueil</a>
+                <a href="#skills">Compétences</a>
+                <a href="#diplomes">Diplômes</a>
+                <a href="#experience">Expérience</a>
+                <a href="#projets">Projets</a>
+                <a href="#veilles">Veilles</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="footer-divider"></div>
             <p>© 2025 Brice Almeras | Étudiant BTS SIO SISR</p>
             <div class="social-links">
                 <a href="https://www.linkedin.com/in/brice-almeras/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="https://github.com/bricealmeras" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
             </div>
         </div>
     </footer>

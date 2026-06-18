@@ -7,7 +7,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="bandit.css"> </head>
+    <link rel="stylesheet" href="bandit.css">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <meta property="og:title" content="Rapport Bandit - Brice Almeras">
+    <meta property="og:description" content="Documentation complète des niveaux 0 à 13 du wargame OverTheWire Bandit.">
+    <meta property="og:type" content="website">
+</head>
 <body>
 
     <nav class="doc-sidebar">
@@ -226,4 +231,20 @@
         </section>
 
     </main>
+    <script>
+        const sections = document.querySelectorAll('.doc-section');
+        const menuLinks = document.querySelectorAll('.doc-menu a');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    menuLinks.forEach(link => link.classList.remove('active'));
+                    const active = document.querySelector('.doc-menu a[href="#' + entry.target.id + '"]');
+                    if (active) active.classList.add('active');
+                }
+            });
+        }, { threshold: 0.3, rootMargin: '-10% 0px -60% 0px' });
+
+        sections.forEach(section => observer.observe(section));
+    </script>
 </body>

@@ -1,4 +1,119 @@
 // =====================
+// SCROLL INDICATOR
+// =====================
+document.addEventListener('DOMContentLoaded', function() {
+    const indicator = document.querySelector('.scroll-indicator');
+    if (!indicator) return;
+
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 80) {
+            indicator.style.opacity = '0';
+            indicator.style.pointerEvents = 'none';
+        } else {
+            indicator.style.opacity = '1';
+            indicator.style.pointerEvents = 'auto';
+        }
+    }, { passive: true });
+});
+
+// =====================
+// NAV ACTIF AU SCROLL
+// =====================
+document.addEventListener('DOMContentLoaded', function() {
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('nav ul li a:not(.btn-contact)');
+
+        const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                navLinks.forEach(link => link.classList.remove('active'));
+                const active = document.querySelector(`nav ul li a[href="#${entry.target.id}"]`);
+                if (active) active.classList.add('active');
+            }
+        });
+    }, { threshold: 0, rootMargin: '-80px 0px -80% 0px' });
+
+    sections.forEach(section => observer.observe(section));
+});
+
+// =====================
+// MENU HAMBURGER
+// =====================
+document.addEventListener('DOMContentLoaded', function() {
+    const hamburger = document.getElementById('hamburger-btn');
+    const nav       = document.getElementById('main-nav');
+
+    if (hamburger && nav) {
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            nav.classList.toggle('open');
+        });
+
+        // Fermer le menu au clic sur un lien
+        nav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                nav.classList.remove('open');
+            });
+        });
+    }
+});
+
+// =====================
+// ANIMATIONS SCROLL
+// =====================
+document.addEventListener('DOMContentLoaded', function() {
+    const fadeEls = document.querySelectorAll('.container, .hero-content, .hero-image');
+    fadeEls.forEach(el => el.classList.add('fade-in'));
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    fadeEls.forEach(el => observer.observe(el));
+});
+
+// =====================
+// TÉLÉPHONE MASQUÉ
+// =====================
+document.addEventListener('DOMContentLoaded', function() {
+    const phoneCard   = document.getElementById('phone-card');
+    if (!phoneCard) return;
+    const hidden      = phoneCard.querySelector('.phone-hidden');
+    const number      = phoneCard.querySelector('.phone-number');
+    let   revealed    = false;
+
+    phoneCard.addEventListener('click', function() {
+        if (!revealed) {
+            hidden.style.display  = 'none';
+            number.style.display  = 'block';
+            revealed = true;
+        } else {
+            // Copier le numéro
+            navigator.clipboard && navigator.clipboard.writeText(number.textContent.trim());
+            showTooltipPhone('Copié !');
+        }
+    });
+
+    function showTooltipPhone(msg) {
+        let tip = phoneCard.querySelector('.copy-tooltip');
+        if (!tip) {
+            tip = document.createElement('div');
+            tip.className = 'copy-tooltip';
+            phoneCard.appendChild(tip);
+        }
+        tip.textContent = msg;
+        tip.classList.add('visible');
+        setTimeout(() => tip.classList.remove('visible'), 1400);
+    }
+});
+
+// =====================
 // TOGGLE TERMINAL
 // =====================
 document.addEventListener('DOMContentLoaded', function() {
@@ -237,6 +352,46 @@ document.addEventListener('DOMContentLoaded', function() {
         tip.classList.add('visible');
         setTimeout(() => tip.classList.remove('visible'), 1400);
     }
+});
+
+// =====================
+// FORMULAIRE CONTACT
+// =====================
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('contact-form');
+    if (!form) return;
+
+    const success = document.getElementById('form-success');
+    const error   = document.getElementById('form-error');
+
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const btn = form.querySelector('.btn-form');
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi...';
+        btn.disabled = true;
+
+        try {
+            const res = await fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: { 'Accept': 'application/json' }
+            });
+
+            if (res.ok) {
+                success.style.display = 'flex';
+                error.style.display   = 'none';
+                form.reset();
+            } else {
+                throw new Error();
+            }
+        } catch {
+            error.style.display   = 'flex';
+            success.style.display = 'none';
+        } finally {
+            btn.innerHTML = '<i class="fas fa-paper-plane"></i> Envoyer le message';
+            btn.disabled = false;
+        }
+    });
 });
 
 // =====================
