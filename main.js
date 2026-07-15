@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 'cv.txt': [
                     { text: '── cv.txt ───────────────────────────────', cls: 'cli-border' },
                     { text: 'CV disponible en téléchargement :', cls: 'cli-info' },
-                    { text: '→ CV_Brice_Almeras.pdf', cls: 'cli-success' },
+                    { text: '→ assets/docs/CV_Brice_Almeras.pdf', cls: 'cli-success' },
                     { text: '─────────────────────────────────────────', cls: 'cli-border' },
                 ],
             };

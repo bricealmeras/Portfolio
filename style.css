@@ -443,6 +443,7 @@ nav a.active::after {
 .status-icon {
     margin-right: 10px;
     font-size: 1rem;
+    color: var(--primary);
 }
 
 /* SECTION EXPÉRIENCE PROFESSIONNELLE */
