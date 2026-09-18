@@ -574,6 +574,8 @@ nav a.active::after {
     border: 1px solid rgba(255,255,255,0.05);
     position: relative;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .card:hover {
@@ -598,6 +600,7 @@ nav a.active::after {
     font-size: 0.95rem;
     margin-bottom: 25px;
     min-height: 80px; /* Pour aligner les boutons */
+    flex-grow: 1;
 }
 
 .card-tags {
@@ -619,17 +622,42 @@ nav a.active::after {
 }
 
 .card a {
-    color: var(--primary);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: auto;
+    align-self: flex-start;
+    color: #0f172a;
+    background: linear-gradient(135deg, #38bdf8, #7dd3fc);
+    border: 1px solid rgba(56, 189, 248, 0.5);
     text-decoration: none;
-    font-weight: 600;
-    font-size: 0.95rem;
-    transition: 0.2s;
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.3px;
+    padding: 9px 18px;
+    border-radius: 25px;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 12px rgba(56, 189, 248, 0.25);
+    text-transform: uppercase;
+}
+
+.card a::after {
+    content: '→';
+    font-size: 0.9rem;
+    transition: transform 0.2s ease;
 }
 
 .card a:hover {
-    text-decoration: underline;
-    text-underline-offset: 5px;
+    background: linear-gradient(135deg, #7dd3fc, #38bdf8);
+    box-shadow: 0 4px 20px rgba(56, 189, 248, 0.45);
+    transform: translateY(-2px);
+    text-decoration: none;
 }
+
+.card a:hover::after {
+    transform: translateX(4px);
+}
+
 
 /* CARTE MISE EN AVANT (HUB DES RAPPORTS) */
 .card.card-featured {
