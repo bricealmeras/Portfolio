@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Procédure Changement d'Identité Utilisateur - Active Directory & Entra ID - Brice Almeras</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 11mm 13mm 13mm 13mm;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #1e293b;
+            background: #ffffff;
+            line-height: 1.38;
+            font-size: 8.5pt;
+        }
+
+        .page {
+            width: 100%;
+            height: 264mm;
+            max-height: 264mm;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            page-break-after: always;
+            break-after: page;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page:last-child {
+            page-break-after: avoid;
+        }
+
+        /* En-tête officiel */
+        .doc-header {
+            border-bottom: 2.5px solid #0284c7;
+            padding-bottom: 6px;
+            margin-bottom: 9px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .header-titles h1 {
+            font-size: 13pt;
+            font-weight: 700;
+            color: #0f172a;
+            letter-spacing: -0.3px;
+            margin-bottom: 2px;
+        }
+
+        .header-titles .subtitle {
+            font-size: 8pt;
+            color: #0284c7;
+            font-weight: 600;
+        }
+
+        .header-badge {
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            color: #0369a1;
+            padding: 3px 9px;
+            border-radius: 6px;
+            font-size: 7.2pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        /* Grille métadonnées */
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 7px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 6px 10px;
+            margin-bottom: 9px;
+            font-size: 7.6pt;
+        }
+
+        .meta-item .label {
+            color: #64748b;
+            font-size: 6.6pt;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 1px;
+        }
+
+        .meta-item .value {
+            color: #0f172a;
+            font-weight: 600;
+        }
+
+        /* Titres de sections */
+        .section-title {
+            font-size: 9.3pt;
+            font-weight: 700;
+            color: #0f172a;
+            border-left: 3.5px solid #0284c7;
+            padding-left: 6px;
+            margin-top: 8px;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .section-title .step-badge {
+            font-size: 6.6pt;
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        p {
+            margin-bottom: 5px;
+            color: #334155;
+            text-align: justify;
+        }
+
+        /* Callouts */
+        .callout {
+            border-radius: 6px;
+            padding: 6px 9px;
+            margin: 6px 0;
+            font-size: 7.9pt;
+            display: flex;
+            gap: 8px;
+            align-items: flex-start;
+        }
+
+        .callout-info {
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-left: 3.5px solid #0284c7;
+            color: #0369a1;
+        }
+
+        .callout-warning {
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            border-left: 3.5px solid #d97706;
+            color: #92400e;
+        }
+
+        .callout-success {
+            background: #ecfdf5;
+            border: 1px solid #a7f3d0;
+            border-left: 3.5px solid #10b981;
+            color: #065f46;
+        }
+
+        /* Code PowerShell */
+        .code-block {
+            background: #0f172a;
+            border-radius: 6px;
+            padding: 7px 11px;
+            margin: 5px 0 7px;
+            font-family: 'Fira Code', monospace;
+            font-size: 7.5pt;
+            color: #f8fafc;
+            border: 1px solid #334155;
+            line-height: 1.45;
+        }
+
+        .code-header {
+            font-size: 6.5pt;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            margin-bottom: 4px;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #1e293b;
+            padding-bottom: 2px;
+        }
+
+        .cmdlet { color: #38bdf8; font-weight: 600; }
+        .param { color: #a5b4fc; }
+        .string { color: #fde047; }
+        .var { color: #fdba74; }
+        .pipe { color: #f43f5e; font-weight: bold; }
+        .comment { color: #64748b; font-style: italic; }
+        .prompt { color: #4ade80; }
+
+        /* Images / Captures */
+        .img-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 6px 0 7px;
+        }
+
+        .img-card {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            overflow: hidden;
+            text-align: center;
+            padding: 5px;
+        }
+
+        .img-card img {
+            max-width: 100%;
+            height: auto;
+            max-height: 125px;
+            object-fit: contain;
+            border-radius: 4px;
+            border: 1px solid #e2e8f0;
+            display: block;
+            margin: 0 auto 4px;
+        }
+
+        .img-caption {
+            font-size: 6.8pt;
+            color: #475569;
+            font-weight: 600;
+        }
+
+        /* Listes */
+        ul.custom-list {
+            list-style: none;
+            margin: 4px 0 6px;
+            padding-left: 2px;
+        }
+
+        ul.custom-list li {
+            position: relative;
+            padding-left: 13px;
+            margin-bottom: 3.5px;
+            font-size: 8.1pt;
+            color: #334155;
+        }
+
+        ul.custom-list li::before {
+            content: '▪';
+            position: absolute;
+            left: 0;
+            color: #0284c7;
+            font-size: 9pt;
+            line-height: 1;
+            top: 0;
+        }
+
+        .table-container {
+            margin: 6px 0;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 7.5pt;
+        }
+
+        th {
+            background: #f1f5f9;
+            color: #0f172a;
+            font-weight: 700;
+            padding: 5px 8px;
+            border-bottom: 1.5px solid #cbd5e1;
+            text-transform: uppercase;
+            font-size: 6.7pt;
+        }
+
+        td {
+            padding: 4.5px 8px;
+            border-bottom: 1px solid #e2e8f0;
+            color: #334155;
+        }
+
+        tr:last-child td { border-bottom: none; }
+        tr:nth-child(even) td { background: #f8fafc; }
+
+        .page-footer-space {
+            height: 16px;
+            margin-top: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== PAGE 1 ==================== -->
+    <div class="page">
+        <div class="page-content">
+            <!-- En-tête -->
+            <div class="doc-header">
+                <div class="header-titles">
+                    <h1>PROCÉDURE D'EXPLOITATION ACTIVE DIRECTORY</h1>
+                    <div class="subtitle">Changement d'Identité Utilisateur & Alias de Messagerie (Hybride AD / Entra ID)</div>
+                </div>
+                <div class="header-badge">Mission Entreprise · E5</div>
+            </div>
+
+            <!-- Métadonnées -->
+            <div class="meta-grid">
+                <div class="meta-item">
+                    <div class="label">Rédacteur</div>
+                    <div class="value">Brice Almeras</div>
+                </div>
+                <div class="meta-item">
+                    <div class="label">Périmètre</div>
+                    <div class="value">AD Local / Entra ID / Exchange</div>
+                </div>
+                <div class="meta-item">
+                    <div class="label">Infrastructure</div>
+                    <div class="value">Hybride Microsoft 365 (eodd.fr)</div>
+                </div>
+                <div class="meta-item">
+                    <div class="label">Statut & Usage</div>
+                    <div class="value">Validé en Production · SOP</div>
+                </div>
+            </div>
+
+            <!-- 1. Contexte & Enjeux -->
+            <div class="section-title">
+                <span>1. Contexte Opérationnel & Principes d'Architecture Hybride</span>
+                <span class="step-badge">Architecture</span>
+            </div>
+            <p>
+                Lorsqu'un collaborateur modifie son état civil (mariage, changement de nom) ou que la convention de nommage interne impose une refonte de son identifiant, l'équipe d'administration système doit adapter l'ensemble de ses identités numériques sans rupture de service.
+            </p>
+            <p>
+                Dans une architecture d'entreprise hybride synchronisée avec <strong>Microsoft Entra Connect</strong> (ex-Azure AD Connect), <strong>l'Active Directory local est la Source Unique de Vérité (Source of Authority)</strong>. Toute modification effectuée directement sur le portail cloud est immédiatement écrasée au cycle de synchronisation suivant.
+            </p>
+
+            <div class="callout callout-warning">
+                <div><strong>Règle d'or :</strong> La totalité des modifications d'identité, d'identifiant d'ouverture de session et d'alias doit être opérée en premier lieu sur le contrôleur de domaine On-Premises avant propagation vers le cloud.</div>
+            </div>
+
+            <!-- 2. Modification de l'Identité (Méthode Graphique) -->
+            <div class="section-title">
+                <span>2. Modification de l'Identité sur le Contrôleur de Domaine (Interface Graphique)</span>
+                <span class="step-badge">Étape 01</span>
+            </div>
+            <p>
+                Pour une modification unitaire assistée par la console MMC <strong>Utilisateurs et ordinateurs Active Directory (ADUC)</strong> :
+            </p>
+            <ul class="custom-list">
+                <li>Ouvrir la console <code>dsa.msc</code> avec un compte membre du groupe <em>Administrateurs du Domaine</em>.</li>
+                <li>Localiser le compte dans l'Unité d'Organisation (OU) cible, faire un clic droit et sélectionner <strong>Renommer</strong>.</li>
+                <li>Renseigner les nouvelles valeurs d'état civil : <strong>Prénom</strong>, <strong>Nom</strong>, <strong>Nom complet</strong>, et le nouvel <strong>UPN</strong> (User Principal Name).</li>
+                <li>Ouvrir les <strong>Propriétés</strong> du compte :
+                    <ul style="padding-left: 14px; margin-top: 2px;">
+                        <li>Onglet <strong>Général</strong> : mettre à jour le champ <em>Adresse de messagerie</em> (ex: <code>j.martin@eodd.fr</code>).</li>
+                        <li>Onglet <strong>Compte</strong> : actualiser le <em>Nom d'ouverture de session de l'utilisateur</em> (<code>j.martin</code>) et le nom pré-Windows 2000 (<code>EODD\j.martin</code>).</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <!-- Captures 1 et 2 côte à côte -->
+            <div class="img-grid-2">
+                <div class="img-card">
+                    <img src="ad_rename_assets/image1.png" alt="Onglet Général ADUC">
+                    <div class="img-caption">Figure 1 : Propriétés du compte - Onglet Général & Adresse e-mail</div>
+                </div>
+                <div class="img-card">
+                    <img src="ad_rename_assets/image2.png" alt="Onglet Compte ADUC">
+                    <div class="img-caption">Figure 2 : Propriétés du compte - Onglet Compte & Identifiants UPN</div>
+                </div>
+            </div>
+
+            <div class="callout callout-info">
+                <div><strong>Continuité de service :</strong> Le renommage de l'identifiant ne modifie pas le <code>objectGUID</code> ni le <code>SID</code> du compte Active Directory. Les appartenances aux groupes de sécurité et les droits ACL d'accès aux partages NAS/SMB demeurent intacts.</div>
+            </div>
+        </div>
+
+        <div class="page-footer-space"></div>
+    </div>
+
+    <!-- ==================== PAGE 2 ==================== -->
+    <div class="page">
+        <div class="page-content">
+            <!-- 3. Gestion des Alias de Messagerie -->
+            <div class="section-title">
+                <span>3. Gestion des Alias de Messagerie via l'Attribut proxyAddresses</span>
+                <span class="step-badge">Étape 02</span>
+            </div>
+            <p>
+                Afin que le collaborateur continue de recevoir les messages adressés à son ancien patronyme (historique d'échanges avec des clients et correspondants externes), il est impératif de configurer les <strong>alias de messagerie</strong>. L'attribut <code>proxyAddresses</code> n'étant pas accessible simplement via les onglets standards, cette opération est réalisée en <strong>PowerShell</strong>.
+            </p>
+
+            <div class="callout callout-info">
+                <div><strong>Spécification RFC / Microsoft Exchange :</strong> Le préfixe <strong><code>SMTP:</code> (majuscules)</strong> définit l'adresse d'envoi et de réponse principale (Primary Reply-To). Le préfixe <strong><code>smtp:</code> (minuscules)</strong> définit les alias de réception secondaires.</div>
+            </div>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>PowerShell · Contrôleur de Domaine</span>
+                    <span>Configuration de l'attribut proxyAddresses</span>
+                </div>
+                <code><span class="var">$NouveauLogin</span> = <span class="string">"j.martin"</span><br>
+<span class="var">$NouvelEmail</span>  = <span class="string">"j.martin@eodd.fr"</span><br>
+<span class="var">$AncienEmail</span>  = <span class="string">"j.dupont@eodd.fr"</span><br><br>
+<span class="comment"># Affectation de l'adresse principale et préservation de l'ancienne en alias</span><br>
+<span class="cmdlet">Set-ADUser</span> <span class="param">-Identity</span> <span class="var">$NouveauLogin</span> <span class="param">-Replace</span> @{proxyAddresses = <span class="string">"SMTP:$NouvelEmail"</span>, <span class="string">"smtp:$AncienEmail"</span>}</code>
+            </div>
+
+            <!-- 4. Automatisation Complète en PowerShell -->
+            <div class="section-title">
+                <span>4. Procédure Alternative : Automatisation Complète 100% Scriptée</span>
+                <span class="step-badge">Industrialisation</span>
+            </div>
+            <p>
+                Pour accélérer le traitement et éliminer les erreurs de saisie manuelle, l'intégralité des opérations (modification des attributs, renommage du conteneur CN et configuration des alias) peut être exécutée d'une seule traite via ce script d'administration :
+            </p>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>PowerShell · Script Complet de Traitement</span>
+                    <span>Automatisation L2/L3</span>
+                </div>
+                <code><span class="comment"># Variables d'entrée du collaborateur</span><br>
+<span class="var">$AncienLogin</span>   = <span class="string">"j.dupont"</span><br>
+<span class="var">$NouveauLogin</span>  = <span class="string">"j.martin"</span><br>
+<span class="var">$NouveauPrenom</span> = <span class="string">"Jeanne"</span><br>
+<span class="var">$NouveauNom</span>    = <span class="string">"MARTIN"</span><br>
+<span class="var">$NouvelEmail</span>   = <span class="string">"j.martin@eodd.fr"</span><br>
+<span class="var">$AncienEmail</span>   = <span class="string">"$AncienLogin@eodd.fr"</span><br><br>
+<span class="comment"># 1. Mise à jour simultanée des attributs du compte</span><br>
+<span class="cmdlet">Set-ADUser</span> <span class="param">-Identity</span> <span class="var">$AncienLogin</span> `<br>
+    <span class="param">-GivenName</span> <span class="var">$NouveauPrenom</span> `<br>
+    <span class="param">-Surname</span> <span class="var">$NouveauNom</span> `<br>
+    <span class="param">-DisplayName</span> <span class="string">"$NouveauPrenom $NouveauNom"</span> `<br>
+    <span class="param">-UserPrincipalName</span> <span class="var">$NouvelEmail</span> `<br>
+    <span class="param">-EmailAddress</span> <span class="var">$NouvelEmail</span> `<br>
+    <span class="param">-SamAccountName</span> <span class="var">$NouveauLogin</span><br><br>
+<span class="comment"># 2. Renommage de l'objet dans le conteneur Active Directory (Common Name)</span><br>
+<span class="var">$User</span> = <span class="cmdlet">Get-ADUser</span> <span class="param">-Identity</span> <span class="var">$NouveauLogin</span><br>
+<span class="cmdlet">Rename-ADObject</span> <span class="param">-Identity</span> <span class="var">$User</span>.DistinguishedName <span class="param">-NewName</span> <span class="string">"$NouveauPrenom $NouveauNom"</span><br><br>
+<span class="comment"># 3. Écriture des alias de messagerie SMTP principal et secondaire</span><br>
+<span class="cmdlet">Set-ADUser</span> <span class="param">-Identity</span> <span class="var">$NouveauLogin</span> <span class="param">-Replace</span> @{proxyAddresses = <span class="string">"SMTP:$NouvelEmail"</span>, <span class="string">"smtp:$AncienEmail"</span>}</code>
+            </div>
+
+            <!-- 5. Forçage de la synchronisation vers le cloud -->
+            <div class="section-title">
+                <span>5. Forçage Immédiat de la Synchronisation Hybride (Microsoft Entra Connect)</span>
+                <span class="step-badge">Étape 03</span>
+            </div>
+            <p>
+                Le cycle automatique de synchronisation Microsoft Entra Connect s'exécute toutes les 30 minutes. Afin d'appliquer immédiatement les modifications sur le tenant Microsoft 365 sans délai de latence :
+            </p>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span>PowerShell · Serveur Entra Connect</span>
+                    <span>Synchronisation Delta</span>
+                </div>
+                <code><span class="prompt">PS C:\> </span><span class="cmdlet">Start-ADSyncSyncCycle</span> <span class="param">-PolicyType</span> <span class="string">Delta</span></code>
+            </div>
+
+            <div class="callout callout-success">
+                <div><strong>Synchronisation Delta :</strong> Seuls les objets et attributs modifiés depuis le dernier cycle sont analysés et poussés vers le répertoire Entra ID, réduisant le temps de réplication cloud à moins de 60 secondes.</div>
+            </div>
+        </div>
+
+        <div class="page-footer-space"></div>
+    </div>
+
+    <!-- ==================== PAGE 3 ==================== -->
+    <div class="page">
+        <div class="page-content">
+            <!-- 6. Contrôle et Validation Côté Cloud -->
+            <div class="section-title">
+                <span>6. Contrôle & Validation Côté Cloud (Entra ID & Exchange Online)</span>
+                <span class="step-badge">Étape 04</span>
+            </div>
+            <p>
+                Une fois la synchronisation achevée, se connecter au portail d'administration Microsoft 365 / Entra ID (<a href="https://entra.microsoft.com" style="color: #0284c7; text-decoration: none;">entra.microsoft.com</a>) pour valider la prise en compte du nouveau <strong>Nom d'utilisateur principal (UPN)</strong> :
+            </p>
+
+            <!-- Capture 3 : Entra ID -->
+            <div class="img-card" style="margin-bottom: 7px;">
+                <img src="ad_rename_assets/image3.png" alt="Validation Entra ID" style="max-height: 105px;">
+                <div class="img-caption">Figure 3 : Vérification du Nom d'utilisateur principal (UPN) dans les Propriétés Entra ID</div>
+            </div>
+
+            <p>
+                Se rendre ensuite sur le <strong>Centre d'administration Exchange</strong> (<a href="https://admin.exchange.microsoft.com" style="color: #0284c7; text-decoration: none;">admin.exchange.microsoft.com</a>) sous <em>Destinataires &gt; Boîtes aux lettres &gt; Gérer les types d'adresses e-mail</em> afin de contrôler la présence des adresses de routage :
+            </p>
+
+            <!-- Captures 4 et 5 : Exchange Online -->
+            <div class="img-grid-2">
+                <div class="img-card">
+                    <img src="ad_rename_assets/image4.png" alt="Accès gestion des adresses Exchange">
+                    <div class="img-caption">Figure 4 : Accès à la gestion des types d'adresses</div>
+                </div>
+                <div class="img-card">
+                    <img src="ad_rename_assets/image5.png" alt="Contrôle des alias Exchange">
+                    <div class="img-caption">Figure 5 : Validation de l'adresse principale et des alias smtp</div>
+                </div>
+            </div>
+
+            <!-- 7. Gestion des Caches Locaux -->
+            <div class="section-title">
+                <span>7. Résolution des Caches Locaux & Post-Traitement (Microsoft Teams & Outlook)</span>
+                <span class="step-badge">Support</span>
+            </div>
+            <p>
+                Certaines applications de l'écosystème Microsoft 365 utilisent un cache local persistant pouvant retarder l'affichage du nouveau nom chez les collègues :
+            </p>
+            <ul class="custom-list">
+                <li><strong>Comportement Microsoft Teams :</strong> Le cache local du client lourd peut conserver l'ancienne identité pendant 24h à 48h. Pour vérifier la réalité de la modification, consulter Teams Web (<a href="https://teams.microsoft.com" style="color: #0284c7; text-decoration: none;">teams.microsoft.com</a>) où l'actualisation est instantanée.</li>
+                <li><strong>Forçage immédiat sur poste client :</strong> Demander à l'utilisateur ou à ses collaborateurs proches de se déconnecter de Teams (<em>Profil &gt; Se déconnecter</em>) puis de se reconnecter. Si nécessaire, purger le dossier <code>%appdata%\Microsoft\Teams</code>.</li>
+                <li><strong>Client lourd Outlook :</strong> Redémarrer Outlook pour reconstruire le Carnet d'Adresses Hors Connexion (OAB - Offline Address Book).</li>
+            </ul>
+
+            <div class="callout callout-success" style="margin-top: 6px;">
+                <div><strong>Synthèse d'intervention :</strong> Changement d'identité complet et transparent, conservation de l'antériorité des accès et de la réception des courriels professionnels, conformité avec l'annuaire d'entreprise EODD.</div>
+            </div>
+        </div>
+
+        <div class="page-footer-space"></div>
+    </div>
+
+</body>
+</html>

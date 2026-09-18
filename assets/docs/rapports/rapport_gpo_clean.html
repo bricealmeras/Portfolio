@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>GPO - Déploiement Automatique des Imprimantes Réseau - Brice Almeras</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 12mm 14mm 14mm 14mm;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #1e293b;
+            background: #ffffff;
+            line-height: 1.4;
+            font-size: 9pt;
+        }
+
+        .page {
+            width: 100%;
+            height: 262mm;
+            max-height: 262mm;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            page-break-after: always;
+            break-after: page;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page:last-child {
+            page-break-after: avoid;
+        }
+
+        /* En-tête / Cartouche officiel */
+        .doc-header {
+            border-bottom: 2.5px solid #0284c7;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .header-titles h1 {
+            font-size: 14pt;
+            font-weight: 700;
+            color: #0f172a;
+            letter-spacing: -0.3px;
+            margin-bottom: 2px;
+        }
+
+        .header-titles .subtitle {
+            font-size: 8.5pt;
+            color: #0284c7;
+            font-weight: 600;
+        }
+
+        .header-badge {
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            color: #0369a1;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 7.5pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        /* Grille métadonnées */
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 8px 12px;
+            margin-bottom: 12px;
+            font-size: 8pt;
+        }
+
+        .meta-item .label {
+            color: #64748b;
+            font-size: 7pt;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 1px;
+        }
+
+        .meta-item .value {
+            color: #0f172a;
+            font-weight: 600;
+        }
+
+        /* Boîtes Contexte / Problème & Solution */
+        .boxes-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .problem-box {
+            background: #fff1f2;
+            border-left: 3.5px solid #e11d48;
+            border-radius: 0 6px 6px 0;
+            padding: 8px 10px;
+            font-size: 8pt;
+        }
+
+        .problem-box h3 {
+            color: #be123c;
+            font-size: 8.5pt;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .problem-box p {
+            color: #4c0519;
+            line-height: 1.35;
+        }
+
+        .solution-box {
+            background: #f0fdf4;
+            border-left: 3.5px solid #16a34a;
+            border-radius: 0 6px 6px 0;
+            padding: 8px 10px;
+            font-size: 8pt;
+        }
+
+        .solution-box h3 {
+            color: #15803d;
+            font-size: 8.5pt;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .solution-box p {
+            color: #14532d;
+            line-height: 1.35;
+        }
+
+        /* Titres de sections */
+        h2.section-title {
+            font-size: 10pt;
+            font-weight: 700;
+            color: #0f172a;
+            border-bottom: 1.5px solid #e2e8f0;
+            padding-bottom: 4px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        h2.section-title span.num {
+            background: #0284c7;
+            color: #ffffff;
+            font-size: 7.5pt;
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+
+        /* Tableaux */
+        .clean-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 8pt;
+            margin-bottom: 12px;
+        }
+
+        .clean-table th {
+            background: #0f172a;
+            color: #ffffff;
+            font-weight: 600;
+            text-align: left;
+            padding: 5px 8px;
+            border: 1px solid #0f172a;
+            font-size: 7.8pt;
+        }
+
+        .clean-table td {
+            padding: 4.5px 8px;
+            border: 1px solid #e2e8f0;
+            color: #334155;
+            vertical-align: middle;
+        }
+
+        .clean-table tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        .badge-site {
+            background: #eff6ff;
+            color: #1d4ed8;
+            border: 1px solid #bfdbfe;
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-family: 'Fira Code', monospace;
+            font-size: 7.5pt;
+        }
+
+        /* Grilles d'étapes */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .step-block {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 8px 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .step-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .step-title {
+            font-size: 8.5pt;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .step-tag {
+            font-size: 7pt;
+            font-family: 'Fira Code', monospace;
+            background: #f1f5f9;
+            color: #475569;
+            padding: 1px 5px;
+            border-radius: 4px;
+            border: 1px solid #cbd5e1;
+        }
+
+        .step-desc {
+            font-size: 7.8pt;
+            color: #475569;
+            margin-bottom: 6px;
+            line-height: 1.35;
+        }
+
+        .step-img-container {
+            text-align: center;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            padding: 4px;
+            height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .step-img-container img {
+            max-width: 100%;
+            max-height: 132px;
+            height: auto;
+            border-radius: 3px;
+            object-fit: contain;
+        }
+
+        .step-caption {
+            font-size: 7pt;
+            color: #64748b;
+            font-style: italic;
+            margin-top: 3px;
+            text-align: center;
+        }
+
+        /* Guide cards / Benefices */
+        .guide-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .guide-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 8px 10px;
+            font-size: 8pt;
+        }
+
+        .guide-card h4 {
+            font-size: 8.5pt;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+
+        .code-snippet {
+            background: #0f172a;
+            color: #38bdf8;
+            font-family: 'Fira Code', monospace;
+            padding: 4px 7px;
+            border-radius: 4px;
+            font-size: 7.5pt;
+            margin: 4px 0;
+            word-break: break-all;
+        }
+
+        /* Highlights bullet list */
+        .highlights-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+
+        .highlights-list li {
+            font-size: 8pt;
+            color: #334155;
+            display: flex;
+            align-items: flex-start;
+            gap: 6px;
+        }
+
+        .highlights-list li strong {
+            color: #0f172a;
+        }
+
+        .bullet-icon {
+            color: #0284c7;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        .doc-footer {
+            border-top: 1px solid #e2e8f0;
+            padding-top: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 7pt;
+            color: #64748b;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== PAGE 1 ==================== -->
+    <div class="page">
+        <div>
+            <header class="doc-header">
+                <div class="header-titles">
+                    <h1>GPO — Déploiement Automatique des Imprimantes Réseau</h1>
+                    <div class="subtitle">Gestion centralisée et ciblage dynamique par Unités d'Organisation (GPP)</div>
+                </div>
+                <div class="header-badge">
+                    Validé · V1.0 Finale
+                </div>
+            </header>
+
+            <div class="meta-grid">
+                <div class="meta-item">
+                    <div class="label">Environnement / Domaine</div>
+                    <div class="value">DC1.EODD.FR</div>
+                </div>
+                <div class="meta-item">
+                    <div class="label">Administrateur / Rédacteur</div>
+                    <div class="value">Brice Almeras (BTS SIO SISR)</div>
+                </div>
+                <div class="meta-item">
+                    <div class="label">Technologie Utilisée</div>
+                    <div class="value">GPP (Group Policy Preferences)</div>
+                </div>
+                <div class="meta-item">
+                    <div class="label">Date de Réalisation</div>
+                    <div class="value">Juin 2026</div>
+                </div>
+            </div>
+
+            <!-- Problématique & Solution -->
+            <div class="boxes-grid">
+                <div class="problem-box">
+                    <h3>1. Problématique Constatée</h3>
+                    <p>
+                        Disparition récurrente des imprimantes réseau sur les postes clients après redémarrage ou reconnexion de session. 
+                        Les mappages étaient réalisés manuellement sans persistance centralisée, générant des interruptions et des tickets support.
+                    </p>
+                </div>
+                <div class="solution-box">
+                    <h3>2. Solution Déployée</h3>
+                    <p>
+                        Mise en place d'une GPO de <strong>Préférences de Stratégie de Groupe (GPP)</strong>. Les imprimantes sont mappées 
+                        automatiquement à l'ouverture de session selon le site géographique de l'ordinateur grâce au ciblage par OU.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Matrice de ciblage -->
+            <h2 class="section-title">
+                <span class="num">1</span> Matrice d'Affectation des Imprimantes par Unité d'Organisation (OU)
+            </h2>
+
+            <table class="clean-table">
+                <thead>
+                    <tr>
+                        <th style="width: 25%;">Unité d'Organisation (Site)</th>
+                        <th style="width: 35%;">Imprimante(s) Réseau Déployée(s)</th>
+                        <th style="width: 40%;">Chemin UNC Partagé (Serveur d'impression)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge-site">OU=LYON</span></td>
+                        <td><strong>IMP-LYO1 / IMP-LYO2</strong></td>
+                        <td><code>\\DC1\IMP-LYO1</code> &nbsp;/&nbsp; <code>\\DC1\IMP-LYO2</code></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge-site">OU=MARSEILLE</span></td>
+                        <td><strong>IMP-MAR</strong></td>
+                        <td><code>\\DC1\IMP-MAR</code></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge-site">OU=METZ</span></td>
+                        <td><strong>IMP-MET</strong></td>
+                        <td><code>\\DC1\IMP-MET</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Étapes 1 et 2 -->
+            <h2 class="section-title">
+                <span class="num">2</span> Configuration de la GPO : Définition des Imprimantes (Étapes 1 & 2)
+            </h2>
+
+            <div class="steps-grid">
+                <!-- Étape 1 -->
+                <div class="step-block">
+                    <div class="step-header">
+                        <span class="step-title">Étape 1 : Création de l'imprimante partagée</span>
+                        <span class="step-tag">GPP Imprimantes</span>
+                    </div>
+                    <p class="step-desc">Navigation dans : <em>Configuration utilisateur &gt; Préférences &gt; Paramètres du Panneau de configuration &gt; Imprimantes</em>. Clic droit &gt; Nouveau &gt; Imprimante partagée.</p>
+                    <div class="step-img-container">
+                        <img src="gpo_assets/1.png" alt="Création imprimante dans GPO" />
+                    </div>
+                    <div class="step-caption">Figure 1 : Arborescence de l'Éditeur de gestion des stratégies de groupe</div>
+                </div>
+
+                <!-- Étape 2 -->
+                <div class="step-block">
+                    <div class="step-header">
+                        <span class="step-title">Étape 2 : Action « Mettre à jour » & Chemin UNC</span>
+                        <span class="step-tag">Onglet Général</span>
+                    </div>
+                    <p class="step-desc">Sélection de l'action <strong>Mettre à jour</strong> (Update) et saisie du chemin réseau partagé <code>\\DC1\IMP-LYO1</code>. L'imprimante est recréée si elle a été supprimée.</p>
+                    <div class="step-img-container">
+                        <img src="gpo_assets/2.png" alt="Action Mettre à jour" />
+                    </div>
+                    <div class="step-caption">Figure 2 : Propriétés Générales — Action de persistance et chemin partagé</div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="doc-footer">
+            <div><strong>Brice Almeras</strong> · BTS SIO SISR — Déploiement d'Imprimantes par GPO</div>
+            <div>Page 1 / 3</div>
+        </footer>
+    </div>
+
+    <!-- ==================== PAGE 2 ==================== -->
+    <div class="page">
+        <div>
+            <h2 class="section-title">
+                <span class="num">3</span> Ciblage Dynamique au Niveau de l'Élément (Étapes 3 à 5)
+            </h2>
+
+            <div class="steps-grid">
+                <!-- Étape 3 -->
+                <div class="step-block">
+                    <div class="step-header">
+                        <span class="step-title">Étape 3 : Contexte de sécurité & Ciblage</span>
+                        <span class="step-tag">Onglet Commun</span>
+                    </div>
+                    <p class="step-desc">Activation de l'option <em>Exécuter dans le contexte de sécurité de l'utilisateur connecté</em> et activation de la case <em>Ciblage au niveau de l'élément</em>.</p>
+                    <div class="step-img-container">
+                        <img src="gpo_assets/5.png" alt="Onglet Commun" />
+                    </div>
+                    <div class="step-caption">Figure 3 : Paramétrage du contexte utilisateur et bouton Ciblage</div>
+                </div>
+
+                <!-- Étape 4 -->
+                <div class="step-block">
+                    <div class="step-header">
+                        <span class="step-title">Étape 4 : Filtre par Unité d'Organisation</span>
+                        <span class="step-tag">Éditeur de ciblage</span>
+                    </div>
+                    <p class="step-desc">Ajout d'une condition : <em>Nouvel élément &gt; Unité d'organisation</em>. Sélection de l'option <strong>Ordinateur membre de l'unité d'organisation</strong>.</p>
+                    <div class="step-img-container">
+                        <img src="gpo_assets/6.png" alt="Filtre ciblage OU" />
+                    </div>
+                    <div class="step-caption">Figure 4 : Définition de la règle de ciblage sur l'OU de l'ordinateur</div>
+                </div>
+
+                <!-- Étape 5 -->
+                <div class="step-block" style="grid-column: span 2;">
+                    <div class="step-header">
+                        <span class="step-title">Étape 5 : Sélection de l'OU cible dans l'annuaire Active Directory</span>
+                        <span class="step-tag">Annuaire Active Directory</span>
+                    </div>
+                    <p class="step-desc">Parcours de l'arborescence Active Directory pour lier formellement la règle à l'Unité d'Organisation cible (ex : <code>OU=LYON</code>). Seuls les postes de travail rattachés à cette OU reçoivent le mappage de l'imprimante associée.</p>
+                    <div class="step-img-container" style="height: 155px;">
+                        <img src="gpo_assets/7.png" alt="Sélection OU AD" style="max-height: 145px;" />
+                    </div>
+                    <div class="step-caption">Figure 5 : Sélection précise de l'Unité d'Organisation dans l'arborescence du domaine DC1.EODD.FR</div>
+                </div>
+            </div>
+
+            <!-- Encadré explicatif sur GPP -->
+            <div class="solution-box" style="background: #f8fafc; border-left-color: #0284c7; margin-top: 10px;">
+                <h3 style="color: #0369a1;">Avantage Technique des Préférences de Stratégie de Groupe (GPP)</h3>
+                <p>
+                    Contrairement aux scripts de connexion traditionnels (VBS/BAT), les préférences GPP avec action <strong>« Mettre à jour »</strong> 
+                    ne s'exécutent pas inutilement si l'imprimante est déjà présente et conforme, tout en garantissant sa réinstallation immédiate si l'utilisateur l'a retirée par erreur.
+                </p>
+            </div>
+        </div>
+
+        <footer class="doc-footer">
+            <div><strong>Brice Almeras</strong> · BTS SIO SISR — Déploiement d'Imprimantes par GPO</div>
+            <div>Page 2 / 3</div>
+        </footer>
+    </div>
+
+    <!-- ==================== PAGE 3 ==================== -->
+    <div class="page">
+        <div>
+            <h2 class="section-title">
+                <span class="num">4</span> Résultats Obtenus & Bénéfices Opérationnels
+            </h2>
+
+            <ul class="highlights-list">
+                <li>
+                    <span class="bullet-icon">✔</span>
+                    <div>
+                        <strong>Remontée transparente des équipements :</strong> Les imprimantes sont mappées automatiquement dès l'ouverture de session sans aucune action requise de la part des utilisateurs.
+                    </div>
+                </li>
+                <li>
+                    <span class="bullet-icon">✔</span>
+                    <div>
+                        <strong>Cloisonnement géographique strict :</strong> Grâce au ciblage par OU d'ordinateur, chaque site (Lyon, Marseille, Metz) ne reçoit que les imprimantes physiques qui lui sont géographiquement attribuées.
+                    </div>
+                </li>
+                <li>
+                    <span class="bullet-icon">✔</span>
+                    <div>
+                        <strong>Auto-remédiation et persistance :</strong> L'action <em>Mettre à jour</em> réinstalle automatiquement toute file d'attente supprimée accidentellement lors de la prochaine connexion.
+                    </div>
+                </li>
+                <li>
+                    <span class="bullet-icon">✔</span>
+                    <div>
+                        <strong>Administration centralisée :</strong> Toute modification (changement d'IP, ajout d'imprimante) est orchestrée depuis la console GPMC sans intervention manuelle poste par poste.
+                    </div>
+                </li>
+                <li>
+                    <span class="bullet-icon">✔</span>
+                    <div>
+                        <strong>Éradication des incidents récurrents :</strong> Réduction significative des tickets ouverts au support technique concernant les imprimantes non trouvées.
+                    </div>
+                </li>
+            </ul>
+
+            <h2 class="section-title">
+                <span class="num">5</span> Procédure de Vérification & Diagnostic Client
+            </h2>
+
+            <div class="guide-grid">
+                <div class="guide-card">
+                    <h4>Vérification en Ligne de Commande (Poste Client)</h4>
+                    <p>Pour forcer l'actualisation immédiate des stratégies et lister les imprimantes :</p>
+                    <div class="code-snippet">gpupdate /force</div>
+                    <div class="code-snippet">Get-Printer | Select-Object Name, Type</div>
+                    <p style="color: #64748b; font-size: 7.2pt; margin-top: 4px;">
+                        L'imprimante réseau doit apparaître avec le type <code>Connection</code>.
+                    </p>
+                </div>
+
+                <div class="guide-card">
+                    <h4>Vérification Graphique & Journalisation</h4>
+                    <p>Contrôles visuels et traces système sur le poste client :</p>
+                    <div class="code-snippet">control printers</div>
+                    <div class="code-snippet">gpresult /r /scope:user</div>
+                    <p style="color: #64748b; font-size: 7.2pt; margin-top: 4px;">
+                        Vérifier que la GPO d'imprimantes est bien listée sous les <em>Objets Stratégie de groupe appliqués</em>.
+                    </p>
+                </div>
+            </div>
+
+            <div class="problem-box" style="background: #fffbeb; border-left-color: #f59e0b; margin-top: 8px;">
+                <h3 style="color: #b45309;">Points de Vigilance & Dépannage (Point and Print)</h3>
+                <p>
+                    Sous Windows 10/11, si une restriction Point and Print empêche l'installation silencieuse du pilote d'impression, 
+                    s'assurer que les pilotes déployés sur le serveur d'impression sont de type <strong>Package-Aware (Type 4 ou Type 3 certifiés)</strong> 
+                    ou configurer la stratégie d'approbation Point and Print autorisant le serveur <code>DC1.EODD.FR</code>.
+                </p>
+            </div>
+        </div>
+
+        <footer class="doc-footer">
+            <div><strong>Brice Almeras</strong> · BTS SIO SISR — Déploiement d'Imprimantes par GPO</div>
+            <div>Page 3 / 3</div>
+        </footer>
+    </div>
+
+</body>
+</html>

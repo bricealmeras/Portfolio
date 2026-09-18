@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livrables Techniques & Rapports (TP & Entreprise) - Brice Almeras</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/css/rapports.css">
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <!-- Meta SEO -->
+    <meta name="description" content="Découvrez tous les livrables techniques, réalisations en entreprise et comptes-rendus de TP documentés par Brice Almeras en BTS SIO SISR : GPO en entreprise, Docker, DNS BIND9, RCA, SSH, Active Directory.">
+    <meta property="og:title" content="Livrables Techniques & Rapports (TP & Entreprise) - Brice Almeras">
+    <meta property="og:description" content="Répertoire des réalisations et travaux pratiques documentés : missions professionnelles en entreprise, méthodologie rigoureuse, analyses d'incidents RCA et maquettes d'infrastructure.">
+    <meta property="og:type" content="website">
+</head>
+<body>
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="tp-header">
+        <a href="../../index.html" class="tp-logo">BRICE.<span>SIO</span></a>
+        <nav class="tp-nav-links">
+            <a href="../../index.html#projets" class="btn-back">
+                <i class="fas fa-arrow-left"></i> Retour au Portfolio
+            </a>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="tp-hero">
+        <span class="badge-glow">
+            <i class="fas fa-briefcase"></i> Répertoire Technique · TP & Missions en Entreprise
+        </span>
+        <h1>Livrables Techniques & Rapports</h1>
+        <p class="hero-desc">
+            Pour chaque réalisation, qu'il s'agisse de missions en milieu professionnel ou de travaux pratiques approfondis, 
+            j'applique une méthodologie rigoureuse : analyse du besoin, captures d'épreuves vérifiables, formalisation de 
+            fiches de cause racine (<strong>RCA</strong>) et livrables d'exploitation directement consultables en PDF.
+        </p>
+
+        <!-- DASHBOARD STATS -->
+        <div class="tp-stats-grid">
+            <div class="stat-box">
+                <div class="stat-number">10</div>
+                <div class="stat-label">Livrables Complets</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Formats PDF Haute Qualité</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">U5 / U6 / E4 / E5</div>
+                <div class="stat-label">Épreuves Officielles BTS</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">Linux & Windows</div>
+                <div class="stat-label">Environnements Systèmes</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BARRE DE RECHERCHE ET FILTRES -->
+    <section class="tp-controls">
+        <div class="search-bar-wrapper">
+            <input type="text" id="tp-search" class="tp-search-input" placeholder="Rechercher par technologie, sujet, protocole (ex: Docker, DNS, SSH, GPO, Cisco...)" />
+            <i class="fas fa-search"></i>
+        </div>
+
+        <div class="tp-filters">
+            <button class="filter-btn active" data-filter="all">
+                <i class="fas fa-layer-group"></i> Tous les livrables <span class="count">10</span>
+            </button>
+            <button class="filter-btn" data-filter="entreprise">
+                <i class="fas fa-building"></i> En Entreprise <span class="count">3</span>
+            </button>
+            <button class="filter-btn" data-filter="bts2">
+                <i class="fas fa-bolt"></i> BTS 2 (U5 / U6) <span class="count">4</span>
+            </button>
+            <button class="filter-btn" data-filter="linux">
+                <i class="fab fa-linux"></i> Systèmes Linux <span class="count">5</span>
+            </button>
+            <button class="filter-btn" data-filter="reseau">
+                <i class="fas fa-network-wired"></i> Réseau & Protocoles <span class="count">3</span>
+            </button>
+            <button class="filter-btn" data-filter="windows">
+                <i class="fab fa-windows"></i> Windows & Cloud <span class="count">4</span>
+            </button>
+            <button class="filter-btn" data-filter="cyber">
+                <i class="fas fa-shield-alt"></i> Sécurité & Audit <span class="count">2</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- GRILLE DES CARTES DE RAPPORTS -->
+    <main class="tp-container">
+        <div class="tp-grid" id="tp-grid">
+
+            <!-- 1. RAPPORT APACHE & DOCKER -->
+            <article class="tp-card" data-category="bts2 linux">
+                <div class="tp-card-content">
+                    <div class="tp-card-header">
+                        <div class="tp-icon-wrapper tp-icon-docker">
+                            <i class="fab fa-docker"></i>
+                        </div>
+                        <div class="tp-badges">
+                            <span class="tag-context">BTS 2 · Épreuve U5</span>
+                            <span class="tag-date">14/09/2026</span>
+                        </div>
+                    </div>
+                    <div class="tp-card-body">
+                        <h3>Maintenance Serveur Web Apache & Sauvegardes Docker</h3>
+                        <p class="tp-card-desc">
+                            Déploiement et exploitation d'une architecture conteneurisée pour serveur Apache. 
+                            Automatisation complète des sauvegardes incrémentielles et sécurisation des répertoires de publication.
+                        </p>
+                        <ul class="tp-highlights">
+                            <li><i class="fas fa-check-circle"></i> Déploiement multi-conteneurs avec Docker Compose</li>
+                            <li><i class="fas fa-check-circle"></i> Script Bash de sauvegarde avec horodatage et compression tar</li>
+                            <li><i class="fas fa-check-circle"></i> Planification automatique via tâche Cron et gestion des droits</li>
+                        </ul>
+                        <div class="tp-tags">
+                            <span class="tp-tag">Docker Compose</span>
+                            <span class="tp-tag">Apache HTTP</span>
+                            <span class="tp-tag">Bash</span>
+                            <span class="tp-tag">Cron</span>
+                            <span class="tp-tag">Debian</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tp-actions">
+                    <a href="../../assets/docs/rapports/Rapport_Maintenance_Apache_Docker_Brice_Almeras.pdf" target="_blank" class="btn-open-pdf">
+                        <i class="fas fa-file-pdf"></i> Consulter le rapport PDF
+                    </a>
+                    <button class="btn-preview" title="Aperçu rapide" data-pdf="../../assets/docs/rapports/Rapport_Maintenance_Apache_Docker_Brice_Almeras.pdf" data-title="Maintenance Apache & Sauvegardes Docker">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </article>
+
+            <!-- 2. RAPPORT DNS & RCA -->
+            <article class="tp-card" data-category="bts2 reseau linux">
+                <div class="tp-card-content">
+                    <div class="tp-card-header">
+                        <div class="tp-icon-wrapper tp-icon-dns">
+                            <i class="fas fa-bug"></i>
+                        </div>
+                        <div class="tp-badges">
+                            <span class="tag-context">BTS 2 · Évaluation Notée</span>
+                            <span class="tag-date">16/09/2026</span>
+                        </div>
+                    </div>
+                    <div class="tp-card-body">
+                        <h3>Résolution d'Incident DNS & Analyse de Cause Racine (RCA)</h3>
+                        <p class="tp-card-desc">
+                            Investigation technique complète sur une panne de résolution DNS BIND9 en environnement Docker. 
+                            Rédaction d'une fiche RCA méthodologique avec scénario de tests et actions préventives.
+                        </p>
+                        <ul class="tp-highlights">
+                            <li><i class="fas fa-check-circle"></i> Diagnostic réseau approfondi (Dig, Nslookup, logs système)</li>
+                            <li><i class="fas fa-check-circle"></i> Identification de la cause racine sur la zone directe & droits BIND</li>
+                            <li><i class="fas fa-check-circle"></i> Validation de la résolution et remédiation pérenne documentée</li>
+                        </ul>
+                        <div class="tp-tags">
+                            <span class="tp-tag">DNS BIND9</span>
+                            <span class="tp-tag">Analyse RCA</span>
+                            <span class="tp-tag">Docker</span>
+                            <span class="tp-tag">Troubleshooting</span>
+                            <span class="tp-tag">Debian</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tp-actions">
+                    <a href="../../assets/docs/rapports/Rapport_RCA_Incident_DNS_BIND9_Brice_Almeras.pdf" target="_blank" class="btn-open-pdf">
+                        <i class="fas fa-file-pdf"></i> Consulter le rapport PDF
+                    </a>
+                    <button class="btn-preview" title="Aperçu rapide" data-pdf="../../assets/docs/rapports/Rapport_RCA_Incident_DNS_BIND9_Brice_Almeras.pdf" data-title="Incident DNS & Analyse de Cause Racine (RCA)">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </article>
+
+            <!-- 3. CADRAGE NAS OMV & AGDLP -->
+            <article class="tp-card" data-category="bts2 reseau windows">
+                <div class="tp-card-content">
+                    <div class="tp-card-header">
+                        <div class="tp-icon-wrapper tp-icon-omv">
+                            <i class="fas fa-hdd"></i>
+                        </div>
+                        <div class="tp-badges">
+                            <span class="tag-context">BTS 2 · Projet Atlas</span>
+                            <span class="tag-date">16/09/2026</span>
+                        </div>
+                    </div>
+                    <div class="tp-card-body">
+                        <h3>Cadrage Équipe : Stockage NAS OpenMediaVault & Sécurité AGDLP</h3>
+                        <p class="tp-card-desc">
+                            Dossier de cadrage d'architecture système : interconnexion d'un NAS OpenMediaVault au domaine AD, 
+                            cloisonnement des services par matrice AGDLP, plan de recette client et procédures de rollback.
+                        </p>
+                        <ul class="tp-highlights">
+                            <li><i class="fas fa-check-circle"></i> Intégration NAS OMV (Debian) au domaine AD via Samba / Winbind</li>
+                            <li><i class="fas fa-check-circle"></i> Matrice des droits AGDLP et permissions ACL strictes par service</li>
+                            <li><i class="fas fa-check-circle"></i> Plan de retour arrière et journalisation d'audit des accès (smbd)</li>
+                        </ul>
+                        <div class="tp-tags">
+                            <span class="tp-tag">OpenMediaVault</span>
+                            <span class="tp-tag">Modèle AGDLP</span>
+                            <span class="tp-tag">Droits NTFS / ACL</span>
+                            <span class="tp-tag">Samba SMB</span>
+                            <span class="tp-tag">Active Directory</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tp-actions">
+                    <a href="../../assets/docs/rapports/Fiche_Cadrage_NAS_AGDLP_Brice_Almeras.pdf" target="_blank" class="btn-open-pdf">
+                        <i class="fas fa-file-pdf"></i> Consulter le rapport PDF
+                    </a>
+                    <button class="btn-preview" title="Aperçu rapide" data-pdf="../../assets/docs/rapports/Fiche_Cadrage_NAS_AGDLP_Brice_Almeras.pdf" data-title="Cadrage Stockage NAS OpenMediaVault & AGDLP">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </article>
+
+            <!-- 4. RAPPORT SSH -->
+            <article class="tp-card" data-category="linux cyber">
+                <div class="tp-card-content">
+                    <div class="tp-card-header">
+                        <div class="tp-icon-wrapper tp-icon-ssh">
+                            <i class="fas fa-terminal"></i>
+                        </div>
+                        <div class="tp-badges">
+                            <span class="tag-context">BTS 1 · Administration Linux</span>
+                            <span class="tag-date">03/2026</span>
+                        </div>
+                    </div>
+                    <div class="tp-card-body">
+                        <h3>Mise en Place & Sécurisation du Service SSH</h3>
+                        <p class="tp-card-desc">
+                            Installation et durcissement d'un serveur OpenSSH sous Debian. Mise en place d'une authentification 
+                            sécurisée sans mot de passe par paire de clés asymétriques et verrouillage des accès distants.
+                        </p>
+                        <ul class="tp-highlights">
+                            <li><i class="fas fa-check-circle"></i> Génération et déploiement de clés asymétriques RSA/Ed25519</li>
+                            <li><i class="fas fa-check-circle"></i> Durcissement du fichier de configuration sshd_config (Root interdit)</li>
+                            <li><i class="fas fa-check-circle"></i> Tests de non-régression et audit de journalisation (/var/log/auth.log)</li>
+                        </ul>
+                        <div class="tp-tags">
+                            <span class="tp-tag">OpenSSH</span>
+                            <span class="tp-tag">Clés Asymétriques</span>
+                            <span class="tp-tag">Durcissement</span>
+                            <span class="tp-tag">Debian</span>
+                            <span class="tp-tag">Sécurité</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tp-actions">
+                    <a href="../../assets/docs/rapports/Rapport_Mise_En_Place_Service_SSH_Brice_Almeras.pdf" target="_blank" class="btn-open-pdf">
+                        <i class="fas fa-file-pdf"></i> Consulter le rapport PDF
+                    </a>
+                    <button class="btn-preview" title="Aperçu rapide" data-pdf="../../assets/docs/rapports/Rapport_Mise_En_Place_Service_SSH_Brice_Almeras.pdf" data-title="Mise en Place & Sécurisation du Service SSH">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </article>
+
+            <!-- 5. DEPLOIEMENT IMPRIMANTES GPO -->
+            <article class="tp-card" data-category="windows entreprise">
+                <div class="tp-card-content">
+                    <div class="tp-card-header">
+                        <div class="tp-icon-wrapper tp-icon-win">
+                            <i class="fas fa-print"></i>
+                        </div>
+                        <div class="tp-badges">
+                            <span class="tag-context tag-context-pro"><i class="fas fa-building"></i> Mission Entreprise · E5</span>
+                            <span class="tag-date">04/2026</span>
+                        </div>
+                    </div>
+                    <div class="tp-card-body">
+                        <h3>Déploiement Automatisé d'Imprimantes Réseau par GPO</h3>
+                        <p class="tp-card-desc">
+                            Réalisation en milieu professionnel : centralisation et industrialisation du déploiement des imprimantes réseau via stratégies de groupe (GPO) Active Directory sur serveur d'impression Windows Server.
+                        </p>
+                        <ul class="tp-highlights">
+                            <li><i class="fas fa-check-circle"></i> Installation du rôle Serveur d'Impression Windows Server</li>
+                            <li><i class="fas fa-check-circle"></i> Création et déploiement de stratégies de groupe (GPO)</li>
+                            <li><i class="fas fa-check-circle"></i> Ciblage par élément pour affectation automatique aux postes clients</li>
+                        </ul>
+                        <div class="tp-tags">
+                            <span class="tp-tag">Mission Entreprise</span>
+                            <span class="tp-tag">Windows Server</span>
+                            <span class="tp-tag">GPO Active Directory</span>
+                            <span class="tp-tag">Print Management</span>
+                            <span class="tp-tag">Automatisation</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tp-actions">
+                    <a href="../../assets/docs/rapports/Doc_Deploiement_Imprimantes_GPO_Brice_Almeras.pdf" target="_blank" class="btn-open-pdf">
+                        <i class="fas fa-file-pdf"></i> Consulter le rapport PDF
+                    </a>
+                    <button class="btn-preview" title="Aperçu rapide" data-pdf="../../assets/docs/rapports/Doc_Deploiement_Imprimantes_GPO_Brice_Almeras.pdf" data-title="Déploiement d'Imprimantes par GPO (Mission Entreprise)">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </article>
+
+            <!-- 6. PROCEDURE FORCAGE ARCHIVAGE M365 -->
+            <article class="tp-card" data-category="windows entreprise">
+                <div class="tp-card-content">
+                    <div class="tp-card-header">
+                        <div class="tp-icon-wrapper tp-icon-m365">
+                            <i class="fab fa-microsoft"></i>
+                        </div>
+                        <div class="tp-badges">
+                            <span class="tag-context tag-context-pro"><i class="fas fa-building"></i> Mission Entreprise · E5</span>
+                            <span class="tag-date">09/2026</span>
+                        </div>
+                    </div>
+                    <div class="tp-card-body">
+                        <h3>Procédure Technique M365 : Forçage d'Archivage Exchange Online</h3>
+                        <p class="tp-card-desc">
+                            Procédure d'exploitation en environnement de production cloud : déblocage d'une boîte mail saturée par provisionnement instantané de l'archive en ligne et forçage asynchrone du Managed Folder Assistant (MFA) via Azure Cloud Shell.
+                        </p>
+                        <ul class="tp-highlights">
+                            <li><i class="fas fa-check-circle"></i> Connexion sécurisée pré-authentifiée via terminal Azure Cloud Shell</li>
+                            <li><i class="fas fa-check-circle"></i> Activation immédiate de l'archive In-Place et contrôle du statut</li>
+                            <li><i class="fas fa-check-circle"></i> Exécution forcée du Managed Folder Assistant (MFA) sans délai de 7 jours</li>
+                            <li><i class="fas fa-check-circle"></i> Procédure de validation métrique des quotas et consignes de clôture ticket</li>
+                        </ul>
+                        <div class="tp-tags">
+                            <span class="tp-tag">Mission Entreprise</span>
+                            <span class="tp-tag">Microsoft 365</span>
+                            <span class="tp-tag">Exchange Online</span>
+                            <span class="tp-tag">Azure Cloud Shell</span>
+                            <span class="tp-tag">PowerShell</span>
+                            <span class="tp-tag">SOP Exploitation</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tp-actions">
+                    <a href="../../assets/docs/rapports/Procedure_Forcage_Archivage_M365_Brice_Almeras.pdf" target="_blank" class="btn-open-pdf">
+                        <i class="fas fa-file-pdf"></i> Consulter le rapport PDF
+                    </a>
+                    <button class="btn-preview" title="Aperçu rapide" data-pdf="../../assets/docs/rapports/Procedure_Forcage_Archivage_M365_Brice_Almeras.pdf" data-title="Procédure Forçage Archivage M365 Exchange Online">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </article>
+
+            <!-- 7. PROCEDURE CHANGEMENT NOM ACTIVE DIRECTORY & HYBRIDE -->
+            <article class="tp-card" data-category="windows entreprise">
+                <div class="tp-card-content">
+                    <div class="tp-card-header">
+                        <div class="tp-icon-wrapper tp-icon-ad">
+                            <i class="fas fa-id-card"></i>
+                        </div>
+                        <div class="tp-badges">
+                            <span class="tag-context tag-context-pro"><i class="fas fa-building"></i> Mission Entreprise · E5</span>
+                            <span class="tag-date">09/2026</span>
+                        </div>
+                    </div>
+                    <div class="tp-card-body">
+                        <h3>Procédure Active Directory : Changement d'Identité & Alias Hybrides</h3>
+                        <p class="tp-card-desc">
+                            Procédure d'exploitation en environnement d'entreprise hybride : modification d'état civil sur contrôleur de domaine local (Source of Authority), gestion des alias SMTP via proxyAddresses, forçage Entra Connect et purge des caches Teams/Outlook.
+                        </p>
+                        <ul class="tp-highlights">
+                            <li><i class="fas fa-check-circle"></i> Renommage d'objet et mise à jour des attributs UPN / SAM via console ADUC</li>
+                            <li><i class="fas fa-check-circle"></i> Configuration des alias SMTP (majuscule/minuscule) via l'attribut proxyAddresses</li>
+                            <li><i class="fas fa-check-circle"></i> Script d'industrialisation PowerShell 100% automatisé pour traitement L2/L3</li>
+                            <li><i class="fas fa-check-circle"></i> Forçage de synchronisation Delta Entra Connect et contrôles Exchange Online</li>
+                        </ul>
+                        <div class="tp-tags">
+                            <span class="tp-tag">Mission Entreprise</span>
+                            <span class="tp-tag">Active Directory</span>
+                            <span class="tp-tag">Microsoft Entra ID</span>
+                            <span class="tp-tag">Exchange Online</span>
+                            <span class="tp-tag">PowerShell</span>
+                            <span class="tp-tag">Hybride M365</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tp-actions">
+                    <a href="../../assets/docs/rapports/Procedure_Changement_Nom_Active_Directory_Brice_Almeras.pdf" target="_blank" class="btn-open-pdf">
+                        <i class="fas fa-file-pdf"></i> Consulter le rapport PDF
+                    </a>
+                    <button class="btn-preview" title="Aperçu rapide" data-pdf="../../assets/docs/rapports/Procedure_Changement_Nom_Active_Directory_Brice_Almeras.pdf" data-title="Procédure Changement d'Identité AD & Hybride M365">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </article>
+
+            <!-- 8. FICHE RCA DIAGNOSTIC RENTREE -->
+            <article class="tp-card" data-category="bts2 linux">
+                <div class="tp-card-content">
+                    <div class="tp-card-header">
+                        <div class="tp-icon-wrapper tp-icon-docker">
+                            <i class="fas fa-stethoscope"></i>
+                        </div>
+                        <div class="tp-badges">
+                            <span class="tag-context">BTS 2 · Diagnostic U5</span>
+                            <span class="tag-date">08/09/2026</span>
+                        </div>
+                    </div>
+                    <div class="tp-card-body">
+                        <h3>Audit Système & Analyse RCA : Diagnostic de Rentrée</h3>
+                        <p class="tp-card-desc">
+                            Diagnostic en conditions réelles d'une infrastructure de services défaillante : collecte des traces, 
+                            identification des erreurs de configuration système et remise en condition opérationnelle.
+                        </p>
+                        <ul class="tp-highlights">
+                            <li><i class="fas fa-check-circle"></i> Investigation sur services Web, DNS et scripts de surveillance</li>
+                            <li><i class="fas fa-check-circle"></i> Rédaction d'une fiche d'analyse d'incident RCA en binôme</li>
+                            <li><i class="fas fa-check-circle"></i> Validation du retour à la normale et sécurisation des processus</li>
+                        </ul>
+                        <div class="tp-tags">
+                            <span class="tp-tag">Audit Système</span>
+                            <span class="tp-tag">Fiche RCA</span>
+                            <span class="tp-tag">Linux</span>
+                            <span class="tp-tag">Monitoring</span>
+                            <span class="tp-tag">MCO</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tp-actions">
+                    <a href="../../assets/docs/rapports/Fiche_RCA_Diagnostic_Systeme_Almeras.pdf" target="_blank" class="btn-open-pdf">
+                        <i class="fas fa-file-pdf"></i> Consulter le rapport PDF
+                    </a>
+                    <button class="btn-preview" title="Aperçu rapide" data-pdf="../../assets/docs/rapports/Fiche_RCA_Diagnostic_Systeme_Almeras.pdf" data-title="Audit Système & Analyse RCA Rentrée">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </article>
+
+            <!-- 7. RAPPORT CONTROLE CISCO -->
+            <article class="tp-card" data-category="reseau">
+                <div class="tp-card-content">
+                    <div class="tp-card-header">
+                        <div class="tp-icon-wrapper tp-icon-cisco">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <div class="tp-badges">
+                            <span class="tag-context">BTS 1 · Réseau Cisco</span>
+                            <span class="tag-date">05/2026</span>
+                        </div>
+                    </div>
+                    <div class="tp-card-body">
+                        <h3>Contrôle & Validation d'Architecture Réseau Cisco</h3>
+                        <p class="tp-card-desc">
+                            Conception et validation d'une infrastructure réseau commutée et routée sous Cisco Packet Tracer : 
+                            isolation des flux par VLANs, trunking 802.1Q, routage inter-VLAN et translation NAT/PAT.
+                        </p>
+                        <ul class="tp-highlights">
+                            <li><i class="fas fa-check-circle"></i> Segmentation et adressage par sous-réseaux et VLANs</li>
+                            <li><i class="fas fa-check-circle"></i> Configuration des liaisons Trunk et passerelles de routage</li>
+                            <li><i class="fas fa-check-circle"></i> Mise en œuvre de translation NAT/PAT pour accès WAN</li>
+                        </ul>
+                        <div class="tp-tags">
+                            <span class="tp-tag">Cisco IOS</span>
+                            <span class="tp-tag">Packet Tracer</span>
+                            <span class="tp-tag">VLAN & Trunk</span>
+                            <span class="tp-tag">Routage Inter-VLAN</span>
+                            <span class="tp-tag">NAT / PAT</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tp-actions">
+                    <a href="../../assets/docs/rapports/Rapport_Controle_Reseau_Cisco_Brice_Almeras.pdf" target="_blank" class="btn-open-pdf">
+                        <i class="fas fa-file-pdf"></i> Consulter le rapport PDF
+                    </a>
+                    <button class="btn-preview" title="Aperçu rapide" data-pdf="../../assets/docs/rapports/Rapport_Controle_Reseau_Cisco_Brice_Almeras.pdf" data-title="Contrôle Architecture Réseau Cisco">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </article>
+
+            <!-- 8. RAPPORT BANDIT CTF -->
+            <article class="tp-card" data-category="linux cyber">
+                <div class="tp-card-content">
+                    <div class="tp-card-header">
+                        <div class="tp-icon-wrapper tp-icon-ctf">
+                            <i class="fas fa-user-ninja"></i>
+                        </div>
+                        <div class="tp-badges">
+                            <span class="tag-context">Cybersécurité · Wargame</span>
+                            <span class="tag-date">01/2026</span>
+                        </div>
+                    </div>
+                    <div class="tp-card-body">
+                        <h3>Wargame OverTheWire : Rapport d'Épreuve Bandit (0 à 13)</h3>
+                        <p class="tp-card-desc">
+                            Challenge de sécurité offensive sous Linux : techniques d'investigation en ligne de commande, 
+                            fouille de répertoires cachés, décodage hexadécimal et établissement de tunnels SSL/SSH.
+                        </p>
+                        <ul class="tp-highlights">
+                            <li><i class="fas fa-check-circle"></i> Maîtrise des commandes avancées Bash (Find, Grep, Cut, Tr)</li>
+                            <li><i class="fas fa-check-circle"></i> Déchiffrement et analyse de formats de données (Tar, Gzip, Base64)</li>
+                            <li><i class="fas fa-check-circle"></i> Communication par socket réseau avec Netcat et OpenSSL s_client</li>
+                        </ul>
+                        <div class="tp-tags">
+                            <span class="tp-tag">Linux Bash</span>
+                            <span class="tp-tag">CTF Wargame</span>
+                            <span class="tp-tag">Cryptographie</span>
+                            <span class="tp-tag">OpenSSL</span>
+                            <span class="tp-tag">Sécurité</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tp-actions">
+                    <a href="../../assets/docs/rapports/Rapport_Bandit_CTF_Brice_Almeras.pdf" target="_blank" class="btn-open-pdf">
+                        <i class="fas fa-file-pdf"></i> Consulter le rapport PDF
+                    </a>
+                    <button class="btn-preview" title="Aperçu rapide" data-pdf="../../assets/docs/rapports/Rapport_Bandit_CTF_Brice_Almeras.pdf" data-title="Rapport Bandit CTF OverTheWire">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </article>
+
+            <!-- État vide si aucune recherche trouvée -->
+            <div id="no-results" class="no-results">
+                <i class="fas fa-search-minus"></i>
+                <h3>Aucun rapport ne correspond à votre recherche</h3>
+                <p>Essayez un autre mot-clé (ex: Docker, DNS, GPO, SSH, Cisco) ou réinitialisez les filtres.</p>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- MODAL DE PRÉVISUALISATION PDF RAPIDE -->
+    <div id="pdf-modal" class="pdf-modal" role="dialog" aria-modal="true">
+        <div class="pdf-modal-content">
+            <div class="pdf-modal-header">
+                <h3 class="pdf-modal-title" id="pdf-modal-title">
+                    <i class="fas fa-file-pdf" style="color: var(--cyan);"></i> Aperçu du Rapport
+                </h3>
+                <div class="pdf-modal-controls">
+                    <a id="pdf-modal-external" href="#" target="_blank" class="btn-modal-action">
+                        <i class="fas fa-external-link-alt"></i> Plein écran
+                    </a>
+                    <a id="pdf-modal-download" href="#" download class="btn-modal-action">
+                        <i class="fas fa-download"></i> Télécharger
+                    </a>
+                    <button class="btn-modal-close" id="pdf-modal-close" title="Fermer (Échap)">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="pdf-modal-body">
+                <iframe id="pdf-modal-frame" src="" title="Visualiseur PDF"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="rapports.js" defer></script>
+</body>
+</html>

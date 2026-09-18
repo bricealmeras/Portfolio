@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Rapport Technique - Mise en Place du Service SSH - Brice Almeras</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 12mm 14mm 14mm 14mm;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #1e293b;
+            background: #ffffff;
+            line-height: 1.4;
+            font-size: 9pt;
+        }
+
+        .page {
+            width: 100%;
+            height: 262mm;
+            max-height: 262mm;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            page-break-after: always;
+            break-after: page;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page:last-child {
+            page-break-after: avoid;
+        }
+
+        /* En-tête / Cartouche officiel */
+        .doc-header {
+            border-bottom: 2.5px solid #0284c7;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .header-titles h1 {
+            font-size: 14pt;
+            font-weight: 700;
+            color: #0f172a;
+            letter-spacing: -0.3px;
+            margin-bottom: 2px;
+        }
+
+        .header-titles .subtitle {
+            font-size: 8.5pt;
+            color: #0284c7;
+            font-weight: 600;
+        }
+
+        .header-badge {
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            color: #0369a1;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 7.5pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        /* Grille métadonnées */
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 8px 12px;
+            margin-bottom: 12px;
+            font-size: 8pt;
+        }
+
+        .meta-item .label {
+            color: #64748b;
+            font-size: 7pt;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 1px;
+        }
+
+        .meta-item .value {
+            color: #0f172a;
+            font-weight: 600;
+        }
+
+        /* Boîte Contexte */
+        .context-box {
+            background: #f0fdf4;
+            border-left: 3.5px solid #16a34a;
+            border-radius: 0 6px 6px 0;
+            padding: 8px 12px;
+            margin-bottom: 12px;
+            font-size: 8.5pt;
+        }
+
+        .context-box h3 {
+            color: #15803d;
+            font-size: 9pt;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .context-box p {
+            color: #334155;
+            line-height: 1.4;
+        }
+
+        /* Titres de sections */
+        h2.section-title {
+            font-size: 10pt;
+            font-weight: 700;
+            color: #0f172a;
+            border-bottom: 1.5px solid #e2e8f0;
+            padding-bottom: 4px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        h2.section-title span.num {
+            background: #0284c7;
+            color: #ffffff;
+            font-size: 7.5pt;
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+
+        /* Grille 2 colonnes pour les étapes */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .step-block {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 8px 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .step-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .step-title {
+            font-size: 8.5pt;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .step-tag {
+            font-size: 7pt;
+            font-family: 'Fira Code', monospace;
+            background: #f1f5f9;
+            color: #475569;
+            padding: 1px 5px;
+            border-radius: 4px;
+            border: 1px solid #cbd5e1;
+        }
+
+        .step-desc {
+            font-size: 7.8pt;
+            color: #475569;
+            margin-bottom: 6px;
+            line-height: 1.35;
+        }
+
+        .step-img-container {
+            text-align: center;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            padding: 4px;
+            height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .step-img-container img {
+            max-width: 100%;
+            max-height: 132px;
+            height: auto;
+            border-radius: 3px;
+            object-fit: contain;
+        }
+
+        .step-caption {
+            font-size: 7pt;
+            color: #64748b;
+            font-style: italic;
+            margin-top: 3px;
+            text-align: center;
+        }
+
+        /* Tableau de recette */
+        .test-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 8pt;
+            margin-top: 4px;
+            margin-bottom: 12px;
+        }
+
+        .test-table th {
+            background: #0f172a;
+            color: #ffffff;
+            font-weight: 600;
+            text-align: left;
+            padding: 5px 8px;
+            border: 1px solid #0f172a;
+            font-size: 7.8pt;
+        }
+
+        .test-table td {
+            padding: 4.5px 8px;
+            border: 1px solid #e2e8f0;
+            color: #334155;
+            vertical-align: middle;
+        }
+
+        .test-table tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        .badge-ok {
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #86efac;
+            padding: 1.5px 5px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 7pt;
+            display: inline-block;
+        }
+
+        /* Guide d'exploitation */
+        .guide-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .guide-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 8px 10px;
+            font-size: 8pt;
+        }
+
+        .guide-card h4 {
+            font-size: 8.5pt;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+
+        .code-snippet {
+            background: #0f172a;
+            color: #38bdf8;
+            font-family: 'Fira Code', monospace;
+            padding: 4px 7px;
+            border-radius: 4px;
+            font-size: 7.5pt;
+            margin: 4px 0;
+            word-break: break-all;
+        }
+
+        /* Footer */
+        .doc-footer {
+            border-top: 1px solid #e2e8f0;
+            padding-top: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 7pt;
+            color: #64748b;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== PAGE 1 ==================== -->
+    <div class="page">
+        <div>
+            <header class="doc-header">
+                <div class="header-titles">
+                    <h1>Rapport de Déploiement & Guide du Service SSH</h1>
+                    <div class="subtitle">Sécurisation des accès d'administration distante par bi-clé asymétrique</div>
+                </div>
+                <div class="header-badge">
+                    Validé · V1.0 Finale
+                </div>
+            </header>
+
+            <div class="meta-grid">
+                <div class="meta-item">
+                    <div class="label">Client / Entreprise</div>
+                    <div class="value">Infoplus (PME 18 salariés)</div>
+                </div>
+                <div class="meta-item">
+                    <div class="label">Administrateur / Rédacteur</div>
+                    <div class="value">Brice Almeras (BTS SIO SISR)</div>
+                </div>
+                <div class="meta-item">
+                    <div class="label">Environnement Technique</div>
+                    <div class="value">Serveur Linux Debian Prod</div>
+                </div>
+                <div class="meta-item">
+                    <div class="label">Méthode de Connexion</div>
+                    <div class="value">Bi-clé asymétrique (RSA / Ed25519)</div>
+                </div>
+            </div>
+
+            <div class="context-box">
+                <h3>Contexte & Expression du Besoin Client</h3>
+                <p>
+                    La société <strong>Infoplus</strong> a mandaté la mise en place d'un accès distant hautement sécurisé pour administrer son serveur Linux. 
+                    En l'absence de VPN (IP dynamique), l'objectif contractuel est de garantir une connexion <strong>sans mot de passe</strong>, 
+                    fondée sur une <strong>authentification par paires de clés asymétriques</strong> et un durcissement complet du service OpenSSH.
+                </p>
+            </div>
+
+            <h2 class="section-title">
+                <span class="num">1</span> Déroulement Technique : Initialisation & Préparation (Étapes 1 à 4)
+            </h2>
+
+            <div class="steps-grid">
+                <!-- Étape 1 -->
+                <div class="step-block">
+                    <div class="step-header">
+                        <span class="step-title">1. Installation et activation du service</span>
+                        <span class="step-tag">systemctl</span>
+                    </div>
+                    <p class="step-desc">Installation du paquet <code>openssh-server</code> et vérification de l'état actif (running) du service sur le port 22.</p>
+                    <div class="step-img-container">
+                        <img src="ssh_assets/image1.png" alt="Statut SSH" />
+                    </div>
+                    <div class="step-caption">Figure 1 : Service sshd actif et opérationnel</div>
+                </div>
+
+                <!-- Étape 2 -->
+                <div class="step-block">
+                    <div class="step-header">
+                        <span class="step-title">2. Création de l'utilisateur dédié</span>
+                        <span class="step-tag">adduser sio1</span>
+                    </div>
+                    <p class="step-desc">Création du compte d'administration non-privilégié <code>sio1</code> pour isoler les accès et bannir l'usage direct de root.</p>
+                    <div class="step-img-container">
+                        <img src="ssh_assets/image2.png" alt="Création compte sio1" />
+                    </div>
+                    <div class="step-caption">Figure 2 : Création du compte utilisateur sio1</div>
+                </div>
+
+                <!-- Étape 3 -->
+                <div class="step-block">
+                    <div class="step-header">
+                        <span class="step-title">3. Test initial de connectivité</span>
+                        <span class="step-tag">Authentification PWD</span>
+                    </div>
+                    <p class="step-desc">Validation de la liaison réseau initiale depuis le poste client en testant l'ouverture de session avec mot de passe.</p>
+                    <div class="step-img-container">
+                        <img src="ssh_assets/image3.png" alt="Connexion mot de passe" />
+                    </div>
+                    <div class="step-caption">Figure 3 : Connexion initiale réussie avec mot de passe</div>
+                </div>
+
+                <!-- Étape 4 -->
+                <div class="step-block">
+                    <div class="step-header">
+                        <span class="step-title">4. Génération de la bi-clé client</span>
+                        <span class="step-tag">ssh-keygen</span>
+                    </div>
+                    <p class="step-desc">Génération de la paire de clés asymétriques sur le poste client (clé privée locale <code>id_rsa</code> et clé publique <code>id_rsa.pub</code>).</p>
+                    <div class="step-img-container">
+                        <img src="ssh_assets/image4.png" alt="Génération de clés" />
+                    </div>
+                    <div class="step-caption">Figure 4 : Clés générées avec empreinte SHA256</div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="doc-footer">
+            <div><strong>Brice Almeras</strong> · BTS SIO SISR — Rapport Déploiement SSH</div>
+            <div>Page 1 / 3</div>
+        </footer>
+    </div>
+
+    <!-- ==================== PAGE 2 ==================== -->
+    <div class="page">
+        <div>
+            <h2 class="section-title">
+                <span class="num">2</span> Déploiement des Clés & Durcissement Sécuritaire (Étapes 5 à 8)
+            </h2>
+
+            <div class="steps-grid">
+                <!-- Étape 5 -->
+                <div class="step-block">
+                    <div class="step-header">
+                        <span class="step-title">5. Déploiement de la clé publique</span>
+                        <span class="step-tag">ssh-copy-id</span>
+                    </div>
+                    <p class="step-desc">Exportation sécurisée de la clé publique client vers le fichier <code>~/.ssh/authorized_keys</code> du compte <code>sio1</code>.</p>
+                    <div class="step-img-container">
+                        <img src="ssh_assets/image5.png" alt="ssh-copy-id" />
+                    </div>
+                    <div class="step-caption">Figure 5 : Enregistrement de la clé publique sur le serveur</div>
+                </div>
+
+                <!-- Étape 6 -->
+                <div class="step-block">
+                    <div class="step-header">
+                        <span class="step-title">6. Validation de l'accès par clé</span>
+                        <span class="step-tag">Session sans mot de passe</span>
+                    </div>
+                    <p class="step-desc">Épreuve de connexion directe sans saisie de mot de passe : l'authentification cryptographique par clé est validée.</p>
+                    <div class="step-img-container">
+                        <img src="ssh_assets/image6.png" alt="Connexion par clé" />
+                    </div>
+                    <div class="step-caption">Figure 6 : Authentification immédiate sans mot de passe</div>
+                </div>
+
+                <!-- Étape 7 -->
+                <div class="step-block">
+                    <div class="step-header">
+                        <span class="step-title">7. Durcissement de la configuration</span>
+                        <span class="step-tag">sshd_config</span>
+                    </div>
+                    <p class="step-desc">Verrouillage de <code>/etc/ssh/sshd_config</code> : désactivation du login root et interdiction formelle des mots de passe.</p>
+                    <div class="step-img-container">
+                        <img src="ssh_assets/image7.png" alt="Durcissement sshd_config" />
+                    </div>
+                    <div class="step-caption">Figure 7 : PasswordAuthentication no et PermitRootLogin no</div>
+                </div>
+
+                <!-- Étape 8 -->
+                <div class="step-block">
+                    <div class="step-header">
+                        <span class="step-title">8. Épreuve de contrôle de sécurité</span>
+                        <span class="step-tag">Test de rejet</span>
+                    </div>
+                    <p class="step-desc">Tentative de connexion depuis un client sans clé publique : le serveur refuse catégoriquement l'accès (échec attendu).</p>
+                    <div class="step-img-container">
+                        <img src="ssh_assets/image8.png" alt="Rejet mot de passe" />
+                    </div>
+                    <div class="step-caption">Figure 8 : Blocage absolu - Permission denied (publickey)</div>
+                </div>
+            </div>
+
+            <!-- Synthèse de durcissement -->
+            <div class="context-box" style="background: #f8fafc; border-left-color: #0284c7; margin-top: 15px;">
+                <h3 style="color: #0369a1;">Bénéfices de Sécurité pour Infoplus</h3>
+                <p>
+                    Grâce à cette configuration durcie, le serveur Linux d'Infoplus est immunisé contre les attaques par force brute et dictionnaire sur le port SSH. 
+                    Seuls les postes de travail détenant la clé privée correspondante peuvent négocier l'ouverture d'une session chiffrée.
+                </p>
+            </div>
+        </div>
+
+        <footer class="doc-footer">
+            <div><strong>Brice Almeras</strong> · BTS SIO SISR — Rapport Déploiement SSH</div>
+            <div>Page 2 / 3</div>
+        </footer>
+    </div>
+
+    <!-- ==================== PAGE 3 ==================== -->
+    <div class="page">
+        <div>
+            <h2 class="section-title">
+                <span class="num">3</span> Cahier de Recette & Validation des Cas de Test
+            </h2>
+
+            <table class="test-table">
+                <thead>
+                    <tr>
+                        <th style="width: 6%;">N°</th>
+                        <th style="width: 32%;">Cas de Test Réalisé</th>
+                        <th style="width: 30%;">Résultat Attendu</th>
+                        <th style="width: 22%;">Résultat Obtenu</th>
+                        <th style="width: 10%; text-align: center;">Statut</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1</strong></td>
+                        <td>Démarrage et écoute du service OpenSSH</td>
+                        <td>Service actif (running) sur port 22</td>
+                        <td>sshd actif et joignable</td>
+                        <td style="text-align: center;"><span class="badge-ok">CONFORME</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>2</strong></td>
+                        <td>Création du compte utilisateur de travail</td>
+                        <td>Compte <code>sio1</code> opérationnel</td>
+                        <td>Compte et /home/sio1 créés</td>
+                        <td style="text-align: center;"><span class="badge-ok">CONFORME</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>3</strong></td>
+                        <td>Vérification initiale par mot de passe</td>
+                        <td>Invite de commande accessible</td>
+                        <td>Session ouverte avec mot de passe</td>
+                        <td style="text-align: center;"><span class="badge-ok">CONFORME</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>4</strong></td>
+                        <td>Génération de la bi-clé asymétrique client</td>
+                        <td>Fichiers <code>id_rsa</code> et <code>id_rsa.pub</code></td>
+                        <td>Paire de clés générée</td>
+                        <td style="text-align: center;"><span class="badge-ok">CONFORME</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>5</strong></td>
+                        <td>Déploiement de la clé publique sur le serveur</td>
+                        <td>Clé inscrite dans <code>authorized_keys</code></td>
+                        <td>Clé copiée avec succès</td>
+                        <td style="text-align: center;"><span class="badge-ok">CONFORME</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>6</strong></td>
+                        <td>Authentification directe par clé asymétrique</td>
+                        <td>Accès direct sans mot de passe</td>
+                        <td>Session ouverte immédiatement</td>
+                        <td style="text-align: center;"><span class="badge-ok">CONFORME</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>7</strong></td>
+                        <td>Durcissement configuration <code>sshd_config</code></td>
+                        <td>PasswordAuth no / PermitRoot no</td>
+                        <td>Paramètres appliqués et rechargés</td>
+                        <td style="text-align: center;"><span class="badge-ok">CONFORME</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>8</strong></td>
+                        <td>Épreuve d'intrusion sans clé privée</td>
+                        <td>Rejet formel de la connexion</td>
+                        <td>Permission denied (publickey)</td>
+                        <td style="text-align: center;"><span class="badge-ok">CONFORME</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2 class="section-title">
+                <span class="num">4</span> Guide Rapide d'Exploitation pour le Client (Infoplus)
+            </h2>
+
+            <div class="guide-grid">
+                <div class="guide-card">
+                    <h4>Connexion depuis Linux / macOS</h4>
+                    <p>Ouvrir le terminal depuis le poste autorisé :</p>
+                    <div class="code-snippet">ssh -i ~/.ssh/id_rsa sio1@&lt;IP_SERVEUR&gt;</div>
+                    <p style="color: #64748b; font-size: 7.2pt; margin-top: 3px;">
+                        Vérification préalable des permissions requises : <code>chmod 600 ~/.ssh/id_rsa</code>.
+                    </p>
+                </div>
+
+                <div class="guide-card">
+                    <h4>Connexion depuis Windows (PowerShell / PuTTY)</h4>
+                    <p>Dans Windows PowerShell natif :</p>
+                    <div class="code-snippet">ssh -i "$env:USERPROFILE\.ssh\id_rsa" sio1@&lt;IP_SERVEUR&gt;</div>
+                    <p style="color: #64748b; font-size: 7.2pt; margin-top: 3px;">
+                        Avec PuTTY : charger la clé convertie (.ppk) dans <em>SSH &gt; Auth &gt; Credentials</em>.
+                    </p>
+                </div>
+            </div>
+
+            <div class="context-box" style="background: #fffbeb; border-left-color: #f59e0b; margin-top: 6px;">
+                <h3 style="color: #b45309;">Que faire en cas de problème de connexion ?</h3>
+                <p>
+                    1. <strong>Permission denied (publickey)</strong> : Vérifiez que vous utilisez bien le poste détenteur de la clé privée ou que le fichier de clé n'a pas été déplacé.<br>
+                    2. <strong>Connexion timed out</strong> : Vérifiez la joignabilité réseau de l'adresse IP du serveur et que le port 22 n'est pas filtré en amont.
+                </p>
+            </div>
+        </div>
+
+        <footer class="doc-footer">
+            <div><strong>Brice Almeras</strong> · BTS SIO SISR — Rapport Déploiement SSH</div>
+            <div>Page 3 / 3</div>
+        </footer>
+    </div>
+
+</body>
+</html>
