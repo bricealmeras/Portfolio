@@ -119,26 +119,51 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // =====================
-// TÉLÉPHONE MASQUÉ
+// TÉLÉPHONE MASQUÉ & COPIE
 // =====================
 document.addEventListener('DOMContentLoaded', function() {
-    const phoneCard   = document.getElementById('phone-card');
+    const phoneCard = document.getElementById('phone-card');
     if (!phoneCard) return;
-    const hidden      = phoneCard.querySelector('.phone-hidden');
-    const number      = phoneCard.querySelector('.phone-number');
-    let   revealed    = false;
+    const hidden = phoneCard.querySelector('.phone-hidden');
+    const number = phoneCard.querySelector('.phone-number');
+    let revealed = false;
 
-    phoneCard.addEventListener('click', function() {
+    function copyPhoneNumber() {
+        const phoneText = number ? number.textContent.trim() : '06 66 78 15 73';
+
+        // Révéler le numéro
         if (!revealed) {
-            hidden.style.display  = 'none';
-            number.style.display  = 'block';
+            if (hidden) hidden.style.display = 'none';
+            if (number) number.style.display = 'block';
+            phoneCard.classList.remove('no-hover');
             revealed = true;
-        } else {
-            // Copier le numéro
-            navigator.clipboard && navigator.clipboard.writeText(number.textContent.trim());
-            showTooltipPhone('Copié !');
         }
-    });
+
+        // Copier le numéro dans le presse-papiers
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(phoneText).then(() => {
+                showTooltipPhone('Numéro copié !');
+            }).catch(() => fallbackCopyPhone(phoneText));
+        } else {
+            fallbackCopyPhone(phoneText);
+        }
+    }
+
+    function fallbackCopyPhone(text) {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+            document.execCommand('copy');
+            showTooltipPhone('Numéro copié !');
+        } catch (err) {
+            showTooltipPhone('Erreur');
+        }
+        ta.remove();
+    }
 
     function showTooltipPhone(msg) {
         let tip = phoneCard.querySelector('.copy-tooltip');
@@ -149,8 +174,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         tip.textContent = msg;
         tip.classList.add('visible');
-        setTimeout(() => tip.classList.remove('visible'), 1400);
+        setTimeout(() => tip.classList.remove('visible'), 1600);
     }
+
+    phoneCard.addEventListener('click', copyPhoneNumber);
+    phoneCard.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            copyPhoneNumber();
+        }
+    });
 });
 
 // =====================
@@ -338,7 +371,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // CONTACT CARDS - Copie
 // =====================
 document.addEventListener('DOMContentLoaded', function() {
-    const cards = document.querySelectorAll('.contact-card');
+    const cards = document.querySelectorAll('.contact-card:not(#phone-card)');
     cards.forEach(card => {
         card.setAttribute('role', 'button');
         card.setAttribute('tabindex', '0');
