@@ -217,6 +217,61 @@ nav a.active::after {
     color: var(--primary);
 }
 
+/* HERO STATS COUNTER */
+.hero-stats {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-top: 32px;
+    padding: 16px 24px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(56, 189, 248, 0.12);
+    border-radius: 14px;
+    backdrop-filter: blur(8px);
+    width: fit-content;
+    animation: fadeSlideIn 0.8s ease 0.4s both;
+}
+
+@keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 20px;
+    gap: 3px;
+}
+
+.hero-stat-number {
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    text-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+    letter-spacing: -0.5px;
+}
+
+.hero-stat-label {
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.hero-stat-divider {
+    width: 1px;
+    height: 36px;
+    background: rgba(56, 189, 248, 0.15);
+    flex-shrink: 0;
+}
+
+
 /* SCROLL INDICATOR */
 .scroll-indicator {
     position: fixed;

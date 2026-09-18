@@ -1,4 +1,44 @@
 // =====================
+// HERO STATS COUNTER
+// =====================
+document.addEventListener('DOMContentLoaded', function () {
+    const statsContainer = document.getElementById('hero-stats');
+    if (!statsContainer) return;
+
+    const counters = statsContainer.querySelectorAll('.hero-stat-number');
+    let hasAnimated = false;
+
+    function animateCounters() {
+        if (hasAnimated) return;
+        hasAnimated = true;
+
+        counters.forEach(counter => {
+            const target = parseInt(counter.dataset.target, 10);
+            const duration = 1200;
+            const startTime = performance.now();
+
+            function update(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                // Ease out cubic
+                const eased = 1 - Math.pow(1 - progress, 3);
+                counter.textContent = Math.round(eased * target);
+                if (progress < 1) requestAnimationFrame(update);
+            }
+
+            requestAnimationFrame(update);
+        });
+    }
+
+    // Trigger on page load since stats are visible immediately
+    const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) animateCounters();
+    }, { threshold: 0.3 });
+
+    observer.observe(statsContainer);
+});
+
+// =====================
 // SCROLL INDICATOR
 // =====================
 document.addEventListener('DOMContentLoaded', function() {
