@@ -643,6 +643,46 @@ nav a.active::after {
     font-style: normal;
 }
 
+/* SUBGROUPS FOR STRUCTURED MISSIONS */
+.experience-subgroups {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+    margin: 18px 0;
+}
+
+.experience-subgroup {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 8px;
+    padding: 14px 16px;
+    transition: 0.25s ease;
+}
+
+.experience-subgroup:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(56, 189, 248, 0.3);
+}
+
+.experience-subgroup h4 {
+    color: var(--primary);
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 0 0 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.experience-subgroup .experience-tasks {
+    margin: 0;
+    padding: 0;
+}
+
+.experience-subgroup .experience-tasks li {
+    margin-bottom: 6px;
+}
+
 .experience-link {
     margin-top: 12px;
 }
