@@ -232,7 +232,7 @@ nav a.active::after {
     align-items: center;
     gap: 0;
     margin-top: 32px;
-    padding: 16px 24px;
+    padding: 16px 24px 26px;
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(56, 189, 248, 0.12);
     border-radius: 14px;
@@ -261,6 +261,7 @@ nav a.active::after {
     gap: 3px;
     text-decoration: none;
     cursor: pointer;
+    position: relative;
     transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -296,6 +297,24 @@ nav a.active::after {
     font-weight: 500;
     white-space: nowrap;
     transition: color 0.25s ease;
+}
+
+.hero-stat-sublabel {
+    position: absolute;
+    bottom: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.58rem;
+    color: rgba(148, 163, 184, 0.50);
+    font-style: italic;
+    letter-spacing: 0.3px;
+    font-weight: 400;
+    white-space: nowrap;
+    transition: color 0.25s ease;
+}
+
+.hero-stat-item:hover .hero-stat-sublabel {
+    color: rgba(248, 250, 252, 0.40);
 }
 
 .hero-stat-divider {
@@ -1458,6 +1477,11 @@ footer {
 
     .hero-buttons {
         justify-content: center;
+    }
+
+    .hero-stats {
+        overflow-x: auto;
+        max-width: 100%;
     }
 }
 

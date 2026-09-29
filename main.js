@@ -1,7 +1,25 @@
+// =============================================================================
+// PORTFOLIO - BRICE ALMERAS (BTS SIO SISR)
+// MAIN SCRIPT
+// =============================================================================
+
+document.addEventListener('DOMContentLoaded', () => {
+    initHeroStats();
+    initScrollIndicator();
+    initNavScroll();
+    initHamburger();
+    initScrollAnimations();
+    initPhoneCard();
+    initTerminal();
+    initContactCards();
+    initContactForm();
+    initRssFeed();
+});
+
 // =====================
-// HERO STATS COUNTER
+// 1. HERO STATS COUNTER
 // =====================
-document.addEventListener('DOMContentLoaded', function () {
+function initHeroStats() {
     const statsContainer = document.getElementById('hero-stats');
     if (!statsContainer) return;
 
@@ -30,18 +48,18 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Trigger on page load since stats are visible immediately
+    // Trigger on page load or intersection
     const observer = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting) animateCounters();
     }, { threshold: 0.3 });
 
     observer.observe(statsContainer);
-});
+}
 
 // =====================
-// SCROLL INDICATOR
+// 2. SCROLL INDICATOR
 // =====================
-document.addEventListener('DOMContentLoaded', function() {
+function initScrollIndicator() {
     const indicator = document.querySelector('.scroll-indicator');
     if (!indicator) return;
 
@@ -54,16 +72,17 @@ document.addEventListener('DOMContentLoaded', function() {
             indicator.style.pointerEvents = 'auto';
         }
     }, { passive: true });
-});
+}
 
 // =====================
-// NAV ACTIF AU SCROLL
+// 3. NAV ACTIF AU SCROLL
 // =====================
-document.addEventListener('DOMContentLoaded', function() {
+function initNavScroll() {
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('nav ul li a:not(.btn-contact)');
+    if (!sections.length || !navLinks.length) return;
 
-        const observer = new IntersectionObserver((entries) => {
+    const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 navLinks.forEach(link => link.classList.remove('active'));
@@ -74,12 +93,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }, { threshold: 0, rootMargin: '-80px 0px -80% 0px' });
 
     sections.forEach(section => observer.observe(section));
-});
+}
 
 // =====================
-// MENU HAMBURGER
+// 4. MENU HAMBURGER
 // =====================
-document.addEventListener('DOMContentLoaded', function() {
+function initHamburger() {
     const hamburger = document.getElementById('hamburger-btn');
     const nav       = document.getElementById('main-nav');
 
@@ -97,12 +116,12 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
-});
+}
 
 // =====================
-// ANIMATIONS SCROLL
+// 5. ANIMATIONS SCROLL
 // =====================
-document.addEventListener('DOMContentLoaded', function() {
+function initScrollAnimations() {
     const fadeEls = document.querySelectorAll('.container, .hero-content, .hero-image');
     fadeEls.forEach(el => el.classList.add('fade-in'));
 
@@ -116,12 +135,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }, { threshold: 0.1 });
 
     fadeEls.forEach(el => observer.observe(el));
-});
+}
 
 // =====================
-// TÉLÉPHONE MASQUÉ & COPIE
+// 6. TÉLÉPHONE MASQUÉ & COPIE
 // =====================
-document.addEventListener('DOMContentLoaded', function() {
+function initPhoneCard() {
     const phoneCard = document.getElementById('phone-card');
     if (!phoneCard) return;
     const hidden = phoneCard.querySelector('.phone-hidden');
@@ -129,7 +148,8 @@ document.addEventListener('DOMContentLoaded', function() {
     let revealed = false;
 
     function copyPhoneNumber() {
-        const phoneText = number ? number.textContent.trim() : '06 66 78 15 73';
+        const phoneText = number ? number.textContent.trim() : '';
+        if (!phoneText) return;
 
         // Révéler le numéro
         if (!revealed) {
@@ -184,27 +204,27 @@ document.addEventListener('DOMContentLoaded', function() {
             copyPhoneNumber();
         }
     });
-});
+}
 
 // =====================
-// TOGGLE TERMINAL
+// 7. TERMINAL CLI
 // =====================
-document.addEventListener('DOMContentLoaded', function() {
+function initTerminal() {
     const btn      = document.getElementById('terminal-toggle-btn');
     const terminal = document.getElementById('terminal-cli');
+    const output   = document.getElementById('cli-output');
     const input    = document.getElementById('cli-input');
+    const body     = document.getElementById('cli-body');
 
+    if (!btn || !terminal || !output || !input || !body) return;
+
+    // Toggle button handler
     btn.addEventListener('click', function() {
-        // On sauvegarde la position du scroll avant l'ouverture
         const scrollY = window.scrollY;
-
         const isHidden = terminal.classList.toggle('terminal-hidden');
-
-        // On remet le scroll exactement au même endroit
         window.scrollTo({ top: scrollY, behavior: 'instant' });
 
         if (!isHidden) {
-            // Terminal ouvert : focus sans scroll
             setTimeout(() => {
                 input.focus({ preventScroll: true });
             }, 50);
@@ -214,18 +234,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Texte initial du bouton
     btn.innerHTML = '<i class="fas fa-terminal"></i> Ouvrir le terminal';
-});
-
-// =====================
-// TERMINAL CLI
-// =====================
-(function() {
-    const output   = document.getElementById('cli-output');
-    const input    = document.getElementById('cli-input');
-    const body     = document.getElementById('cli-body');
-    const terminal = document.getElementById('terminal-cli');
 
     let history = [];
     let historyIndex = -1;
@@ -362,15 +371,12 @@ document.addEventListener('DOMContentLoaded', function() {
     terminal.addEventListener('click', function() {
         input.focus();
     });
-
-    // Focus auto au chargement
-    input.focus();
-})();
+}
 
 // =====================
-// CONTACT CARDS - Copie
+// 8. CONTACT CARDS - Copie
 // =====================
-document.addEventListener('DOMContentLoaded', function() {
+function initContactCards() {
     const cards = document.querySelectorAll('.contact-card:not(#phone-card)');
     cards.forEach(card => {
         card.setAttribute('role', 'button');
@@ -425,12 +431,12 @@ document.addEventListener('DOMContentLoaded', function() {
         tip.classList.add('visible');
         setTimeout(() => tip.classList.remove('visible'), 1400);
     }
-});
+}
 
 // =====================
-// FORMULAIRE CONTACT
+// 9. FORMULAIRE CONTACT
 // =====================
-document.addEventListener('DOMContentLoaded', function() {
+function initContactForm() {
     const form = document.getElementById('contact-form');
     if (!form) return;
 
@@ -465,23 +471,31 @@ document.addEventListener('DOMContentLoaded', function() {
             btn.disabled = false;
         }
     });
-});
+}
 
 // =====================
-// FLUX RSS IT-CONNECT
+// 10. FLUX RSS IT-CONNECT
 // =====================
-fetch('https://api.rss2json.com/v1/api.json?rss_url=https://www.it-connect.fr/feed/')
-    .then(res => res.json())
-    .then(data => {
-        const feed = document.getElementById('rss-feed');
-        if (!data.items || data.items.length === 0) {
-            feed.innerHTML = '<p class="rss-error">Impossible de charger les articles.</p>';
-            return;
-        }
-        const articles = data.items.slice(0, 5);
-        feed.innerHTML = articles.map(item => {
-            const date = new Date(item.pubDate).toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: 'numeric' });
-            return `
+function initRssFeed() {
+    const feed = document.getElementById('rss-feed');
+    if (!feed) return;
+
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+    fetch('https://api.rss2json.com/v1/api.json?rss_url=https://www.it-connect.fr/feed/', {
+        signal: controller.signal
+    })
+        .then(res => { clearTimeout(timeoutId); return res.json(); })
+        .then(data => {
+            if (!data.items || data.items.length === 0) {
+                feed.innerHTML = '<p class="rss-error">Impossible de charger les articles.</p>';
+                return;
+            }
+            const articles = data.items.slice(0, 5);
+            feed.innerHTML = articles.map(item => {
+                const date = new Date(item.pubDate).toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: 'numeric' });
+                return `
             <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="rss-item">
                 <div class="rss-item-content">
                     <span class="rss-date">${date}</span>
@@ -489,8 +503,9 @@ fetch('https://api.rss2json.com/v1/api.json?rss_url=https://www.it-connect.fr/fe
                 </div>
                 <i class="fas fa-external-link-alt rss-icon"></i>
             </a>`;
-        }).join('');
-    })
-    .catch(() => {
-        document.getElementById('rss-feed').innerHTML = '<p class="rss-error">Flux RSS indisponible pour le moment.</p>';
-    });
+            }).join('');
+        })
+        .catch(() => {
+            feed.innerHTML = '<p class="rss-error">Flux RSS indisponible pour le moment.</p>';
+        });
+}
