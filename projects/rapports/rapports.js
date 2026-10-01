@@ -53,6 +53,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Calcul et mise à jour dynamique des compteurs de filtres
+    function updateFilterCounts() {
+        filterButtons.forEach(btn => {
+            const filter = btn.getAttribute('data-filter');
+            const countSpan = btn.querySelector('.count');
+            if (!countSpan) return;
+            if (filter === 'all') {
+                countSpan.textContent = cards.length;
+            } else {
+                const count = Array.from(cards).filter(card => {
+                    const cats = (card.getAttribute('data-category') || '').split(' ');
+                    return cats.includes(filter);
+                }).length;
+                countSpan.textContent = count;
+            }
+        });
+    }
+
+    updateFilterCounts();
+
     // Gestion des boutons de filtres
     filterButtons.forEach(btn => {
         btn.addEventListener('click', () => {
