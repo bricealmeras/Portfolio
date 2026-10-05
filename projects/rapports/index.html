@@ -41,7 +41,7 @@
         <!-- DASHBOARD STATS -->
         <div class="tp-stats-grid">
             <div class="stat-box">
-                <div class="stat-number">13</div>
+                <div class="stat-number">14</div>
                 <div class="stat-label">Livrables Complets</div>
             </div>
             <div class="stat-box">
@@ -68,25 +68,25 @@
 
         <div class="tp-filters">
             <button class="filter-btn active" data-filter="all">
-                <i class="fas fa-layer-group"></i> Tous les livrables <span class="count">13</span>
+                <i class="fas fa-layer-group"></i> Tous les livrables <span class="count">14</span>
             </button>
             <button class="filter-btn" data-filter="entreprise">
-                <i class="fas fa-building"></i> En Entreprise <span class="count">5</span>
+                <i class="fas fa-building"></i> En Entreprise <span class="count">6</span>
             </button>
             <button class="filter-btn" data-filter="bts2">
                 <i class="fas fa-bolt"></i> BTS 2 (U5 / U6) <span class="count">6</span>
             </button>
             <button class="filter-btn" data-filter="linux">
-                <i class="fab fa-linux"></i> Systèmes Linux <span class="count">8</span>
+                <i class="fab fa-linux"></i> Systèmes Linux <span class="count">9</span>
             </button>
             <button class="filter-btn" data-filter="reseau">
-                <i class="fas fa-network-wired"></i> Réseau & Protocoles <span class="count">4</span>
+                <i class="fas fa-network-wired"></i> Réseau & Protocoles <span class="count">5</span>
             </button>
             <button class="filter-btn" data-filter="windows">
                 <i class="fab fa-windows"></i> Windows & Cloud <span class="count">5</span>
             </button>
             <button class="filter-btn" data-filter="cyber">
-                <i class="fas fa-shield-alt"></i> Sécurité & Audit <span class="count">3</span>
+                <i class="fas fa-shield-alt"></i> Sécurité & Audit <span class="count">4</span>
             </button>
         </div>
     </section>
@@ -95,7 +95,50 @@
     <main class="tp-container">
         <div class="tp-grid" id="tp-grid">
 
-            <!-- 1. RAPPORT GESTION DE PARC CMDB & DOCKER -->
+            <!-- 1. RAPPORT INTERVENTION FLUX DMZ GITLAB -->
+            <article class="tp-card" data-category="linux reseau entreprise cyber">
+                <div class="tp-card-content">
+                    <div class="tp-card-header">
+                        <div class="tp-icon-wrapper tp-icon-firewall">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="tp-badges">
+                            <span class="tag-context tag-context-pro"><i class="fas fa-building"></i> Mission Entreprise · E5</span>
+                            <span class="tag-date">10/2026</span>
+                        </div>
+                    </div>
+                    <div class="tp-card-body">
+                        <h3>Sécurisation & Routage DMZ Applicative vers Forge GitLab</h3>
+                        <p class="tp-card-desc">
+                            Intervention en milieu professionnel : diagnostic d'interconnexion bloquée entre un serveur de production DMZ et la forge GitLab interne. Correction de règles pare-feu UTM inversion WAN/DMZ et re-configuration DNS Netplan.
+                        </p>
+                        <ul class="tp-highlights">
+                            <li><i class="fas fa-check-circle"></i> Diagnostic de pannes inter-VLAN et levée du Default Deny sur pare-feu UTM</li>
+                            <li><i class="fas fa-check-circle"></i> Re-configuration pérenne Netplan (DNS d'entreprise 172.16.10.10)</li>
+                            <li><i class="fas fa-check-circle"></i> Filtrage strict Stateful (DNS TCP/UDP 53, HTTPS 443 & ICMP supervision)</li>
+                            <li><i class="fas fa-check-circle"></i> Recette de validation complète (nslookup/dig, ping, sonde curl HTTP 200 OK)</li>
+                        </ul>
+                        <div class="tp-tags">
+                            <span class="tp-tag">Mission Entreprise</span>
+                            <span class="tp-tag">Firewall UTM</span>
+                            <span class="tp-tag">DMZ Applicative</span>
+                            <span class="tp-tag">GitLab CI/CD</span>
+                            <span class="tp-tag">Netplan Linux</span>
+                            <span class="tp-tag">Sécurité & Routage</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tp-actions">
+                    <a href="../../assets/docs/rapports/Entreprise/Rapport_Intervention_Flux_DMZ_GitLab_Anonymise.pdf" target="_blank" class="btn-open-pdf">
+                        <i class="fas fa-file-pdf"></i> Consulter le rapport PDF
+                    </a>
+                    <button class="btn-preview" title="Aperçu rapide" data-pdf="../../assets/docs/rapports/Entreprise/Rapport_Intervention_Flux_DMZ_GitLab_Anonymise.pdf" data-title="Sécurisation & Routage DMZ Applicative vers Forge GitLab">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </article>
+
+            <!-- 2. RAPPORT GESTION DE PARC CMDB & DOCKER -->
             <article class="tp-card" data-category="bts2 linux">
                 <div class="tp-card-content">
                     <div class="tp-card-header">
